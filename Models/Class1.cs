@@ -1,4 +1,4 @@
-﻿using System.Windows.Media.ImageSource;
+using System.Windows.Media.ImageSource;
 
 namespace Models;
 public class User
