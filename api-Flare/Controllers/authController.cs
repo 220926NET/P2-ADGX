@@ -18,7 +18,7 @@ namespace api_Flare.Controllers
 
         [HttpPost]
         [Route("register/")]
-        public ActionResult Register([FromBody]User user)
+        public ActionResult Register([FromBody] User user)
         {
             int id = _authService.Register(user.Username, user.Password);
             if (id != -1)
@@ -30,7 +30,7 @@ namespace api_Flare.Controllers
 
         [HttpPost]
         [Route("login/")]
-        public ActionResult Login(User user)
+        public ActionResult Login([FromBody]User user)
         {
             User login = _authService.Login(user.Username, user.Password);
             if (login.Id != 0)

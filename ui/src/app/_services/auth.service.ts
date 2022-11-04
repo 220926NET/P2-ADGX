@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "src/models/user";
 
-const AUTH_API = "http://localhost:7219/api/Auth/";
+const AUTH_API = "https://localhost:7219/api/Auth/";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -15,11 +15,8 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + "login", {
-      username: username,
-      password: password,
-    });
+  login(user: User): Observable<any> {
+    return this.http.post(AUTH_API + "login", user);
   }
 
   register(user: User): Observable<Object> {

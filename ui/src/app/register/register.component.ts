@@ -23,7 +23,6 @@ export class RegisterComponent {
         password: this.registerForm.controls["password"].value,
       })
       .subscribe((res) => {
-        console.log(res);
         this.registerForm.reset();
       });
   }
