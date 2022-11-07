@@ -1,0 +1,16 @@
+<div class="grid-container">
+    <div class="grid-item" *ngFor="let post of userPosts">
+        <div class="user-post-image">
+            <img src="{{post.postUrl}}" />
+        </div>
+        <div class="grid-content">
+            <h4 class="user-post-title">{{post.title}}</h4>
+            <div class="like-post">
+                <p class="like-post-description">This is the like button</p>
+            </div>
+            <div class="amount-of-likes">
+                <p>600</p>
+            </div>
+        </div>
+    </div>
+</div>
