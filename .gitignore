@@ -11,8 +11,8 @@
 *.sln.docstates
 
 DataAccessLayer\Secrets.cs
-./DataAccessLayer/secrets.cs
-./DataAccessLayer/secrets
+./DataAccessLayer/Secrets.cs
+./DataAccessLayer/Secrets
 # User-specific files (MonoDevelop/Xamarin Studio)
  ./ui/.angular/cache/
  ui/.angular/cache/14.2.7/angular-webpack/8e5d11c7dd4636e03e1dee40dffc1a5886dc5bce/1.pack
