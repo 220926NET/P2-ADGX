@@ -1,7 +1,6 @@
 
 using Microsoft.Data.SqlClient;
 using Models;
-
 namespace DataAccessLayer;
 public class Repository
 {
