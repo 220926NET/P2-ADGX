@@ -4,7 +4,7 @@ public class ProfilePage
 
     public string? Image { get; set; }
 
-    public string AboutMe { get; set; } = string.Empty;
+    public string AboutMe { get; set; }
     public List<string> Hobbies { get; set; }
 
     public List<string> Interests { get; set; }

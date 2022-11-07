@@ -22,7 +22,7 @@ public static class ImageHash
             sSourceData = Convert.ToBase64String(formFileBytes);
         }
 
-        tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData + userName + Secrets.GetImageSalt());
+        tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData + userName + Secrets.ImageSalt);
 
         var byteHash = md5.ComputeHash(tmpSource);
 
