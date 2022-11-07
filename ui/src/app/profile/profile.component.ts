@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   // it is set on each render of the page 
   userProfile : Profile | null = null; 
 
- 
+  
  
   // on each init fetch user profile details 
   ngOnInit(): void {
@@ -54,4 +54,6 @@ export class ProfileComponent implements OnInit {
   deleteProfilePhoto(){
     this._profileService.deleteProfilePhoto().subscribe(res=> console.log(res));
   }
+
+ 
 }

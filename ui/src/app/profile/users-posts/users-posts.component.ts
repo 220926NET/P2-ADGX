@@ -17,7 +17,7 @@ export class UsersPostsComponent implements OnInit {
 
   userPosts : UserPosts[] | null = null; 
 
-
+  isViewGallery : boolean = false; 
 
   constructor(private _httpClient : HttpClient) { }
 
@@ -29,6 +29,9 @@ export class UsersPostsComponent implements OnInit {
     })
     //TODO: get a list of user posts pictures and titles 
 
+  }
+  setView() {
+    this.isViewGallery = !this.isViewGallery;
   }
 
 }

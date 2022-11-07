@@ -24,7 +24,7 @@ describe('ProfileComponent', () => {
 
   const mockSuccesfulResponseMessage : ResponseMessage = {
     data : mockProfile,
-    message : "successfully retrieves profile details",
+    message : "successfully retrieved profile details",
     success : true
   }
 
@@ -57,7 +57,6 @@ describe('ProfileComponent', () => {
     expect(component).toBeTruthy()
   })
 
-
   // this method tests the class variable userProfile : Profile has been correctly set 
   it('getProfileDetails shoulds return a userProfile object', fakeAsync (() => {
     fixture = TestBed.createComponent(ProfileComponent);
@@ -79,15 +78,18 @@ describe('ProfileComponent', () => {
     expect(divAboutMe).toBeTruthy();
   })
 
+
   it('profile renders profile-hobbies div', () => {
     const divProfileHobbies = document.querySelector(".profile-hobbies")
     expect(divProfileHobbies).toBeTruthy();
   })
 
+
   it('profile renders profile-interests div', () => {
     const divProfileInterests = document.querySelector(".profile-interests")
     expect(divProfileInterests).toBeTruthy();
   })
+
 
   it('profile renders an image container', () => {
     const {debugElement} = fixture;
@@ -97,6 +99,7 @@ describe('ProfileComponent', () => {
     expect(imageContainer).toBeTruthy()
 
   });
+  
 
   it('profile renders a container for user posts', () => {
     const compiled = fixture.debugElement.nativeElement;
