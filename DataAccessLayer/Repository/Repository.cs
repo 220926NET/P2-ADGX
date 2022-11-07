@@ -6,7 +6,7 @@ public class Repository
 {
 
     private SqlConnection _connection;
-    private string _connectionString = Secrets.GetOdbcStr();
+    private string _connectionString = Secrets.OdbcString;
 
     public Repository()
     {
