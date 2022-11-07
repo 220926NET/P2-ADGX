@@ -15,7 +15,7 @@ public class PostController : ControllerBase
     }
 
     [HttpPost]
-    public void CreatePost([FromBody]Post post)
+    public void CreatePost([FromBody] Post post)
     {
         postRepository.Create(post);
     }
@@ -33,7 +33,7 @@ public class PostController : ControllerBase
     }
 
     [HttpPut()]
-    public Post UpdatePost([FromBody]Post post)
+    public Post UpdatePost([FromBody] Post post)
     {
         postRepository.Update(post);
         return post;
@@ -44,4 +44,17 @@ public class PostController : ControllerBase
     {
 
     }
+
+
+    [HttpPost("/uploadPost")]
+    public async Task<ActionResult<ResponseMessage<string>>> uploadUserPhoto([FromForm] Post userPost)
+    {
+
+        ResponseMessage<string> uploadUserPhotoRes = new ResponseMessage<string>();
+
+        // uploadUserPhotoRes = await _postService.AddUserPost(userPost);
+
+        return uploadUserPhotoRes;
+    }
+
 }
