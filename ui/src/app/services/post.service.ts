@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Post } from "src/Models/Post";
 
 const POST_API = "https://localhost:7219/api/Posts";
@@ -13,9 +14,11 @@ export class PostService {
   createPost(post: Post) {
     return this.http.post(POST_API + "Create", post);
   }
-  getPost() {}
-  getPosts(): any {
-    return this.http.get(POST_API);
+  getPost(id: number): any {
+    return this.http.get(POST_API + "/" + id);
+  }
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(POST_API);
   }
   updatePost() {}
   deletePost() {}

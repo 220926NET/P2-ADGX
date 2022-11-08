@@ -10,6 +10,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { HomeComponent } from "./home/home.component";
+import { PostFeedComponent } from './post-feed/post-feed.component';
 =======
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
@@ -28,6 +29,7 @@ import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
     ProfileComponent,
     HomeComponent,
     NavBarComponent,
+    PostFeedComponent,
   ],
   imports: [
     BrowserModule,
