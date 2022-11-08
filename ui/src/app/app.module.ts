@@ -2,7 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 <<<<<<< Updated upstream
@@ -20,6 +19,9 @@ import { UsersPostsComponent } from "./components/profile/users-posts/users-post
 import { PostComponent } from "./components/post/post.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 >>>>>>> Stashed changes
+import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
+import { ProfileService } from "./services/ProfileService";
+import { PostComponent } from "./post/post.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    PostComponent,
+    UsersPostsComponent,
     HomeComponent,
     NavBarComponent,
     PostFeedComponent,
@@ -34,6 +38,7 @@ import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
