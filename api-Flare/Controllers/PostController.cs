@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using DataAccessLayer;
 using Models;
 
 namespace api_Flare.Controllers;
@@ -7,21 +8,51 @@ namespace api_Flare.Controllers;
 [Route("[controller]")]
 public class PostController : ControllerBase
 {
+    private readonly IPostRepository postRepository;
+    public PostController(IPostRepository postRepository)
+    {
+        this.postRepository = postRepository;
+    }
 
-    private readonly IPostService _postService;
-    public PostController(IPostService postService)
+    [HttpPost]
+    public void CreatePost([FromBody] Post post)
+    {
+        postRepository.Create(post);
+    }
+
+    [HttpGet("/{id}")]
+    public Post GetPost(int id)
+    {
+        return postRepository.GetById(id);
+    }
+
+    [HttpGet()]
+    public List<Post> GetAllPost()
+    {
+        return postRepository.GetAll();
+    }
+
+    [HttpPut()]
+    public Post UpdatePost([FromBody] Post post)
+    {
+        postRepository.Update(post);
+        return post;
+    }
+
+    [HttpDelete()]
+    public void DeletePost()
     {
 
-        _postService = postService;
-
     }
+
+
     [HttpPost("/uploadPost")]
     public async Task<ActionResult<ResponseMessage<string>>> uploadUserPhoto([FromForm] Post userPost)
     {
 
         ResponseMessage<string> uploadUserPhotoRes = new ResponseMessage<string>();
 
-        uploadUserPhotoRes = await _postService.AddUserPost(userPost);
+        // uploadUserPhotoRes = await _postService.AddUserPost(userPost);
 
         return uploadUserPhotoRes;
     }
