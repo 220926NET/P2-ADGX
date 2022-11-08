@@ -1,13 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User } from "src/models/user";
+import { User } from "src/Models/User";
 
 const AUTH_API = "https://localhost:7219/api/Auth/";
-
-const httpOptions = {
-  headers: new HttpHeaders({ "Content-Type": "application/json" }),
-};
 
 @Injectable({
   providedIn: "root",
