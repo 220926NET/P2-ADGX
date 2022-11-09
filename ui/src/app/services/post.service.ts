@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Post } from "src/Models/Post";
 
-const POST_API = "https://localhost:7219/api/Posts";
+const POST_API = "https://localhost:7219/api/Posts/";
 
 @Injectable({
   providedIn: "root",
@@ -15,11 +15,11 @@ export class PostService {
     return this.http.post(POST_API + "Create", post);
   }
   getPost(id: number): any {
-    return this.http.get(POST_API + "/" + id);
+    return this.http.get(POST_API + id);
   }
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(POST_API);
   }
-  updatePost() {}
-  deletePost() {}
+  // updatePost() {}
+  // deletePost() {}
 }

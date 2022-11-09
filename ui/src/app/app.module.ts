@@ -4,13 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-<<<<<<< Updated upstream
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { HomeComponent } from "./home/home.component";
-import { PostFeedComponent } from './post-feed/post-feed.component';
-=======
+import { PostFeedComponent } from "./components/post-feed/post-feed.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ProfileComponent } from "./components/profile/profile.component";
@@ -18,10 +12,11 @@ import { HomeComponent } from "./components/home/home.component";
 import { UsersPostsComponent } from "./components/profile/users-posts/users-posts.component";
 import { PostComponent } from "./components/post/post.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
->>>>>>> Stashed changes
-import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
-import { ProfileService } from "./services/ProfileService";
-import { PostComponent } from "./post/post.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatCardModule } from "@angular/material/card";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -34,6 +29,8 @@ import { PostComponent } from "./post/post.component";
     HomeComponent,
     NavBarComponent,
     PostFeedComponent,
+    CommentFeedComponent,
+    UsersPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +39,10 @@ import { PostComponent } from "./post/post.component";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

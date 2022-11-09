@@ -1,0 +1,9 @@
+<div *ngFor="let comment of comments">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ comment.userId }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>{{ comment.text }}</mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>
