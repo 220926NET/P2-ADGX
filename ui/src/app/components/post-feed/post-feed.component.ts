@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PostService } from "src/app/services/post.service";
 import { Post } from "src/Models/Post";
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
   selector: "app-post-feed",
@@ -13,6 +14,9 @@ export class PostFeedComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe((posts) => (this.posts = posts));
+    this.postService.getPosts().subscribe((posts) => {
+      console.log(posts);
+      this.posts = posts;
+    });
   }
 }

@@ -1,11 +1,10 @@
-<table>
-  <thead>
-    <th>PostId</th>
-    <th>UserId</th>
-    <th>Title</th>
-    <th>Text</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let post of posts"></tr>
-  </tbody>
-</table>
+<div *ngFor="let post of posts">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ post.title }}</mat-card-title>
+      <mat-card-subtitle>{{ post.datePosted }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>{{ post.text }}</mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>
