@@ -1,11 +1,3 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
-=======
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import ResponseMessage from "src/Models/ResponseMessage";
@@ -17,7 +9,6 @@ import { ProfileService } from "../services/ProfileService";
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.css"],
   providers: [ProfileService],
->>>>>>> Stashed changes
 })
 export class ProfileComponent implements OnInit {
   constructor(
@@ -25,13 +16,6 @@ export class ProfileComponent implements OnInit {
     private _profileService: ProfileService
   ) {}
 
-<<<<<<< Updated upstream
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-=======
   postProfilePictureUrl: string = "https://localhost:7219/Profile";
 
   uploadingPhoto: boolean = false;
@@ -72,5 +56,4 @@ export class ProfileComponent implements OnInit {
       .deleteProfilePhoto()
       .subscribe((res) => console.log(res));
   }
->>>>>>> Stashed changes
 }

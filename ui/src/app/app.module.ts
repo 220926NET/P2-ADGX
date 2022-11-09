@@ -2,7 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PostFeedComponent } from "./components/post-feed/post-feed.component";
@@ -22,6 +21,9 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
 import { MatDividerModule } from "@angular/material/divider";
 >>>>>>> Stashed changes
+import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
+import { ProfileService } from "./services/ProfileService";
+import { PostComponent } from "./post/post.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MatDividerModule } from "@angular/material/divider";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    PostComponent,
+    UsersPostsComponent,
     HomeComponent,
     NavBarComponent,
     PostFeedComponent,
@@ -37,6 +41,7 @@ import { MatDividerModule } from "@angular/material/divider";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

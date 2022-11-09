@@ -29,7 +29,7 @@ public class PostService : IPostService
 
         if (userPost.Image != null)
         {
-            string userPostImageHash = ImageHash.GetImageHash(userPost.Image, userPost.Text);
+            string userPostImageHash = ImageHash.GetImageHash(userPost.Image, userPost.Description);
 
             string completeHash = userPostImageHash;
 
