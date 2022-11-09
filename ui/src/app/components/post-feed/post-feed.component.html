@@ -5,6 +5,7 @@
       <mat-card-subtitle>{{ post.datePosted }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>{{ post.text }}</mat-card-content>
+    <app-comment-feed [postId]="post.postID"></app-comment-feed>
   </mat-card>
   <mat-divider></mat-divider>
 </div>

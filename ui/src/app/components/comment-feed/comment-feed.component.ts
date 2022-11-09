@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Comment } from "src/Models/Comment";
 import { CommentService } from "src/app/services/comment.service";
 @Component({
@@ -7,8 +7,14 @@ import { CommentService } from "src/app/services/comment.service";
   styleUrls: ["./comment-feed.component.css"],
 })
 export class CommentFeedComponent implements OnInit {
+  @Input() postId: number = -1;
   public comments: Comment[] = [];
   constructor(private commentService: CommentService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.commentService.getComments(this.postId).subscribe((comments) => {
+      console.log(comments);
+      this.comments = comments;
+    });
+  }
 }

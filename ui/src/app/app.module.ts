@@ -12,18 +12,11 @@ import { HomeComponent } from "./components/home/home.component";
 import { UsersPostsComponent } from "./components/profile/users-posts/users-posts.component";
 import { PostComponent } from "./components/post/post.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
 import { MatDividerModule } from "@angular/material/divider";
->>>>>>> Stashed changes
-import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
-import { ProfileService } from "./services/ProfileService";
-import { PostComponent } from "./post/post.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +30,7 @@ import { PostComponent } from "./post/post.component";
     NavBarComponent,
     PostFeedComponent,
     CommentFeedComponent,
+    UsersPostsComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,16 +45,4 @@ public class PostController : ControllerBase
 
     }
 
-
-    [HttpPost("/uploadPost")]
-    public async Task<ActionResult<ResponseMessage<string>>> uploadUserPhoto([FromForm] Post userPost)
-    {
-
-        ResponseMessage<string> uploadUserPhotoRes = new ResponseMessage<string>();
-
-        // uploadUserPhotoRes = await _postService.AddUserPost(userPost);
-
-        return uploadUserPhotoRes;
-    }
-
 }

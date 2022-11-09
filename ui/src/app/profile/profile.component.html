@@ -2,7 +2,11 @@
   <div class="outer-profile-container-logo"></div>
   <div class="profile-container">
     <div class="profile-img-container" data-testid="profile-image-container">
-      <img class="profile-img" src="{{ userProfile?.image }}" />
+      <img
+        class="profile-img"
+        src="{{ userProfile?.image }}"
+        alt="userProfile"
+      />
       <!-- if user adds a new photo use api delete route, delete photo and upload new one -->
       <input
         type="file"
@@ -77,5 +81,5 @@
   <div class="profile-recent-posts">
     <h2>My Recent Posts</h2>
   </div>
-  <app-users-posts></app-users-posts>
+  <!-- <app-users-posts></app-users-posts> -->
 </div>
