@@ -13,6 +13,9 @@ export class PostFeedComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe((posts) => (this.posts = posts));
+    this.postService.getPosts().subscribe((posts) => {
+      console.log(posts);
+      this.posts = posts;
+    });
   }
 }

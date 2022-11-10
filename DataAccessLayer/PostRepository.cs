@@ -4,16 +4,16 @@ namespace DataAccessLayer;
 
 public class PostRepository : IPostRepository
 {
-    private readonly string table = "";
+    private readonly string table = "Post";
     private Post ReadEntry(SqlDataReader reader)
     {
-        int postid = (int)reader["PostId"];
-        int userId = (int)reader["UserId"];
-        string title = (string)reader["Title"];
-        string text = (string)reader["Text"];
-        string imageUrl = (string)reader["ImageUrl"];
+        int PostID = (int)reader["PostID"];
+        int UserID = (int)reader["UserID"];
+        string Title = (string)reader["Title"];
+        string Text = (string)reader["Text"];
+        DateTime DatePosted = (DateTime)reader["DatePosted"];
 
-        return new Post {PostId = postid, UserId = userId, Title = title, Text=text, ImageUrl=imageUrl};
+        return new Post { PostID = PostID, UserID = UserID, Title = Title, Text = Text, DatePosted = DatePosted };
     }
 
     public List<Post> GetAll()
@@ -28,7 +28,7 @@ public class PostRepository : IPostRepository
             try
             {
                 SqlDataReader reader = command.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     list.Add(ReadEntry(reader));
                 }
@@ -76,11 +76,10 @@ public class PostRepository : IPostRepository
             string query = $"INSERT INTO {table} (UserID, Title, Text, ImageUrl) VALUES (@UserID, @Title, @Text, @ImageUrl)";
             SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.Add(new SqlParameter("@UserID", entity.UserId));
+            command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
             command.Parameters.AddWithValue("@Title", entity.Title);
             command.Parameters.AddWithValue("@Text", entity.Text);
-            command.Parameters.AddWithValue("@ImageUrl", entity.ImageUrl);
-            
+
             try
             {
                 command.ExecuteNonQuery();
@@ -99,11 +98,10 @@ public class PostRepository : IPostRepository
             connection.Open();
             string query = $"UPDATE {table} SET UserID=@UserID, Title=@Title, Text=@Text, ImageUrl=@ImageUrl  WHERE PostID = @postId";
             SqlCommand command = new SqlCommand(query, connection);
-            
-            command.Parameters.Add(new SqlParameter("@UserID", entity.UserId));
+
+            command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
             command.Parameters.AddWithValue("@Title", entity.Title);
             command.Parameters.AddWithValue("@Text", entity.Text);
-            command.Parameters.AddWithValue("@ImageUrl", entity.ImageUrl);
             try
             {
                 command.ExecuteNonQuery();
@@ -122,8 +120,8 @@ public class PostRepository : IPostRepository
             connection.Open();
             string query = $"DELETE FROM {table} WHERE PostID = @postId";
             SqlCommand command = new SqlCommand(query, connection);
-            
-            command.Parameters.Add(new SqlParameter("@postId", entity.PostId));
+
+            command.Parameters.Add(new SqlParameter("@postId", entity.PostID));
             try
             {
                 command.ExecuteNonQuery();
