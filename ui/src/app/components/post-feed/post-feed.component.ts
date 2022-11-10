@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PostService } from "src/app/services/post.service";
 import { Post } from "src/Models/Post";
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
   selector: "app-post-feed",
