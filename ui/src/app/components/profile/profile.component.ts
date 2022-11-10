@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import ResponseMessage from "src/Models/ResponseMessage";
 import Profile from "src/Models/Profile";
-import { ProfileService } from "../services/ProfileService";
+import { ProfileService } from "src/app/services/ProfileService";
 
 @Component({
   selector: "app-profile",

@@ -9,7 +9,7 @@ public class BlobStorage
 
 
 
-    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://storagetestrev.blob.core.windows.net"), new StorageSharedKeyCredential("storagetestrev", Secrets.BlobStorageKey));
+    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://storagetestrev.blob.core.windows.net"), new StorageSharedKeyCredential("storagetestrev", Secrets.blobStorageKey));
 
 
     //This class is used to upload a user photo
