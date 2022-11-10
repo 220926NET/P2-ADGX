@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
+namespace BusinessLogicLayer;
 public static class Validator
 {
 
