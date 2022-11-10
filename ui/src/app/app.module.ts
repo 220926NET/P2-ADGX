@@ -17,6 +17,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
 import { MatDividerModule } from "@angular/material/divider";
+import { CommentFormComponent } from './comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatDividerModule } from "@angular/material/divider";
     PostFeedComponent,
     CommentFeedComponent,
     UsersPostsComponent,
+    CommentFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,4 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer;
 
 namespace BusinessLogicLayer
@@ -11,6 +6,7 @@ namespace BusinessLogicLayer
     public interface ICommentService
     {
         List<Comment> GetPostComments(int postId);
+        void create_comment(Comment comment);
     }
 
     public class CommentService : ICommentService
@@ -20,6 +16,11 @@ namespace BusinessLogicLayer
         public CommentService(ICommentsRepository commentRepository)
         {
             this.commentRepository = commentRepository;
+        }
+
+        public void create_comment(Comment comment)
+        {
+            commentRepository.CreateComment(comment);
         }
 
         public List<Comment> GetPostComments(int postId)

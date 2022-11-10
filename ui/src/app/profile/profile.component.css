@@ -9,7 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 700px;
-  background-image: url(../../assets/flare-logo.png);
+  /* background-image: url(../../assets/flare-logo.png); */
   background-size: cover;
   position: relative;
 }
