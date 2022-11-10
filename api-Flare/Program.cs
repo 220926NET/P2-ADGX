@@ -1,5 +1,4 @@
 using DataAccessLayer;
-using BusinessLogicLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -21,21 +20,15 @@ builder.Services.AddCors(options =>
                       });
 });
 // Add services to the container.
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
-builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddSingleton<BlobStorage>();
-builder.Services.AddSingleton<Repository>();
+builder.Services.AddSingleton<VisionApi>();
+builder.Services.AddSingleton<ProfileServiceResponse>();
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddSingleton<IPostRepository, PostRepository>();
 
 
 

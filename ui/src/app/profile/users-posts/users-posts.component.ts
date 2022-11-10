@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import UserPosts from 'src/Models/UserPosts';
-import ResponseMessage from 'src/Models/ResponseMessage';
+import ResponseMessage from 'src/Models/Profile/ResponseMessage';
 
 
 @Component({

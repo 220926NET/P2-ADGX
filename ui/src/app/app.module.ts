@@ -11,6 +11,7 @@ import { HomeComponent } from "./home/home.component";
 import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
 import { ProfileService } from "./services/ProfileService";
 import { PostComponent } from "./post/post.component";
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PostComponent } from "./post/post.component";
     PostComponent,
     UsersPostsComponent,
     HomeComponent,
+    ProfileDetailsComponent,
   ],
   imports: [
     BrowserModule,
