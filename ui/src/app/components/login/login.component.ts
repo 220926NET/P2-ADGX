@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../_services/auth.service";
+import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -8,7 +9,10 @@ import { AuthService } from "../_services/auth.service";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private navBarComponent: NavBarComponent
+  ) {}
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
@@ -24,8 +28,8 @@ export class LoginComponent {
         password: this.loginForm.controls["password"].value,
       })
       .subscribe((res) => {
-        console.log(res);
         this.loginForm.reset();
+        this.navBarComponent.loggedIn = true;
       });
   }
 }
