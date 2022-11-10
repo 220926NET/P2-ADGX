@@ -1,14 +1,19 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Comment } from "src/Models/Comment";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+
 const COMMENT_API = "https://localhost:7219/api/Comments/";
 
 @Injectable({
   providedIn: "root",
 })
 export class CommentService {
-  constructor(private http: HttpClient) {}
+  public commentAdded: Subject<boolean>;
+
+  constructor(private http: HttpClient) {
+    this.commentAdded = new Subject<boolean>();
+  }
 
   createComment(comment: Comment) {
     return this.http.post(COMMENT_API + "create", comment);

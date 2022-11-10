@@ -1,13 +1,14 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//handles looking up stuff in database
+using Microsoft.Data.SqlClient;
 using Models;
 
 namespace DataAccessLayer
 {
+    public interface ICommentsRepository
+    {
+        List<Comment> GetPostComments(int postId);
+        void CreateComment(Comment comment);
+    }
     public class CommentsRepository : ICommentsRepository
     {
         SqlConnection connection;
@@ -15,6 +16,30 @@ namespace DataAccessLayer
         {
             connection = SqlConnectionFactory.GetConnection();
         }
+
+        public void CreateComment(Comment comment)
+        {
+            try
+            {
+                connection.Open();
+                string query = "exec create_comment @UserId, @PostId, @Text";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@UserId", comment.UserID);
+                cmd.Parameters.AddWithValue("@PostId", comment.PostID);
+                cmd.Parameters.AddWithValue("@Text", comment.Text);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public List<Comment> GetPostComments(int postId)
         {
             List<Comment> postComments = new();
@@ -40,7 +65,7 @@ namespace DataAccessLayer
                 }
                 command.Dispose();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
