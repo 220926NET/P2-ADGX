@@ -4,7 +4,7 @@ namespace DataAccessLayer;
 
 public class PostRepository : RepositoryBase<Post>, IPostRepository
 {
-    public PostRepository():base("Post")
+    public PostRepository() : base("Post")
     {
     }
     protected override Post EntityRead(SqlDataReader reader)
@@ -56,14 +56,12 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
     }
     public void Update(Post entity)
     {
-        /*
-        string query = $"UPDATE {tableName} SET UserID=@UserID, Title=@Title, Text=@Text, ImageUrl=@ImageUrl  WHERE PostID = @postId";
-        SqlCommand command = new SqlCommand(query);
-        command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
-        command.Parameters.AddWithValue("@Title", entity.Title);
-        command.Parameters.AddWithValue("@Text", entity.Text);
-        */
-        EntityNonQuery(command);
+        // string query = $"UPDATE {tableName} SET UserID=@UserID, Title=@Title, Text=@Text, ImageUrl=@ImageUrl  WHERE PostID = @postId";
+        // SqlCommand command = new SqlCommand(query);
+        // command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
+        // command.Parameters.AddWithValue("@Title", entity.Title);
+        // command.Parameters.AddWithValue("@Text", entity.Text);
+        // EntityNonQuery(command);
     }
     public void Delete(Post entity)
     {
