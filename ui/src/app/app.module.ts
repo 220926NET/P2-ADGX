@@ -10,6 +10,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { HomeComponent } from "./home/home.component";
 import { UsersPostsComponent } from "./profile/users-posts/users-posts.component";
 import { ProfileService } from "./services/ProfileService";
+import { PostComponent } from "./post/post.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProfileService } from "./services/ProfileService";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    PostComponent,
     UsersPostsComponent,
     HomeComponent,
   ],

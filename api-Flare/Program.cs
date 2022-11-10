@@ -35,6 +35,8 @@ builder.Services.AddSingleton<Repository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IPostRepository, PostRepository>();
+
 
 
 builder.Services.AddCors(options =>
