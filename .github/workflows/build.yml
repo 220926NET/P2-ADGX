@@ -20,7 +20,7 @@ jobs:
         working-directory: ui/
         run: |
           npm install
-          yarn test --coverage
+          yarn jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
