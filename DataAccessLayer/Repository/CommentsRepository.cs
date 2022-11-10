@@ -63,7 +63,6 @@ namespace DataAccessLayer
                     };
                     postComments.Add(comment);
                 }
-
                 command.Dispose();
             }
             catch (Exception)
@@ -74,8 +73,6 @@ namespace DataAccessLayer
             {
                 connection.Close();
             }
-
-
             return postComments;
         }
     }
