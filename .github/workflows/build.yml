@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Test and coverage
-        run: yarn jest --coverage
+        run: yarn jest --coverage ui/
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
