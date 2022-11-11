@@ -9,16 +9,26 @@ namespace api_Flare.Controllers;
 public class PostsController : ControllerBase
 {
     private readonly IPostRepository postRepository;
-    public PostsController(IPostRepository postRepository)
+
+    private readonly IPostService _postService;
+
+    private readonly int _mockUserId = 4;
+
+    public PostsController(IPostRepository postRepository, IPostService postService)
     {
+        _postService = postService;
         this.postRepository = postRepository;
     }
 
     [HttpPost]
     [Route("create")]
-    public void CreatePost([FromBody] Post post)
+    public async void CreatePost([FromForm] Post post)
     {
-        postRepository.Create(post);
+        //postRepository.Create(post);
+
+        System.Console.WriteLine($"post is {post.Text}");
+
+        await _postService.CreatePost(post);
     }
 
     [HttpGet]

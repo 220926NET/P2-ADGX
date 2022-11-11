@@ -20,11 +20,9 @@ public class ProfileRepository : IProfileRepository
             cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
             cmd.Parameters.AddWithValue("@ImageName", imageFileName);
             int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            _connection.Close();
+            return true;
 
-            if (rowsAffected > 0)
-            {
-                return true;
-            }
 
 
         }
@@ -38,7 +36,7 @@ public class ProfileRepository : IProfileRepository
             _connection.Close();
         }
 
-        return false;
+
     }
 
     /// This method checks to see if an image has already been uploaded by the user
@@ -234,7 +232,7 @@ public class ProfileRepository : IProfileRepository
             SqlCommand cmd = new SqlCommand("exec delete_profile_hobbies @userId", _connection);
             cmd.Parameters.AddWithValue("@userId", userId);
             await cmd.ExecuteNonQueryAsync();
-
+            _connection.Close();
             return true;
         }
         catch (SqlException)
@@ -256,6 +254,8 @@ public class ProfileRepository : IProfileRepository
 
             foreach (string interest in interests.Interests)
             {
+
+                Console.WriteLine("interest are " + interest);
                 //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
                 SqlCommand cmd = new SqlCommand("exec create_profile_interest @UserId, @Text", _connection);
                 cmd.Parameters.AddWithValue("@UserId", userId);
@@ -356,16 +356,15 @@ public class ProfileRepository : IProfileRepository
             SqlCommand cmd = new SqlCommand("exec delete_profile_interests @UserId", _connection);
             cmd.Parameters.AddWithValue("@UserId", userId);
             await cmd.ExecuteNonQueryAsync();
-
             _connection.Close();
             return true;
         }
-        catch (SqlException)
+        catch (SqlException e)
         {
+            Console.WriteLine(e);
             //TODO: Log error to file 
             _connection.Close();
             return false;
-
         }
 
     }
@@ -381,8 +380,13 @@ public class ProfileRepository : IProfileRepository
             SqlCommand cmd = new SqlCommand("exec add_profile_about_me @UserId, @AboutMe", _connection);
             cmd.Parameters.AddWithValue("@UserId", userId);
             cmd.Parameters.AddWithValue("@AboutMe", aboutMe.AboutMe);
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            await cmd.ExecuteNonQueryAsync();
+            _connection.Close();
+            return true;
+
         }
+
+
         catch (SqlException)
         {
             //TODO: Log error to file
@@ -393,7 +397,7 @@ public class ProfileRepository : IProfileRepository
             _connection.Close();
         }
 
-        return true;
+
     }
 
     public async Task<string> GetProfileAboutMe(int userId)
@@ -455,5 +459,32 @@ public class ProfileRepository : IProfileRepository
             _connection.Close();
         }
 
+    }
+    public async Task<bool> UserImagePostAlreadyExists(string imageName)
+    {
+        try
+        {
+            _connection.Open();
+            //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
+            SqlCommand cmd = new SqlCommand("exec user_post_already_exists @ImageHash", _connection);
+            cmd.Parameters.AddWithValue("@ImageHash", imageName);
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
+            {
+                _connection.Close();
+                return true;
+            }
+        }
+        catch (SqlException)
+        {
+            //TODO: Log error to file 
+            return false;
+        }
+        finally
+        {
+            _connection.Close();
+        }
+
+        return false;
     }
 }

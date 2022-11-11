@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { ProfileDetailsComponent } from "./components/profile-details/profile-details.component";
+import { ProfileService } from "./services/ProfileService";
 import { PostFeedComponent } from "./components/post-feed/post-feed.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
@@ -13,11 +15,11 @@ import { UsersPostsComponent } from "./components/profile/users-posts/users-post
 import { PostComponent } from "./components/post/post.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
+import { CommentFormComponent } from "./comment-form/comment-form.component";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
-import { MatDividerModule } from "@angular/material/divider";
-import { CommentFormComponent } from "./comment-form/comment-form.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { CommentFormComponent } from "./comment-form/comment-form.component";
     PostComponent,
     UsersPostsComponent,
     HomeComponent,
+    ProfileDetailsComponent,
     NavBarComponent,
     PostFeedComponent,
     CommentFeedComponent,
@@ -42,9 +45,9 @@ import { CommentFormComponent } from "./comment-form/comment-form.component";
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatSidenavModule,
     MatDividerModule,
+    MatCardModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent],

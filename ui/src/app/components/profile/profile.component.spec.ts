@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from '../services/ProfileService';
-import Profile from 'src/Models/Profile';
+import Profile from 'src/Models/Profile/Profile';
 import { Observable } from 'rxjs';
-import ResponseMessage from 'src/Models/ResponseMessage';
+import ResponseMessage from 'src/Models/Profile/ResponseMessage';
 import { By } from '@angular/platform-browser';
 
 

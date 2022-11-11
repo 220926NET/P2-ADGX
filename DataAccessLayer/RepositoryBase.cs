@@ -31,10 +31,14 @@ public abstract class RepositoryBase<T> where T : new()
                     return new T();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 // logging
                 throw;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }
@@ -56,10 +60,14 @@ public abstract class RepositoryBase<T> where T : new()
                 }
                 return list;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 // logging
                 throw;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }
@@ -79,6 +87,10 @@ public abstract class RepositoryBase<T> where T : new()
             {
                 // Add serilog logging
                 throw;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }

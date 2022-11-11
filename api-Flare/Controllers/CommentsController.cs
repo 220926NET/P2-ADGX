@@ -35,7 +35,7 @@ namespace api_Flare.Controllers
         [Route("create")]
         public void Post([FromBody] Comment comment)
         {
-            commentService.create_comment(comment);
+            commentService.CreateComment(comment);
         }
 
         // PUT api/<CommentsController>/5

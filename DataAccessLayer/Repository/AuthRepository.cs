@@ -24,8 +24,6 @@ public class AuthRepository : IAuthRepository
     {
         conn = SqlConnectionFactory.GetConnection();
     }
-
-
     //receives user credentials
     //returns validation of successful login
     public User GetUser(string username, string password)
@@ -222,7 +220,6 @@ public class AuthRepository : IAuthRepository
             string sql = "SELECT * FROM Login WHERE LoginID=@id";
             SqlCommand cmd = new(sql, conn);
             cmd.Parameters.AddWithValue("@id", id);
-
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {

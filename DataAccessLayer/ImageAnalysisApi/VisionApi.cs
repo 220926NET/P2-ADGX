@@ -6,8 +6,8 @@ namespace DataAccessLayer;
 public class VisionApi
 {
 
-    private readonly string _subscriptionKey = "";
-    private readonly string _endpoint = "";
+    private readonly string _subscriptionKey = "ce1e97017e2149f99111548f394cb69b";
+    private readonly string _endpoint = "https://revatureproject2api.cognitiveservices.azure.com/";
 
 
     ///<Summary> Returns a <c>VisionApiResponse</c> containing a list of tags and a description</Summary>
@@ -21,7 +21,7 @@ public class VisionApi
         return response;
     }
 
-    public ComputerVisionClient Authenticate(string endpoint, string key)
+    private ComputerVisionClient Authenticate(string endpoint, string key)
     {
 
         ComputerVisionClient client =
@@ -31,7 +31,7 @@ public class VisionApi
         return client;
     }
 
-    public async Task<VisionApiResponse> AnalyzeImageUrl(ComputerVisionClient client, string imageUrl)
+    private async Task<VisionApiResponse> AnalyzeImageUrl(ComputerVisionClient client, string imageUrl)
     {
 
         VisionApiResponse response = new VisionApiResponse();
