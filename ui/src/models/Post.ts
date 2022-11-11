@@ -4,4 +4,5 @@ export interface Post {
   title: string;
   text: string;
   datePosted: Date;
+  image: any;
 }

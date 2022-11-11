@@ -15,8 +15,8 @@ export class CommentService {
     this.commentAdded = new Subject<boolean>();
   }
 
-  createComment(comment: Comment) {
-    return this.http.post(COMMENT_API + "create", comment);
+  createComment(comment: Partial<Comment>): Observable<Comment> {
+    return this.http.post<Comment>(COMMENT_API + "create", comment);
   }
   getComments(postId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(COMMENT_API + postId);

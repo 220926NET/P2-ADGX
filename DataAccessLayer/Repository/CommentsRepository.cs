@@ -12,7 +12,7 @@ namespace DataAccessLayer
             connection = SqlConnectionFactory.GetConnection();
         }
 
-        public void CreateComment(Comment comment)
+        public Comment CreateComment(Comment comment)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@UserId", comment.UserID);
                 cmd.Parameters.AddWithValue("@PostId", comment.PostID);
                 cmd.Parameters.AddWithValue("@Text", comment.Text);
-                cmd.ExecuteNonQuery();
+                comment.CommentID = (int)cmd.ExecuteScalar();
                 cmd.Dispose();
             }
             catch
@@ -33,6 +33,7 @@ namespace DataAccessLayer
             {
                 connection.Close();
             }
+            return comment;
         }
 
         public List<Comment> GetPostComments(int postId)

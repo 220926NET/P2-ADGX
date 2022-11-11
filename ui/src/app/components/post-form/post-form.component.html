@@ -1,0 +1,28 @@
+<form [formGroup]="postForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      name="title"
+      type="text"
+      class="form-control"
+      formControlName="title"
+    />
+    <label for="text">Body</label>
+    <textarea
+      name="text"
+      id="post-body"
+      class="form-control"
+      formControlName="text"
+    ></textarea>
+    <label for="img">Image</label>
+    <input
+      name="img"
+      type="file"
+      class="form-control"
+      formControlName="image"
+    />
+    <button class="btn btn-primary" type="submit" (click)="submitForm()">
+      Submit
+    </button>
+  </div>
+</form>
