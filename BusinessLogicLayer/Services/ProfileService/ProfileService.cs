@@ -11,14 +11,14 @@ public class ProfileService : IProfileService
     private readonly IProfileRepository _repo;
 
 
-    private readonly ProfileServiceResponse _profileServiceResponse;
+    private readonly ServerResponse _ServerResponse;
 
-    public ProfileService(BlobStorage blobStorage, IProfileRepository repo, ProfileServiceResponse profileServiceResponse)
+    public ProfileService(BlobStorage blobStorage, IProfileRepository repo, ServerResponse ServerResponse)
     {
 
         _blobStorage = blobStorage;
         _repo = repo;
-        _profileServiceResponse = profileServiceResponse;
+        _ServerResponse = ServerResponse;
     }
 
     // This method takes in user Photo and uploads it inside a blob storage container 
@@ -29,12 +29,12 @@ public class ProfileService : IProfileService
 
         if (!Validator.IsFileValid(userPhoto))
         {
-            return _profileServiceResponse.InvalidFileResponse();
+            return _ServerResponse.InvalidFileResponse();
         };
 
         if (await _repo.UserHasProfilePhoto(userId))
         {
-            return _profileServiceResponse.UserHasProfilePhotoSet();
+            return _ServerResponse.UserHasProfilePhotoSet();
         }
 
         string fileExtension = userPhoto.FileName.Split(".")[1];
@@ -43,7 +43,7 @@ public class ProfileService : IProfileService
 
         if (string.IsNullOrEmpty(imageUrl))
         {
-            return _profileServiceResponse.IssueUploadingToBlobStorage();
+            return _ServerResponse.IssueUploadingToBlobStorage();
         }
 
         string newPhotoFileName = mockUserName + "." + fileExtension;
@@ -52,11 +52,11 @@ public class ProfileService : IProfileService
 
         if (!successUploadingPhoto)
         {
-            return _profileServiceResponse.IssueUploadingProfilePhotoToDb();
+            return _ServerResponse.IssueUploadingProfilePhotoToDb();
         }
 
 
-        return _profileServiceResponse.SuccessfullyUploadedProfilePhoto();
+        return _ServerResponse.SuccessfullyUploadedProfilePhoto();
 
     }
 
@@ -89,11 +89,11 @@ public class ProfileService : IProfileService
             bool deleteSuccess = await _blobStorage.deletePhotoFromStorage(deletedFileName);
             if (!deleteSuccess)
             {
-                return _profileServiceResponse.DeletingFromBlobStorageFailure();
+                return _ServerResponse.DeletingFromBlobStorageFailure();
             }
         }
 
-        return _profileServiceResponse.DeletingFromBlobStorageSuccess();
+        return _ServerResponse.DeletingFromBlobStorageSuccess();
     }
 
     public async Task<ResponseMessage<string>> UploadProfileHobbies(int userId, ProfileHobbies hobbies)
@@ -103,16 +103,16 @@ public class ProfileService : IProfileService
 
         if (!deleteUserHobbies)
         {
-            return _profileServiceResponse.SqlError();
+            return _ServerResponse.SqlError();
         }
 
         bool uploadUserHobbiesSuccess = await _repo.UploadUserHobbies(userId, hobbies);
 
         if (!uploadUserHobbiesSuccess)
         {
-            return _profileServiceResponse.uploadUserHobbiesFailure();
+            return _ServerResponse.uploadUserHobbiesFailure();
         }
-        return _profileServiceResponse.uploadUserHobbiesSuccess();
+        return _ServerResponse.uploadUserHobbiesSuccess();
 
     }
 
@@ -123,18 +123,19 @@ public class ProfileService : IProfileService
 
         if (!deleteInterests)
         {
-            return _profileServiceResponse.SqlError();
+            return _ServerResponse.SqlError();
         }
         else
         {
+            Console.WriteLine("inside upload interests");
             bool setInterests = await _repo.UploadProfileInterests(userId, interests);
             if (!setInterests)
             {
-                return _profileServiceResponse.UploadProfileInterestsFailure();
+                return _ServerResponse.UploadProfileInterestsFailure();
             }
         }
 
-        return _profileServiceResponse.uploadUserHobbiesSuccess();
+        return _ServerResponse.UploadProfileInterestsSuccess();
 
     }
 

@@ -2,6 +2,7 @@ using DataAccessLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using BusinessLogicLayer;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -20,8 +21,14 @@ builder.Services.AddCors(options =>
                       });
 });
 // Add services to the container.
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddSingleton<BlobStorage>();
 builder.Services.AddSingleton<VisionApi>();
 builder.Services.AddSingleton<ProfileServiceResponse>();

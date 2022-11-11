@@ -1,6 +1,8 @@
 using Models;
 
-public class ProfileServiceResponse
+namespace BusinessLogicLayer;
+
+public class ServerResponse
 {
 
 
@@ -66,6 +68,7 @@ public class ProfileServiceResponse
     {
         return setResponse("Issues with database, please try again later");
     }
+
 
 
     public ResponseMessage<string> setResponse(string message, bool success = false)

@@ -7,7 +7,7 @@ public static class ImageHash
 {
 
 
-    public static string GetImageHash(IFormFile formFile, string userName)
+    public static string GetImageHash(IFormFile formFile, string text, string userName)
     {
 
         var md5 = MD5.Create();
@@ -22,7 +22,7 @@ public static class ImageHash
             sSourceData = Convert.ToBase64String(formFileBytes);
         }
 
-        tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData + userName);
+        tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData + text + userName);
 
         var byteHash = md5.ComputeHash(tmpSource);
 

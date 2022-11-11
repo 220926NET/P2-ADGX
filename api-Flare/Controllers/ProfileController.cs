@@ -11,8 +11,6 @@ public class ProfileController : ControllerBase
     private readonly IProfileService _profileService;
     private readonly int _mockUserId = 4;
 
-    //  ProfilePage _mockProfilePage;
-
     public ProfileController(IProfileService profileService)
     {
         _profileService = profileService;
@@ -105,12 +103,12 @@ public class ProfileController : ControllerBase
 
 
     [HttpPost("/interests")]
-    public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserInterests([FromBody] ProfileInterests interests)
+    public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests)
     {
 
 
-        ResponseMessage<List<string>> uploadUserInterestsRes = new ResponseMessage<List<string>>();
-        await _profileService.UploadProfileInterests(_mockUserId, interests);
+        ResponseMessage<string> uploadUserInterestsRes = new ResponseMessage<string>();
+        uploadUserInterestsRes = await _profileService.UploadProfileInterests(_mockUserId, interests);
         return Ok(uploadUserInterestsRes);
 
 
