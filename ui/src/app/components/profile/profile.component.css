@@ -1,93 +1,76 @@
 * {
-    font-family: 'Courier New', Courier, monospace;
-    overflow: hidden;
+  font-family: "Courier New", Courier, monospace;
+  overflow: hidden;
 }
 
 .outer-profile-container {
-    overflow: hidden;
-    text-align: center;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 700px;
-    background-image: url(../../assets/flare-logo.png);
-    background-size: cover;
-    position:relative;
-    
+  overflow: hidden;
+  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 700px;
+  /* background-image: url(../../assets/flare-logo.png); */
+  background-size: cover;
+  position: relative;
 }
 
 .profile-container {
-    border-radius: 5rem;
-    padding: 10px;
-    top: 60%;
-    position: relative;
-    background-color: white;
-    margin: 0px 50% 0px 30%;
-    display: flex; 
-    min-width: 50%;
-    
-   
+  border-radius: 5rem;
+  padding: 10px;
+  top: 60%;
+  position: relative;
+  background-color: white;
+  margin: 0px 50% 0px 30%;
+  display: flex;
+  min-width: 50%;
 }
-.profile-img-container{
-   
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+.profile-img-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
-.profile-img-container img{
-  
-    border-radius: 50%;
-    
+.profile-img-container img {
+  border-radius: 50%;
 }
 
-
-.profile-details-container{
-    
-    display: flex;
-    margin: auto;
-    gap: 20px;
-    
+.profile-details-container {
+  display: flex;
+  margin: auto;
+  gap: 20px;
 }
-
-
-
-
 
 .profile-text-area {
-   
-    width: 100%
+  width: 100%;
 }
 
-.btn-upload-photo{
-    
-      width: 20%;
+.btn-upload-photo {
+  width: 20%;
 }
 
 .text-black {
-    color: black;
+  color: black;
 }
 
-.btn-delete-user-photo{
-    margin: 0 auto 0 auto;
-    font-size: small;
-    text-align: center;
-    width: fit-content;
-    background-color:  rgb(42, 42, 42, .2);
+.btn-delete-user-photo {
+  margin: 0 auto 0 auto;
+  font-size: small;
+  text-align: center;
+  width: fit-content;
+  background-color: rgb(42, 42, 42, 0.2);
 }
 
-.btn-upload-photo{
-
-    background-color: aqua;
-    width: fit-content;
+.btn-upload-photo {
+  background-color: aqua;
+  width: fit-content;
 }
 
-
-.app-user-posts-container{
-    margin: auto;
-    padding-top: 20px;
-    justify-content: center;
+.app-user-posts-container {
+  margin: auto;
+  padding-top: 20px;
+  justify-content: center;
 }
 
-.profile-recent-posts{
-    text-align: center;
+.profile-recent-posts {
+  text-align: center;
 }
