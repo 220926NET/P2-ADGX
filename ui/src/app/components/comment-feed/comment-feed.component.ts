@@ -14,6 +14,7 @@ export class CommentFeedComponent implements OnInit {
 
   updateComments() {
     this.commentService.getComments(this.postId).subscribe((comments) => {
+      console.log(comments);
       this.comments = comments;
     });
   }
