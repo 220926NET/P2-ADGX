@@ -17,7 +17,7 @@ jobs:
         working-directory: ui/
         run: |
           yarn
-          yarn add jest
+          yarn add jest typescript
       - name: Test and coverage
         working-directory: ui/
         run: yarn jest --coverage
