@@ -22,16 +22,14 @@ builder.Services.AddCors(options =>
 });
 // Add services to the container.
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddSingleton<BlobStorage>();
 builder.Services.AddSingleton<VisionApi>();
-builder.Services.AddSingleton<ProfileServiceResponse>();
+builder.Services.AddSingleton<ServerResponse>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
