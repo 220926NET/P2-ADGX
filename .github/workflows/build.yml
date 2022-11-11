@@ -19,6 +19,7 @@ jobs:
           yarn
           yarn add jest
       - name: Test and coverage
+        working-directory: ui/
         run: yarn jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
