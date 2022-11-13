@@ -12,7 +12,7 @@ const POST_API = "https://localhost:7219/api/Posts/";
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  createPost(post: Partial<Post>) {
+  createPost(post: FormData) {
     return this.http.post(POST_API + "Create", post);
   }
   getPost(id: number): any {
