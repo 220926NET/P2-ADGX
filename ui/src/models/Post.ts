@@ -5,4 +5,5 @@ export interface Post {
   text: string;
   datePosted: Date;
   image: any;
+  isTextPost: string;
 }

@@ -27,6 +27,9 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
+
 builder.Services.AddSingleton<BlobStorage>();
 builder.Services.AddSingleton<VisionApi>();
 builder.Services.AddSingleton<ServerResponse>();

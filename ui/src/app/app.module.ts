@@ -18,7 +18,7 @@ import { CommentFormComponent } from "./components/comment-form/comment-form.com
 import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { PostFormComponent } from "./components/post-form/post-form.component";
+import { PostComponent } from "./components/post/post.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { PostFormComponent } from "./components/post-form/post-form.component";
     CommentFeedComponent,
     UsersPostsComponent,
     CommentFormComponent,
-    PostFormComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
