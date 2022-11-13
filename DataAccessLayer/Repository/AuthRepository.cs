@@ -13,6 +13,10 @@ public interface IAuthRepository : IDisposable
     int CreateUser(string username, string password);
     void DeleteUser(int id);
     void UpdateUser(User user);
+    bool VerifyPassword(string username, string password, string salt);
+    string GetUserSalt(string username);
+    bool LookupUser(string username);
+
 }
 
 
@@ -32,7 +36,7 @@ public class AuthRepository : IAuthRepository
         if (LookupUser(username))
         {
             string salt = GetUserSalt(username);
-            if (TestPassword(username, password, salt))
+            if (VerifyPassword(username, password, salt))
             {
                 try
                 {
@@ -66,7 +70,7 @@ public class AuthRepository : IAuthRepository
         return user;
     }
 
-    private string GetUserSalt(string username)
+    public string GetUserSalt(string username)
     {
         string salt = "";
         try
@@ -95,7 +99,7 @@ public class AuthRepository : IAuthRepository
         return salt;
     }
 
-    private bool LookupUser(string username)
+    public bool LookupUser(string username)
     {
         int count = 0;
         try
@@ -120,14 +124,14 @@ public class AuthRepository : IAuthRepository
 
     }
 
-    private bool TestPassword(string username, string password, string salt)
+    public bool VerifyPassword(string username, string password, string salt)
     {
         byte[] password_hash = GetHash(password + salt);
         int count = 0;
         try
         {
             conn.Open();
-            string sql = "SELECT COUNT(*) FROM Login WHERE username=@username AND password_hash=@password_hash";
+            string sql = "SELECT COUNT(*) FROM Login WHERE username=@username AND PasswordHash=@password_hash";
             SqlCommand cmd = new(sql, conn);
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@password_hash", password_hash);

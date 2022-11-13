@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using BusinessLogicLayer;
+using System.Configuration;
+using BusinessLogicLayer.Services.AuthService;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddCors(options =>
 {
@@ -25,19 +26,24 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddSingleton<BlobStorage>();
 builder.Services.AddSingleton<VisionApi>();
 builder.Services.AddSingleton<ServerResponse>();
-builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 
 
 builder.Services.AddCors(options =>
