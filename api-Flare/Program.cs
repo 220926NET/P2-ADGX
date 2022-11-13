@@ -68,30 +68,18 @@ builder.Services.AddAuthentication((opt) =>
     };
 });
 
-
 var app = builder.Build();
-
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
-
-app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

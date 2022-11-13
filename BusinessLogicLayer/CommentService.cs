@@ -7,7 +7,7 @@ namespace BusinessLogicLayer
     public interface ICommentService
     {
         List<Comment> GetPostComments(int postId);
-        void CreateComment(Comment comment);
+        Comment create_comment(Comment comment);
     }
 
     public class CommentService : ICommentService
@@ -19,9 +19,9 @@ namespace BusinessLogicLayer
             this.commentRepository = commentRepository;
         }
 
-        public void CreateComment(Comment comment)
+        public Comment create_comment(Comment comment)
         {
-            commentRepository.CreateComment(comment);
+            return commentRepository.CreateComment(comment);
         }
         public List<Comment> GetPostComments(int postId)
         {

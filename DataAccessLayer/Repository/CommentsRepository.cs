@@ -4,7 +4,6 @@ using Models;
 
 namespace DataAccessLayer
 {
-
     public class CommentsRepository : ICommentsRepository
     {
         SqlConnection connection;
@@ -13,7 +12,20 @@ namespace DataAccessLayer
             connection = SqlConnectionFactory.GetConnection();
         }
 
-        public void CreateComment(Comment comment)
+        public static T ConvertFromDBVal<T>(object obj)
+        {
+            if (obj == null || obj == DBNull.Value)
+            {
+                return default(T); // returns the default value for the type
+            }
+            else
+            {
+                return (T)obj;
+            }
+        }
+
+
+        public Comment CreateComment(Comment comment)
         {
             try
             {
@@ -23,7 +35,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@UserId", comment.UserID);
                 cmd.Parameters.AddWithValue("@PostId", comment.PostID);
                 cmd.Parameters.AddWithValue("@Text", comment.Text);
-                cmd.ExecuteNonQuery();
+                comment.CommentID = (int)cmd.ExecuteScalar();
                 cmd.Dispose();
             }
             catch
@@ -34,6 +46,7 @@ namespace DataAccessLayer
             {
                 connection.Close();
             }
+            return comment;
         }
 
         public List<Comment> GetPostComments(int postId)
@@ -52,10 +65,11 @@ namespace DataAccessLayer
                 {
                     Comment comment = new()
                     {
-                        CommentID = (int)reader["CommentID"],
-                        UserID = (int)reader["UserID"],
-                        PostID = postId,
-                        Text = (string)reader["Text"]
+                        CommentID = ConvertFromDBVal<int>(reader["CommentID"]),
+                        UserID = ConvertFromDBVal<int>(reader["UserID"]),
+                        Text = ConvertFromDBVal<string>(reader["Text"]),
+                        Name = ConvertFromDBVal<string>(reader["Name"]),
+                        ImageURL = ConvertFromDBVal<string>(reader["ImageUrl"])
                     };
                     postComments.Add(comment);
                 }

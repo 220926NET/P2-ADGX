@@ -4,6 +4,19 @@ namespace DataAccessLayer;
 
 public class PostRepository : RepositoryBase<Post>, IPostRepository
 {
+    public static T ConvertFromDBVal<T>(object obj)
+    {
+        if (obj == null || obj == DBNull.Value)
+        {
+            return default(T); // returns the default value for the type
+        }
+        else
+        {
+            return (T)obj;
+        }
+    }
+
+
     public PostRepository() : base("Post")
     {
     }
@@ -12,7 +25,7 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         int PostID = (int)reader["PostID"];
         int UserID = (int)reader["UserID"];
         string Title = (string)reader["Title"];
-        string Text = (string)reader["Text"];
+        string Text = ConvertFromDBVal<string>(reader["Text"]);
         DateTime DatePosted = (DateTime)reader["DatePosted"];
         return new Post { PostID = PostID, UserID = UserID, Title = Title, Text = Text, DatePosted = DatePosted };
     }
@@ -30,7 +43,7 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         command.Parameters.Add(new SqlParameter("@PostID", id));
         return EntityGet(command);
     }
-    public void Create(NewPost entity,int userId, PostImage postImage = null)
+    public void Create(NewPost entity, int userId, PostImage postImage = null)
     {
         try
         {
@@ -40,7 +53,7 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
             {
                 connection.Open();
 
-                if (entity.isTextPost  == "true")
+                if (entity.isTextPost == "true")
                 {
                     string query = $"exec create_text_post @UserId, @Text , @Title ";
                     SqlCommand command = new SqlCommand(query, connection);

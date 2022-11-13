@@ -11,14 +11,14 @@ import { RegisterComponent } from "./components/register/register.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { HomeComponent } from "./components/home/home.component";
 import { UsersPostsComponent } from "./components/profile/users-posts/users-posts.component";
-import { PostComponent } from "./components/post/post.component";
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommentFeedComponent } from "./components/comment-feed/comment-feed.component";
-import { CommentFormComponent } from "./comment-form/comment-form.component";
+import { CommentFormComponent } from "./components/comment-form/comment-form.component";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { PostFormComponent } from "./components/post-form/post-form.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    PostComponent,
     UsersPostsComponent,
     HomeComponent,
     ProfileDetailsComponent,
@@ -35,6 +34,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     CommentFeedComponent,
     UsersPostsComponent,
     CommentFormComponent,
+    PostFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     BrowserAnimationsModule,
     MatDividerModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

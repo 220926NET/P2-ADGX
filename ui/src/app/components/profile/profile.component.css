@@ -1,6 +1,5 @@
 * {
   font-family: "Courier New", Courier, monospace;
-  
 }
 
 .outer-profile-container {
@@ -15,7 +14,7 @@
   justify-content: center;
 }
 
-.profile-img{
+.profile-img {
   width: 168px;
   height: 168px;
   border-radius: 3rem;
@@ -24,19 +23,16 @@
   flex-wrap: wrap;
 }
 
-
-
-.no-profile-img{
+.no-profile-img {
   height: 20px;
 }
-
 
 .btn-upload-photo {
   width: 20%;
 }
 
-.btn-delete-user-photo{
-  position:absolute;
+.btn-delete-user-photo {
+  position: absolute;
   top: 50%;
   left: 19.5%;
   margin: 0 auto 0 auto;
@@ -46,20 +42,17 @@
   background-color: rgba(141, 26, 26, 1);
 }
 
-
-
 .btn-upload-photo {
   position: absolute;
   top: 50%;
   left: 19.5%;
-  background-color: rgb(23, 24, 26, .4);
+  background-color: rgb(23, 24, 26, 0.4);
   color: black;
   width: fit-content;
 }
 
-.profile-details-container{
- width:50%;
- 
+.profile-details-container {
+  width: 50%;
 }
 
 .app-user-posts-container {
@@ -73,13 +66,13 @@
   text-align: center;
 }
 
-.photo-label{
+.photo-label {
   padding: 20px;
   display: block;
   border: 1px solid black;
   height: 200px;
 }
 
-.photo-input{
+.photo-input {
   display: none;
 }

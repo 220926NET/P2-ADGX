@@ -1,0 +1,13 @@
+<form [formGroup]="commentForm">
+  <div class="form-group">
+    <input
+      placeholder="Insert comment here..."
+      type="text"
+      class="form-control"
+      formControlName="text"
+    />
+    <button class="btn btn-primary" type="submit" (click)="submitForm()">
+      Submit
+    </button>
+  </div>
+</form>
