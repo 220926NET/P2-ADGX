@@ -2,48 +2,37 @@
   <div class="outer-profile-container-logo"></div>
   <div class="profile-container">
     <div class="profile-img-container" data-testid="profile-image-container">
-      <img
-        class="profile-img"
-        src="{{ userProfile.image }}"
-        alt="userProfile"
-      />
-      <!-- if user adds a new photo use api delete route, delete photo and upload new one -->
-      <input
-        type="file"
-        id="avatar"
-        name="avatar"
-        accept="image/png, image/jpeg"
-        (change)="setPhoto($event)"
-        value="upload user photo"
-        [hidden]="userProfile.image"
-      />
-
-      <div
-        class="btn btn-delete-user-photo"
-        *ngIf="userProfile?.image; else noPhotoSet"
-        (click)="deleteProfilePhoto()"
-      >
+      <img [ngClass]="userProfile.image ? 'profile-img' : 'no-profile-img'" class="profile-img"
+        src="{{ userProfile.image }}" [alt]="userProfile.image ? 'Users profile picture' : ''"
+        [hidden]="!userProfile.image" (mouseenter)="showDeleteBtn()" (mouseleave)="hideDeleteBtn()" />
+      <div #delete class="btn btn-delete-user-photo" *ngIf="userProfile.image; else noPhotoSet"
+        (click)="deleteProfilePhoto()" [hidden]="!isDeleteBtn" (mouseenter)="showDeleteBtn()">
         Delete photo
       </div>
-
-      <!-- changes text to upload photo when a user image is not retrieved -->
       <ng-template #noPhotoSet>
+        <label class="photo-label"> Click inside box to A Profile Photo
+          <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" (change)="setPhoto($event)"
+            value="upload user photo" [hidden]="userProfile.image" class="photo-input" />
+        </label>
         <div class="btn btn-upload-photo" (click)="uploadPhoto()">
           Upload Photo
         </div>
       </ng-template>
     </div>
-
-   
   </div>
+  <div class="profile-details-container">
+    <app-profile-details [myHobbies]="userProfile.hobbies" [myInterests]="userProfile.interests"
+      [myAboutMe]="userProfile.aboutMe"></app-profile-details>
+  </div>
+  <hr />
 </div>
 <hr />
-<app-profile-details [myHobbies]="userProfile.hobbies" [myInterests]="userProfile.interests" [myAboutMe]="userProfile.aboutMe"></app-profile-details>
-<hr/>
+<div class="btn btn-create-post" (click)="showCreatePost()">Create a post</div>
+<app-post [hidden]="!createPost"></app-post>
 
 <div class="app-user-posts-container">
   <div class="profile-recent-posts">
     <h2>My Recent Posts</h2>
   </div>
-  <!-- <app-users-posts></app-users-posts> -->
+  <app-users-posts></app-users-posts>
 </div>

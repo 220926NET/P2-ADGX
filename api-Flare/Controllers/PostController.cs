@@ -14,11 +14,11 @@ public class PostController : ControllerBase
         this.postRepository = postRepository;
     }
 
-    [HttpPost]
-    public void CreatePost([FromBody] Post post)
-    {
-        postRepository.Create(post);
-    }
+    // [HttpPost]
+    // public void CreatePost([FromBody] Post post)
+    // {
+    //     postRepository.Create(post);
+    // }
 
     [HttpGet("/{id}")]
     public Post GetPost(int id)

@@ -19,6 +19,8 @@ public class ProfileController : ControllerBase
     [HttpPost("Photo")]
     public async Task<ActionResult<ResponseMessage<string>>> PostUserProfilePhoto(IFormFile userPhoto)
     {
+
+
         int mockUserId = 4;
         ResponseMessage<string> postUserPhotoRes = await _profileService.uploadUserPhoto(userPhoto, mockUserId);
 

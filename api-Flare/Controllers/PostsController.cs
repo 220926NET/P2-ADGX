@@ -16,17 +16,17 @@ public class PostsController : ControllerBase
 
     public PostsController(IPostRepository postRepository, IPostService postService)
     {
+
         _postService = postService;
         this.postRepository = postRepository;
+
     }
 
     [HttpPost]
     [Route("create")]
-    public async void CreatePost([FromForm] Post post)
+    public async void CreatePost([FromForm] NewPost post)
     {
         //postRepository.Create(post);
-
-        System.Console.WriteLine($"post is {post.Text}");
 
         await _postService.CreatePost(post);
     }

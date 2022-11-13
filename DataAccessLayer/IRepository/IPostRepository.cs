@@ -5,7 +5,7 @@ public interface IPostRepository
 {
     List<Post> GetAll();
     Post GetById(int id);
-    void Create(Post entity, PostImage postImage = null);
+    void Create(NewPost entity, int userId, PostImage postImage = null);
     void Update(Post entity);
     void Delete(Post entity);
 }

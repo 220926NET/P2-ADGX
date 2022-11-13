@@ -1,11 +1,10 @@
 .about-me-container {
-    width: 400px;
-    display: inline-block;
-    
+    word-break: break-word;
 }
 .about-me-edit-btn{
     cursor: pointer;
 }
+
 
 .active {
     background-color: rgb(126, 22, 38, .1);
