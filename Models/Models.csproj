@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Aspnetcore.mvc" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

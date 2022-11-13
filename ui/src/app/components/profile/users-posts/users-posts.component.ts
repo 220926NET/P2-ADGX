@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import UserPosts from 'src/Models/UserPosts';
 import ResponseMessage from 'src/Models/Profile/ResponseMessage';
-
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-users-posts',

@@ -15,6 +15,8 @@ public class PostService : IPostService
     private readonly VisionApi _visionApi;
 
     private readonly string _mockUserName = "emmora3";
+
+    private readonly int _mockUserId = 4; 
     public PostService(IPostRepository postRepository, BlobStorage blobStorage, IProfileRepository profileRepository, VisionApi visionApi)
     {
         _visionApi = visionApi;
@@ -23,25 +25,22 @@ public class PostService : IPostService
         _profileRepository = profileRepository;
 
     }
-    public async Task<ResponseMessage<string>> CreatePost(Post userPost)
+    public async Task<ResponseMessage<string>> CreatePost(NewPost userPost)
     {
 
         ResponseMessage<string> addUserPostRes = new ResponseMessage<string>();
 
+        //TODO check that posts are valid
 
-        if (userPost.isTextPost)
+        if (userPost.isTextPost == "true")
         {
-            // upload text post into databse 
-            _repo.Create(userPost);
-            Console.WriteLine("inside create text post");
+            _repo.Create(userPost, _mockUserId);
         }
         else
         {
-
-
             // creata new image post and pass it in
             //get a hash string consisting of the image, image text and username that will be used as the imageName in the database and blob storage
-            string userPostImageHash = ImageHash.GetImageHash(userPost.Image!, userPost.Text, _mockUserName);
+            string userPostImageHash = ImageHash.GetImageHash(userPost.Image!, userPost.Title, _mockUserName);
             string imageName = userPostImageHash;
             string imageExtension = getImageExtension(userPost.Image!.FileName);
 
@@ -64,7 +63,7 @@ public class PostService : IPostService
                     ImageName = imageName + "." + imageExtension,
                     Tags = apiResponse.Tags
                 };
-                _repo.Create(userPost, imagePost);
+                _repo.Create(userPost, _mockUserId, imagePost);
 
 
             }

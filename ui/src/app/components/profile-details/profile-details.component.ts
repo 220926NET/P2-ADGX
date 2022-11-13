@@ -37,10 +37,11 @@ export class ProfileDetailsComponent implements OnInit {
   setMyInterestsEditable(){
     this.isMyInterestsEditable = !this.isMyInterestsEditable
   }
+
+  
   addHobbyItem(){
     // if previous array is empty dont add
     if(this.myHobbies.length < 6){
-
       this.myHobbies.push("");
     }
   
@@ -52,7 +53,6 @@ export class ProfileDetailsComponent implements OnInit {
 
   addInterestItem(value : any){
     if(this.myInterests.length < 6){
-    
       this.myInterests.push("");
     }
     

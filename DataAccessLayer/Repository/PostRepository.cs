@@ -14,7 +14,6 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         string Title = (string)reader["Title"];
         string Text = (string)reader["Text"];
         DateTime DatePosted = (DateTime)reader["DatePosted"];
-
         return new Post { PostID = PostID, UserID = UserID, Title = Title, Text = Text, DatePosted = DatePosted };
     }
 
@@ -31,7 +30,7 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         command.Parameters.Add(new SqlParameter("@PostID", id));
         return EntityGet(command);
     }
-    public void Create(Post entity, PostImage postImage = null)
+    public void Create(NewPost entity,int userId, PostImage postImage = null)
     {
         try
         {
@@ -41,11 +40,11 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
             {
                 connection.Open();
 
-                if (entity.isTextPost)
+                if (entity.isTextPost  == "true")
                 {
                     string query = $"exec create_text_post @UserId, @Text , @Title ";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
+                    command.Parameters.Add(new SqlParameter("@UserID", userId));
                     command.Parameters.AddWithValue("@Title", entity.Title);
                     command.Parameters.AddWithValue("@Text", entity.Text);
                     command.ExecuteNonQuery();
@@ -57,7 +56,7 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
                     int imageInsertId = 0;
                     string query = $"exec create_image_post @UserId, @Title , @ImageUrl , @ImageName, @ImageDescription ";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@UserId", entity.UserID);
+                    command.Parameters.AddWithValue("@UserId", userId);
                     command.Parameters.AddWithValue("@Title", entity.Title);
                     command.Parameters.AddWithValue("@ImageUrl", postImage.ImageUrl);
                     command.Parameters.AddWithValue("@ImageName", postImage.ImageName);

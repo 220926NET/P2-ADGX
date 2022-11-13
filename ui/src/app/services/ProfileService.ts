@@ -25,13 +25,8 @@ export class ProfileService
     postProfileAboutMeUrl : string = "https://localhost:7219/AboutMe";
 
 
-
-
-
-    //TODO change 
+    
     deleteProfilePhoto() : Observable<ResponseMessage> {
-       // return this._httpClient.get(this.deleteProfilePictureUrl)
-
        return this._httpClient.delete<ResponseMessage>(this.deleteProfilePictureUrl);
     }
     
@@ -40,12 +35,14 @@ export class ProfileService
          return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl)
     }
 
-   
-
    postProfileAboutMe(aboutMe : string) : Observable<ResponseMessage> {
         return this._httpClient.post<ResponseMessage>(this.postProfileAboutMeUrl, {
             "aboutMe" : aboutMe
         })
+   }
+
+   postProfilePhoto(photo :FormData) : Observable<ResponseMessage>{
+        return this._httpClient.post<ResponseMessage>(this.postProfilePictureUrl, photo)
    }
 
    postProfileInterests(interests : string[]) : Observable<ResponseMessage>{

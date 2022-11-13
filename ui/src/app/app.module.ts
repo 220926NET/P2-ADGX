@@ -5,7 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ProfileDetailsComponent } from "./components/profile-details/profile-details.component";
-import { ProfileService } from "./services/ProfileService";
 import { PostFeedComponent } from "./components/post-feed/post-feed.component";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
