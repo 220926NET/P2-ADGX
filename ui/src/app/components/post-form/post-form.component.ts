@@ -13,15 +13,21 @@ export class PostFormComponent {
     text: new FormControl(""),
     image: new FormControl(""),
   });
+
   //TODO add logged in user id
   submitForm() {
-    this.postService.createPost({
-      userID: 2,
-      title: this.postForm.controls["title"].value,
-      text: this.postForm.controls["text"].value,
-      datePosted: new Date(),
-      image: this.postForm.controls["image"].value,
-    });
+    this.postService
+      .createPost({
+        userID: 2,
+        title: this.postForm.controls["title"].value,
+        text: this.postForm.controls["text"].value,
+        datePosted: new Date(),
+        image: this.postForm.controls["image"].value,
+      })
+      .subscribe((post) => {
+        console.log(post);
+        this.postForm.reset();
+      });
   }
 
   constructor(private postService: PostService) {}

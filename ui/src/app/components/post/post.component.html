@@ -1,0 +1,41 @@
+<div class="post-container">
+  <form [formGroup]="postForm">
+    <div>
+      <fieldset class="text-image-selection-container">
+        <div (click)="setText()" class=" btn-post btn" [ngClass]="isText ? 'active' : ''">
+          <span class="btn-text">Post</span> 
+        </div>
+        <div (click)="setTextFalse()" class=" btn-image btn" [ngClass]="!isText ? 'active' : ''">
+          <span class="btn-text">Image</span>
+        </div>
+        <!-- <input type="radio" value="true" formControlName="option" class="text-selector"/>
+        <label for="text-choice" class="text-selector">Text Post</label>
+        <input type="radio" value="false" formControlName="option"  class="image-selector"/>
+        <label for="image-choice">Image Post</label> -->
+      </fieldset>
+    </div>
+    <div>
+    <div class="post-title-container">
+      <input name="post-text" id="post-text" formControlName="title" placeholder="Post title" class="post-title"/>
+      <span *ngIf="!postForm.get('text')?.valid && postForm.get('title')?.touched">Please enter a Title for your
+        post!</span>
+    </div>
+    <div class="post-text-container">
+      <textarea formControlName="text" placeholder="text" maxlength="1000"
+        *ngIf="isText" class="post-text-area"></textarea>
+    </div>
+
+    <div class="post-image-container" *ngIf="!isText">
+      <label class="image-input-label">
+        <span class="btn btn-secondary upload-image-text">Upload image</span>
+      <input type="file" formControlName="image" *ngIf="!isText" accept="image/png, image/jpeg" 
+        (change)="setImage($event)" class="image-input"/>
+      </label>
+    </div>
+    
+      <button class="btn btn-primary" type="submit" (click)="onSubmit()">Post</button>
+    </div>
+
+  </form>
+
+</div>

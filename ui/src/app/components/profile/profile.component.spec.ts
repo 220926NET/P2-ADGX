@@ -6,10 +6,10 @@ import {
 } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ProfileComponent } from "./profile.component";
-import { ProfileService } from "src/app/services/ProfileService";
-import Profile from "src/Models/Profile";
+import { ProfileService } from "../services/ProfileService";
+import Profile from "src/Models/Profile/Profile";
 import { Observable } from "rxjs";
-import ResponseMessage from "src/Models/ResponseMessage";
+import ResponseMessage from "src/Models/Profile/ResponseMessage";
 import { By } from "@angular/platform-browser";
 
 describe("ProfileComponent", () => {

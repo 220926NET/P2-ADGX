@@ -18,9 +18,10 @@ export class CommentFormComponent implements OnInit {
 
   constructor(private commentService: CommentService) {}
 
-  ngOnInit(): void {
-    /* TODO document why this method 'ngOnInit' is empty */
-  }
+  ngOnInit(): void {}
+  public commentForm: FormGroup = new FormGroup({
+    text: new FormControl("", [Validators.required]),
+  });
 
   submitForm() {
     this.commentService

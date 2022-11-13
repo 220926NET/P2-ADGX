@@ -1,0 +1,16 @@
+.about-me-container {
+    word-break: break-word;
+}
+.about-me-edit-btn{
+    cursor: pointer;
+}
+
+
+.active {
+    background-color: rgb(126, 22, 38, .1);
+}
+
+.active-hobbies{
+    background-color: rgb(126, 22, 38, .1);
+
+}

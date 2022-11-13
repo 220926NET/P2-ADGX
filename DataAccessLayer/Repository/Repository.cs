@@ -41,7 +41,6 @@ public class Repository
             }
 
             _connection.Close();
-            _connection.Open();
 
 
         }

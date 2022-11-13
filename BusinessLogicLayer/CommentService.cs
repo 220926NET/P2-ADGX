@@ -2,6 +2,7 @@
 using DataAccessLayer;
 
 namespace BusinessLogicLayer
+
 {
     public interface ICommentService
     {
@@ -22,7 +23,6 @@ namespace BusinessLogicLayer
         {
             return commentRepository.CreateComment(comment);
         }
-
         public List<Comment> GetPostComments(int postId)
         {
             return commentRepository.GetPostComments(postId);

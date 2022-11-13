@@ -9,46 +9,30 @@ public class ProfileController : ControllerBase
 {
 
     private readonly IProfileService _profileService;
-
-    ProfilePage _mockProfilePage;
+    private readonly int _mockUserId = 4;
 
     public ProfileController(IProfileService profileService)
     {
-        _mockProfilePage = new ProfilePage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRED0Wfr3ScQFESoWpiyZ1yBk1rFAj2laVCiQ&usqp=CAU", "13 time WWE champion", new List<string>(){
-            "Running",
-            "Weight Lifting",
-            "Wood Working"
-        }, new List<string>(){
-            "Movies",
-            "Video games"
-
-        });
         _profileService = profileService;
-
     }
 
-    [HttpPost]
+    [HttpPost("Photo")]
     public async Task<ActionResult<ResponseMessage<string>>> PostUserProfilePhoto(IFormFile userPhoto)
     {
-        //TODO: check if user already has a photo
-        // if so delete it and save a new one 
-        // else save the photo 
 
-        ResponseMessage<string> postUserPhotoRes = await _profileService.uploadUserPhoto(userPhoto);
+
+        int mockUserId = 4;
+        ResponseMessage<string> postUserPhotoRes = await _profileService.uploadUserPhoto(userPhoto, mockUserId);
 
         return Ok(postUserPhotoRes);
 
     }
 
-    [HttpGet]
-    public ActionResult<ResponseMessage<ProfilePage>> GetProfileDetails()
+    [HttpGet("profileDetails")]
+    public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails()
     {
 
-        ResponseMessage<ProfilePage> getProfilePageRes = new ResponseMessage<ProfilePage>();
-
-        getProfilePageRes.data = _mockProfilePage;
-        getProfilePageRes.message = "Successfully retrieved profile page details!";
-        getProfilePageRes.success = true;
+        ResponseMessage<ProfilePage> getProfilePageRes = await _profileService.GetProfileDetails(_mockUserId);
 
         return Ok(getProfilePageRes);
 
@@ -95,21 +79,56 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpDelete]
+    [HttpDelete("profilePhoto")]
 
-    public ActionResult<ResponseMessage<string>> DeleteUserPhoto()
+    public async Task<ActionResult<ResponseMessage<string>>> DeleteUserPhoto()
     {
 
         ResponseMessage<string> deleteUserPhotoRes = new ResponseMessage<string>();
+        int mockUserId = 4;
 
+        deleteUserPhotoRes = await _profileService.DeleteProfilePicture(mockUserId);
 
-
-        deleteUserPhotoRes.data = null;
-        deleteUserPhotoRes.message = "Successfully deleted user photo";
-        deleteUserPhotoRes.success = true;
-
-        return deleteUserPhotoRes;
+        return Ok(deleteUserPhotoRes);
 
     }
+
+    [HttpPost("/hobbies")]
+
+    public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies)
+    {
+        ResponseMessage<string> uploadUserDetailsRes = await _profileService.UploadProfileHobbies(_mockUserId, hobbies);
+
+        return Ok(uploadUserDetailsRes);
+    }
+
+
+
+    [HttpPost("/interests")]
+    public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests)
+    {
+
+
+        ResponseMessage<string> uploadUserInterestsRes = new ResponseMessage<string>();
+        uploadUserInterestsRes = await _profileService.UploadProfileInterests(_mockUserId, interests);
+        return Ok(uploadUserInterestsRes);
+
+
+    }
+
+
+
+    [HttpPost("/AboutMe")]
+
+    public async Task<ActionResult<ResponseMessage<string>>> AddProfileAboutMe([FromBody] ProfileAboutMe aboutMe)
+    {
+        ResponseMessage<string> addProfileAboutMeRes = new ResponseMessage<string>();
+
+        addProfileAboutMeRes = await _profileService.SetProfileAboutMe(_mockUserId, aboutMe);
+
+        return Ok(addProfileAboutMeRes);
+    }
+
+
 
 }

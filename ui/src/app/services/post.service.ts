@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { NewPost } from "src/Models/NewPost";
 import { Post } from "src/Models/Post";
 
 const POST_API = "https://localhost:7219/api/Posts/";
