@@ -5,10 +5,31 @@ using Microsoft.IdentityModel.Tokens;
 using BusinessLogicLayer;
 using System.Configuration;
 using BusinessLogicLayer.Services.AuthService;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication((opt) =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = "https://localhost:7219",
+        ValidAudience = "https://localhost:4200",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecret12345"))
+    };
+});
 
 builder.Services.AddCors(options =>
 {
@@ -46,7 +67,18 @@ builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(configuration =>
+{
+    configuration.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "Using JWT Bearer Scheme, e.g. \"bearer {token} \"",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    configuration.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 
@@ -63,24 +95,6 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddAuthentication((opt) =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new()
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-
-        ValidIssuer = "https://localhost:7219",
-        ValidAudience = "https://localhost:4200",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-    };
-});
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
