@@ -71,11 +71,12 @@ public class AuthRepository : IAuthRepository
         User user = new();
         try
         {
+            string salt = GetUserSalt(username);
             conn.Open();
             string sql = "EXEC get_user @username, @passwordHash";
             SqlCommand cmd = new(sql, conn);
             cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@passwordHash", GetHash(password + GetUserSalt(username)));
+            cmd.Parameters.AddWithValue("@passwordHash", GetHash(password + salt));
 
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
