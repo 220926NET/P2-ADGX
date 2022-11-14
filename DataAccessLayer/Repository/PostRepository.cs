@@ -17,10 +17,11 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
     }
 
     private readonly string tableName = "Post";
-    public PostRepository() {}
+    public PostRepository() { }
     protected override Post EntityRead(SqlDataReader reader)
     {
-        return new Post { 
+        return new Post
+        {
             PostID = (int)reader["PostID"],
             UserID = (int)reader["UserID"],
             Title = (string)reader["Title"],
