@@ -54,7 +54,6 @@ namespace DataAccessLayer
             List<Comment> postComments = new();
 
             connection.Open();
-
             string query = "EXEC get_post_comments @PostID";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@PostID", postId);
@@ -63,14 +62,18 @@ namespace DataAccessLayer
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+
                     Comment comment = new()
                     {
                         CommentID = ConvertFromDBVal<int>(reader["CommentID"]),
                         UserID = ConvertFromDBVal<int>(reader["UserID"]),
+                        PostID = ConvertFromDBVal<int>(reader["PostID"]),
+                        ProfileID = ConvertFromDBVal<int>(reader["ProfileID"]),
                         Text = ConvertFromDBVal<string>(reader["Text"]),
                         Name = ConvertFromDBVal<string>(reader["Name"]),
                         ImageURL = ConvertFromDBVal<string>(reader["ImageUrl"])
                     };
+                    
                     postComments.Add(comment);
                 }
                 command.Dispose();

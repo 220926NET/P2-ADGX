@@ -6,6 +6,9 @@
       <mat-card-subtitle>{{ post.datePosted | date }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>{{ post.text }}</mat-card-content>
+    <div *ngIf="post.imageUrl">
+      <img [src]="post.imageUrl" [alt]="post.description">
+    </div>
     <app-comment-feed [postId]="post.postID"></app-comment-feed>
   </mat-card>
   <mat-divider></mat-divider>

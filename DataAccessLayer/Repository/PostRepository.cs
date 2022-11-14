@@ -22,12 +22,15 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
     }
     protected override Post EntityRead(SqlDataReader reader)
     {
-        int PostID = (int)reader["PostID"];
-        int UserID = (int)reader["UserID"];
-        string Title = (string)reader["Title"];
-        string Text = ConvertFromDBVal<string>(reader["Text"]);
-        DateTime DatePosted = (DateTime)reader["DatePosted"];
-        return new Post { PostID = PostID, UserID = UserID, Title = Title, Text = Text, DatePosted = DatePosted };
+        return new Post { 
+            PostID = (int)reader["PostID"],
+            UserID = (int)reader["UserID"],
+            Title = (string)reader["Title"],
+            Text = ConvertFromDBVal<string>(reader["Text"]),
+            DatePosted = (DateTime)reader["DatePosted"],
+            ImageUrl = ConvertFromDBVal<string>(reader["ImageUrl"]),
+            Description = ConvertFromDBVal<string>(reader["Description"]),
+        };
     }
 
     public List<Post> GetAll()
