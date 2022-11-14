@@ -10,7 +10,7 @@ public class BlobStorage : IBlobStorage
 
 
 
-    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://revatureproject2.blob.core.windows.net"), new StorageSharedKeyCredential("revatureproject2", Secrets.blobStorageKey));
+    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://revatureproject2.blob.core.windows.net"), new StorageSharedKeyCredential("revatureproject2", "8n7TzhP0EURkC6yzIslHEeSQqynspD896uMltzv31UVQW1eJqN2BOFiEPZuhrp5yhor5nWDcjqYP+ASt/3n7AQ=="));
 
     //This class is used to upload a user photo
     //it takes in the user name employee image and extension
