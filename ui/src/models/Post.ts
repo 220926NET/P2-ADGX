@@ -7,4 +7,5 @@ export interface Post {
   image: any;
   imageUrl?: string,
   description?:string
+  isTextPost: string;
 }

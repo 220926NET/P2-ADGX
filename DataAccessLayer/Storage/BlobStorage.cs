@@ -10,7 +10,7 @@ public class BlobStorage
 
 
 
-    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://revatureproject2.blob.core.windows.net"), new StorageSharedKeyCredential("revatureproject2", Secrets.BlobStorageKey));
+    private readonly BlobServiceClient _blobServiceClient = new BlobServiceClient(new Uri("https://revatureproject2.blob.core.windows.net"), new StorageSharedKeyCredential("revatureproject2", Secrets.blobStorageKey));
 
     //This class is used to upload a user photo
     //it takes in the user name employee image and extension
@@ -83,7 +83,7 @@ public class BlobStorage
         }
         catch (Azure.RequestFailedException)
         {
-            Console.WriteLine("error in upload photo blob sotrage");
+            Console.WriteLine("error in upload photo blob storage");
         }
         return url;
     }
