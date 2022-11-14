@@ -1,23 +1,13 @@
 .fire {
     cursor: pointer;
+    opacity: 50%;
 }
 
 .fire.unliked{
-    content: url("../../../assets/like/fire-black.svg");
-    opacity: 50%;
-}
-
-.fire:hover.unliked{
-    opacity: 100%;
-    content: url("../../../assets/like/fire-red.svg");
+    content: url("../../../../assets/like/fire-black.svg");
 }
 
 .fire.liked{
-    content: url("../../../assets/like/fire-red.svg");
-    opacity: 50%;
-}
-
-.fire:hover.liked{
     opacity: 100%;
-    content: url("../../../assets/like/fire-black.svg");
+    content: url("../../../../assets/like/fire-red.svg");
 }
