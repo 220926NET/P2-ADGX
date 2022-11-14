@@ -8,11 +8,10 @@ namespace DataAccessLayer;
 
 public interface IAuthRepository : IDisposable
 {
-    User GetUser(string username, string password);
-    User GetUser(int id);
-    int CreateUser(string username, string password);
-    void DeleteUser(int id);
+    bool Register(string username, string password);
+    User Login(string username, string password);
     void UpdateUser(User user);
+    void DeleteUser(int id);
     bool VerifyPassword(string username, string password, string salt);
     string GetUserSalt(string username);
     bool LookupUser(string username);
@@ -28,44 +27,74 @@ public class AuthRepository : IAuthRepository
     {
         conn = SqlConnectionFactory.GetConnection();
     }
+
+
+    public bool Register(string username, string password)
+    {
+        if (!LookupUser(username))
+        {
+            try
+            {
+                conn.Open();
+                string sql = "EXEC create_user @username, @passwordHash, @salt";
+                SqlCommand cmd = new(sql, conn);
+                string salt = GetSalt();
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password_hash", GetHash(password + salt));
+                cmd.Parameters.AddWithValue("@salt", salt);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+
+
     //receives user credentials
     //returns validation of successful login
-    public User GetUser(string username, string password)
+    public User Login(string username, string password)
     {
         User user = new();
-        if (LookupUser(username))
+        try
         {
-            string salt = GetUserSalt(username);
-            if (VerifyPassword(username, password, salt))
+            conn.Open();
+            string sql = "EXEC get_user @username, @passwordHash";
+            SqlCommand cmd = new(sql, conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@passwordHash", GetHash(password + GetUserSalt(username)));
+
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
             {
-                try
-                {
-                    conn.Open();
-                    string sql = "SELECT * FROM Login WHERE username=@username";
-                    SqlCommand cmd = new(sql, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-
-                    SqlDataReader dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        int id = (int)dataReader["LoginID"];
-                        salt = (string)dataReader["salt"];
-                        user.Id = id;
-                        user.Username = username;
-                        user.Password = password;
-                    }
-                    cmd.Dispose();
-                }
-                catch (SqlException)
-                {
-                    throw;
-                }
-                finally
-                {
-                    conn.Close();
-
-                }
+                user.UserId = (int)dataReader["UserID"];
+                user.LoginId = (int)dataReader["LoginID"];
+                user.Username = username;
+                user.Password = password;
             }
+            cmd.Dispose();
+        }
+        catch (SqlException)
+        {
+            throw;
+        }
+        finally
+        {
+            conn.Close();
+
         }
         return user;
     }
@@ -151,32 +180,6 @@ public class AuthRepository : IAuthRepository
     }
 
 
-    public int CreateUser(string username, string password)
-    {
-        int id = -1;
-        if (!LookupUser(username))
-            try
-            {
-                conn.Open();
-                string sql = "INSERT INTO Login (username, PasswordHash, salt) OUTPUT INSERTED.LoginID VALUES(@username, @password_hash, @salt)";
-                SqlCommand cmd = new(sql, conn);
-                string salt = GetSalt();
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password_hash", GetHash(password + salt));
-                cmd.Parameters.AddWithValue("@salt", salt);
-                id = (int)cmd.ExecuteScalar();
-                cmd.Dispose();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        return id;
-    }
 
     private static byte[] GetHash(string password)
     {
@@ -229,7 +232,7 @@ public class AuthRepository : IAuthRepository
             {
                 string salt = (string)dataReader["salt"];
                 string username = (string)dataReader["username"];
-                user.Id = id;
+                user.LoginId = id;
                 user.Username = username;
             }
             cmd.Dispose();

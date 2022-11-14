@@ -30,9 +30,16 @@ namespace api_Flare.Controllers
 
 
         [HttpPost, Route("register")]
-        public ActionResult<User> Register([FromForm] User user)
+        public ActionResult Register([FromForm] User user)
         {
-            return Ok(authService.Register(user.Username, user.Password));
+            if (authService.Register(user.Username, user.Password))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -47,6 +54,7 @@ namespace api_Flare.Controllers
             }
             if (authService.TestPassword(user.Username, user.Password))
             {
+                User loggedIn = authService.Login(user.Username, user.Password);
 
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.AuthSecretKey));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -55,7 +63,8 @@ namespace api_Flare.Controllers
                     issuer: authSettings.Issuer,
                     audience: authSettings.Audience,
                     claims: new List<Claim>{
-                        new Claim(ClaimTypes.Name, user.Username)
+                        new Claim(ClaimTypes.Name, loggedIn.Username),
+                        new Claim(ClaimTypes.Sid, loggedIn.UserId.ToString())
                     },
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials
