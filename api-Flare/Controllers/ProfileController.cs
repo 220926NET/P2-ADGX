@@ -1,8 +1,12 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace api_Flare.Controllers;
 
+
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class ProfileController : ControllerBase
@@ -19,10 +23,13 @@ public class ProfileController : ControllerBase
     [HttpPost("Photo")]
     public async Task<ActionResult<ResponseMessage<string>>> PostUserProfilePhoto(IFormFile userPhoto)
     {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        IEnumerable<Claim> claims = identity!.Claims;
+        int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+        string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
 
 
-        int mockUserId = 4;
-        ResponseMessage<string> postUserPhotoRes = await _profileService.uploadUserPhoto(userPhoto, mockUserId);
+        ResponseMessage<string> postUserPhotoRes = await _profileService.uploadUserPhoto(userPhoto, id);
 
         return Ok(postUserPhotoRes);
 

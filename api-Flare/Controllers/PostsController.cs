@@ -35,7 +35,6 @@ public class PostsController : ControllerBase
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
-        System.Console.WriteLine(id);
 
         await _postService.CreatePost(post, id, name);
     }

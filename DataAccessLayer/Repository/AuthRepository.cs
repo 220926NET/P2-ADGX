@@ -40,7 +40,7 @@ public class AuthRepository : IAuthRepository
                 SqlCommand cmd = new(sql, conn);
                 string salt = GetSalt();
                 cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password_hash", GetHash(password + salt));
+                cmd.Parameters.AddWithValue("@passwordHash", GetHash(password + salt));
                 cmd.Parameters.AddWithValue("@salt", salt);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
