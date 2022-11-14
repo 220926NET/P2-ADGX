@@ -9,8 +9,10 @@ namespace BusinessLogicLayer.Services.AuthService
 {
     public interface IAuthService
     {
-        public User Login(string username, string password);
+        User Login(string username, string password);
+        User Register(string username, string password);
         bool TestPassword(string username, string password);
+
 
 
     }

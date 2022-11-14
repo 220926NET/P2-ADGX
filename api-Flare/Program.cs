@@ -23,6 +23,7 @@ builder.Services.AddCors(options =>
 });
 // Add services to the container.
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProfileService, ProfileService>();
@@ -34,7 +35,6 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
 
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddSingleton<BlobStorage>();
 builder.Services.AddSingleton<VisionApi>();

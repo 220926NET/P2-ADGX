@@ -28,55 +28,43 @@ namespace api_Flare.Controllers
             this.authSettings = authSettings.Value;
         }
 
-        // GET: api/<AuthController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+
+        [HttpPost, Route("register")]
+        public ActionResult<User> Register([FromForm] User user)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(authService.Register(user.Username, user.Password));
+
         }
 
-        // GET api/<AuthController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<AuthController>
         [HttpPost, Route("login")]
-        public IActionResult Post([FromBody] User user)
+        public IActionResult login([FromForm] User user)
         {
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("Invalid client request");
             }
-            if(authService.TestPassword(user.Username, user.Password)){
+            if (authService.TestPassword(user.Username, user.Password))
+            {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.AuthSecretKey));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
                     issuer: authSettings.Issuer,
                     audience: authSettings.Audience,
-                    claims: new List<Claim>(),
+                    claims: new List<Claim>{
+                        new Claim(ClaimTypes.Name, user.Username)
+                    },
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(new { Token = tokenString });
+                return Ok(tokenString);
             }
             return Unauthorized();
         }
 
-        // PUT api/<AuthController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AuthController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

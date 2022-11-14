@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "src/Models/User";
+import { FormGroup } from "@angular/forms";
 
 const AUTH_API = "https://localhost:7219/api/Auth/";
 
@@ -11,11 +12,17 @@ const AUTH_API = "https://localhost:7219/api/Auth/";
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(user: User): Observable<any> {
-    return this.http.post(AUTH_API + "login", user);
+  public login(user: FormData): Observable<string> {
+    return this.http.post(AUTH_API + "login", user, {
+      responseType: "text",
+    });
   }
 
-  register(user: User): Observable<Object> {
-    return this.http.post(AUTH_API + "register", user);
+  public register(user: FormData): Observable<User> {
+    return this.http.post<User>(AUTH_API + "register", user);
+  }
+
+  public getMe(): Observable<string> {
+    return this.http.get<string>(AUTH_API);
   }
 }
