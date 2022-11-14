@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Models;
+namespace BusinessLogicLayer;
 public static class ImageHash
 {
 

@@ -13,11 +13,10 @@ import { ProfileDetailsComponent } from '../profile-details/profile-details.comp
 })
 export class ProfileComponent implements OnInit {
   constructor(
-    private _httpClient: HttpClient,
     private _profileService: ProfileService
   ) { }
 
-
+  _mockUserId = 2; 
   postProfilePictureUrl: string = "https://localhost:7219/Profile/uploadUserPhoto";
 
   uploadingPhoto: boolean = false;
@@ -39,15 +38,12 @@ export class ProfileComponent implements OnInit {
 
   createPost : boolean = false; 
 
-
-
   isDeleteBtn: boolean = false;
 
   // on each init fetch user profile details 
   ngOnInit(): void {
     // set profile data 
-    this._profileService.getProfileDetails().subscribe(res => {
-      console.log(res.data);
+    this._profileService.getUserProfileDetails(2).subscribe(res => {
       this.userProfile = res.data;
     })
   }
