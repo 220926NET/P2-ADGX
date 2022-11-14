@@ -9,6 +9,9 @@
     <div *ngIf="post.imageUrl">
       <img [src]="post.imageUrl" [alt]="post.description">
     </div>
+    <div>
+      <app-post-like [postId]="post.postID"></app-post-like>
+    </div>
     <app-comment-feed [postId]="post.postID"></app-comment-feed>
   </mat-card>
   <mat-divider></mat-divider>
