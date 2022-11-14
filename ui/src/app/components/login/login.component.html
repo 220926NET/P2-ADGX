@@ -9,18 +9,6 @@
         id="un"
         formControlName="username"
       />
-      <div
-        *ngIf="
-          loginForm.controls['username'].invalid &&
-          loginForm.controls['username'].touched
-        "
-      >
-        <span
-          style="color: red"
-          *ngIf="loginForm.controls['username'].errors?.['required']"
-          >Username is required</span
-        >
-      </div>
     </div>
     <div class="form-group">
       <label class="form-label" for="pw">Password</label>

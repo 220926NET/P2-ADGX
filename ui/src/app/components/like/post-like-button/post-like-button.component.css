@@ -1,0 +1,16 @@
+.fire {
+    cursor: pointer;
+    opacity: 50%;
+}
+
+.fire:hover {
+    opacity: 100%;
+}
+
+.unliked {
+    content: url("../../../../assets/like/fire-black.svg");
+}
+
+.liked {
+    content: url("../../../../assets/like/fire-red.svg");
+}

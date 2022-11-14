@@ -16,13 +16,13 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.invalid) return;
-    this.authService
-      .register({
-        username: this.registerForm.controls["username"].value,
-        password: this.registerForm.controls["password"].value,
-      })
-      .subscribe((res) => {
-        this.registerForm.reset();
-      });
+
+    const register: FormData = new FormData();
+    register.append("Username", this.registerForm.controls["username"].value);
+    register.append("Password", this.registerForm.controls["password"].value);
+
+    this.authService.register(register).subscribe((res) => {
+      this.registerForm.reset();
+    });
   }
 }

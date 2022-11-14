@@ -1,9 +1,8 @@
 # Flare (Social Media App)
 
 - Gregory Sabado
-- Xavier Perez-Hall
 - Denis Espino
-- Alejandro Vasquez
+- Emmanuel Morales
 
 ## OVERVIEW
 

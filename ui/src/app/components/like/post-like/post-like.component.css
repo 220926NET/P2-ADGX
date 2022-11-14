@@ -1,0 +1,23 @@
+.fire {
+    cursor: pointer;
+}
+
+.fire.unliked{
+    content: url("../../../assets/like/fire-black.svg");
+    opacity: 50%;
+}
+
+.fire:hover.unliked{
+    opacity: 100%;
+    content: url("../../../assets/like/fire-red.svg");
+}
+
+.fire.liked{
+    content: url("../../../assets/like/fire-red.svg");
+    opacity: 50%;
+}
+
+.fire:hover.liked{
+    opacity: 100%;
+    content: url("../../../assets/like/fire-black.svg");
+}

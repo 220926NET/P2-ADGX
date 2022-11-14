@@ -16,43 +16,42 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         }
     }
 
-
-    public PostRepository() : base("Post")
-    {
-    }
+    private readonly string tableName = "Post";
+    public PostRepository() {}
     protected override Post EntityRead(SqlDataReader reader)
     {
-        int PostID = (int)reader["PostID"];
-        int UserID = (int)reader["UserID"];
-        string Title = (string)reader["Title"];
-        string Text = ConvertFromDBVal<string>(reader["Text"]);
-        DateTime DatePosted = (DateTime)reader["DatePosted"];
-        return new Post { PostID = PostID, UserID = UserID, Title = Title, Text = Text, DatePosted = DatePosted };
+        return new Post { 
+            PostID = (int)reader["PostID"],
+            UserID = (int)reader["UserID"],
+            Title = (string)reader["Title"],
+            Text = ConvertFromDBVal<string>(reader["Text"]),
+            DatePosted = (DateTime)reader["DatePosted"],
+            ImageUrl = ConvertFromDBVal<string>(reader["ImageUrl"]),
+            Description = ConvertFromDBVal<string>(reader["Description"]),
+        };
     }
 
     public List<Post> GetAll()
     {
         string query = "EXEC get_all_posts";
         SqlCommand command = new SqlCommand(query);
-        return EntityGetList(command);
+        return ExecuteGetList(command);
     }
     public Post GetById(int id)
     {
         string query = "EXEC get_post @PostID";
         SqlCommand command = new SqlCommand(query);
         command.Parameters.Add(new SqlParameter("@PostID", id));
-        return EntityGet(command);
+        return ExecuteGet(command);
     }
     public void Create(NewPost entity, int userId, PostImage postImage = null)
     {
         try
         {
-
             SqlConnection connection = ConnectionFactory.GetConnection();
             using (connection)
             {
                 connection.Open();
-
                 if (entity.isTextPost == "true")
                 {
                     string query = $"exec create_text_post @UserId, @Text , @Title ";
@@ -63,7 +62,6 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
-
                 else
                 {
                     int imageInsertId = 0;
@@ -94,13 +92,9 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
                             command.Parameters.AddWithValue("@ImageId", imageInsertId);
                             command.ExecuteNonQuery();
                         }
-
                         connection.Close();
                     }
-
-
                 }
-
             }
         }
         catch (SqlException e)
@@ -117,40 +111,18 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
 
     public void Update(Post entity)
     {
-
         string query = $"UPDATE {tableName} SET UserID=@UserID, Title=@Title, Text=@Text, ImageUrl=@ImageUrl  WHERE PostID = @postId";
         SqlCommand command = new SqlCommand(query);
         command.Parameters.Add(new SqlParameter("@UserID", entity.UserID));
         command.Parameters.AddWithValue("@Title", entity.Title);
         command.Parameters.AddWithValue("@Text", entity.Text);
-        try
-        {
-            EntityNonQuery(command);
-        }
-        catch (SqlException e)
-        {
-            Console.WriteLine(e);
-        }
-
+        ExecuteNonQuery(command);
     }
     public void Delete(Post entity)
     {
-        SqlConnection connection = ConnectionFactory.GetConnection();
-        using (connection)
-        {
-            connection.Open();
-            string query = $"DELETE FROM {tableName} WHERE PostID = @postId";
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.Add(new SqlParameter("@postId", entity.PostID));
-            try
-            {
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                // Add serilog logging
-            }
-        }
+        string query = $"DELETE FROM {tableName} WHERE PostID = @postId";
+        SqlCommand command = new SqlCommand(query);
+        command.Parameters.Add(new SqlParameter("@postId", entity.PostID));
+        ExecuteNonQuery(command);
     }
 }

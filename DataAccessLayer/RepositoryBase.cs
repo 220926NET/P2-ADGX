@@ -4,15 +4,13 @@ namespace DataAccessLayer;
 
 public abstract class RepositoryBase<T> where T : new()
 {
-    protected readonly string tableName;
-    public RepositoryBase(string tableName)
+    public RepositoryBase()
     {
-        this.tableName = tableName;
     }
 
     protected abstract T EntityRead(SqlDataReader reader);
 
-    protected T EntityGet(SqlCommand command)
+    protected T ExecuteGet(SqlCommand command)
     {
         SqlConnection connection = ConnectionFactory.GetConnection();
         using (connection)
@@ -31,19 +29,15 @@ public abstract class RepositoryBase<T> where T : new()
                     return new T();
                 }
             }
-            catch (Exception)
+            catch(Exception)
             {
                 // logging
                 throw;
             }
-            finally
-            {
-                connection.Close();
-            }
         }
     }
 
-    protected List<T> EntityGetList(SqlCommand command)
+    protected List<T> ExecuteGetList(SqlCommand command)
     {
         SqlConnection connection = ConnectionFactory.GetConnection();
         using (connection)
@@ -60,19 +54,15 @@ public abstract class RepositoryBase<T> where T : new()
                 }
                 return list;
             }
-            catch (Exception)
+            catch(Exception)
             {
                 // logging
                 throw;
             }
-            finally
-            {
-                connection.Close();
-            }
         }
     }
 
-    protected void EntityNonQuery(SqlCommand command)
+    protected void ExecuteNonQuery(SqlCommand command)
     {
         SqlConnection connection = ConnectionFactory.GetConnection();
         using (connection)
@@ -87,10 +77,6 @@ public abstract class RepositoryBase<T> where T : new()
             {
                 // Add serilog logging
                 throw;
-            }
-            finally
-            {
-                connection.Close();
             }
         }
     }

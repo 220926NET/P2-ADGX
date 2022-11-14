@@ -12,14 +12,10 @@ export class CommentFormComponent implements OnInit {
   @Input() postId: number = -1;
   @Input() userId: number = -1;
   @Input() comments: Comment[] = [];
-  public commentForm: FormGroup = new FormGroup({
-    text: new FormControl("", [Validators.required]),
-  });
 
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {}
- 
 
   submitForm() {
     this.commentService
