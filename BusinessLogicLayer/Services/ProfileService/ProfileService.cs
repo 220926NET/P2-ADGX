@@ -74,7 +74,7 @@ public class ProfileService : IProfileService
 
 
         getProfileDetailsRes.data = profilePage;
-        getProfileDetailsRes.message = "Retrieved user profile page";
+        getProfileDetailsRes.message = "Successfully Retrieved profile details!";
         getProfileDetailsRes.success = true;
 
         return getProfileDetailsRes;
@@ -91,6 +91,12 @@ public class ProfileService : IProfileService
             {
                 return _ServerResponse.DeletingFromBlobStorageFailure();
             }
+        }
+        else
+        {
+
+            return _ServerResponse.SqlError();
+
         }
 
         return _ServerResponse.DeletingFromBlobStorageSuccess();
@@ -127,7 +133,7 @@ public class ProfileService : IProfileService
         }
         else
         {
-            Console.WriteLine("inside upload interests");
+            Console.WriteLine("user id is " + userId);
             bool setInterests = await _repo.UploadProfileInterests(userId, interests);
             if (!setInterests)
             {
@@ -143,9 +149,13 @@ public class ProfileService : IProfileService
     public async Task<ResponseMessage<string>> SetProfileAboutMe(int userId, ProfileAboutMe aboutMe)
     {
         ResponseMessage<string> setProfileAboutMeRes = new ResponseMessage<string>();
-        await _repo.DeleteProfileAboutMe(userId);
+        bool success = await _repo.DeleteProfileAboutMe(userId);
+        if (!success)
+        {
+            return _ServerResponse.SqlError();
+        }
         setProfileAboutMeRes.success = await _repo.SetProfileAboutMe(userId, aboutMe);
-        setProfileAboutMeRes.message = "Set profile about me";
+        setProfileAboutMeRes.message = "Succesfully set profile about me!";
         return setProfileAboutMeRes;
     }
 

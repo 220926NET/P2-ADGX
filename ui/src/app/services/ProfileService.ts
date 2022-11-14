@@ -18,10 +18,10 @@ export class ProfileService
         
     }
     postProfilePictureUrl : string = "https://localhost:7219/Profile/Photo"; 
-    getProfileDetailsUrl : string = "https://localhost:7219/Profile/profileDetails"; 
+    getProfileDetailsUrl : string = "https://localhost:7219/Profile/profileDetails/"; 
     deleteProfilePictureUrl : string = "https://localhost:7219/Profile/profilePhoto"; 
-    postProfileHobbiesUrl : string = "https://localhost:7219/hobbies";
-    postProfileInterestsUrl : string = "https://localhost:7219/interests";
+    postProfileHobbiesUrl : string = "https://localhost:7219/hobbies/";
+    postProfileInterestsUrl : string = "https://localhost:7219/interests/";
     postProfileAboutMeUrl : string = "https://localhost:7219/AboutMe";
 
 
@@ -30,10 +30,13 @@ export class ProfileService
        return this._httpClient.delete<ResponseMessage>(this.deleteProfilePictureUrl);
     }
     
+     getProfileDetails() : Observable<ResponseMessage> {
+          return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl)
+     }
 
-    getProfileDetails() : Observable<ResponseMessage> {
-         return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl)
-    }
+     getUserProfileDetails(userId :number) : Observable<ResponseMessage>{
+          return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl + userId)
+     }
 
    postProfileAboutMe(aboutMe : string) : Observable<ResponseMessage> {
         return this._httpClient.post<ResponseMessage>(this.postProfileAboutMeUrl, {
@@ -45,11 +48,11 @@ export class ProfileService
         return this._httpClient.post<ResponseMessage>(this.postProfilePictureUrl, photo)
    }
 
-   postProfileInterests(interests : string[]) : Observable<ResponseMessage>{
-    return this._httpClient.post<ResponseMessage>(this.postProfileInterestsUrl, {"interests" : interests})
+   postProfileInterests(interests : string[], userId : number) : Observable<ResponseMessage>{
+    return this._httpClient.post<ResponseMessage>(this.postProfileInterestsUrl + userId, {"interests" : interests})
    }
 
-   postProfileHobbies(hobbies : string[]) : Observable<ResponseMessage>{
-    return this._httpClient.post<ResponseMessage>(this.postProfileHobbiesUrl, {"hobbies" : hobbies})
+   postProfileHobbies(hobbies : string[], userId : number) : Observable<ResponseMessage>{
+    return this._httpClient.post<ResponseMessage>(this.postProfileHobbiesUrl + userId, {"hobbies" : hobbies})
    }
 }

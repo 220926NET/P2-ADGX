@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Models;
 
 namespace DataAccessLayer;
-public class BlobStorage
+public class BlobStorage : IBlobStorage
 {
 
 

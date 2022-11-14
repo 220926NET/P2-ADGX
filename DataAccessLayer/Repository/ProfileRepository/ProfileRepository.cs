@@ -22,9 +22,6 @@ public class ProfileRepository : IProfileRepository
             int rowsAffected = await cmd.ExecuteNonQueryAsync();
             _connection.Close();
             return true;
-
-
-
         }
         catch (SqlException)
         {
@@ -35,7 +32,6 @@ public class ProfileRepository : IProfileRepository
         {
             _connection.Close();
         }
-
 
     }
 
@@ -438,7 +434,7 @@ public class ProfileRepository : IProfileRepository
         return aboutMeRes;
     }
 
-    public async Task DeleteProfileAboutMe(int userId)
+    public async Task<bool> DeleteProfileAboutMe(int userId)
     {
 
         try
@@ -448,11 +444,12 @@ public class ProfileRepository : IProfileRepository
             SqlCommand cmd = new SqlCommand("exec delete_profile_about_me @UserId", _connection);
             cmd.Parameters.AddWithValue("@UserId", userId);
             await cmd.ExecuteNonQueryAsync();
+            return true;
         }
         catch (SqlException)
         {
             //TODO: Log error to file 
-
+            return false;
         }
         finally
         {

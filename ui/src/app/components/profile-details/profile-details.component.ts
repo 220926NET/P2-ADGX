@@ -19,6 +19,8 @@ export class ProfileDetailsComponent implements OnInit {
   @Input() myInterests : string[] = [];
  @Input() myAboutMe : string = "";
 
+ _mockUserId = 2; 
+
   constructor(private _profileService : ProfileService) { }
 
   ngOnInit(): void {
@@ -81,7 +83,7 @@ export class ProfileDetailsComponent implements OnInit {
         interests.push(element.textContent as string);
       }
     }
-    this._profileService.postProfileInterests(interests).subscribe(res => {
+    this._profileService.postProfileInterests(interests, this._mockUserId).subscribe(res => {
       console.log(res);
     })
 
@@ -98,7 +100,7 @@ export class ProfileDetailsComponent implements OnInit {
         hobbies.push(element.textContent as string);
       }
     }
-    this._profileService.postProfileHobbies(hobbies).subscribe(res => {
+    this._profileService.postProfileHobbies(hobbies, this._mockUserId).subscribe(res => {
       console.log(res);
     })
     
