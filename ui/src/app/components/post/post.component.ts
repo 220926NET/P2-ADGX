@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { PostService } from 'src/app/services/post.service';
-import { Post } from 'src/Models/Post';
+import { PostService } from "src/app/services/post.service";
+import { Post } from "src/Models/Post";
 
 @Component({
   selector: "app-post",
@@ -43,10 +43,9 @@ export class PostComponent implements OnInit {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("isTextPost", "false");
 
-      post.append("image", this.image)
-      let submitPost:Partial<Post> = {title:this.postForm.controls["title"].value, text:this.postForm.controls["text"].value};
-      this._postService.createPost(submitPost).subscribe(res => {
-        console.log(res)
+      post.append("image", this.image);
+      this._postService.createPost(post).subscribe((res) => {
+        console.log(res);
       });
     }
     this.postForm.reset();
