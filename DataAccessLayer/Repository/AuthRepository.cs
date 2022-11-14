@@ -158,7 +158,7 @@ public class AuthRepository : IAuthRepository
             try
             {
                 conn.Open();
-                string sql = "INSERT INTO Login (username, password_hash, salt) OUTPUT INSERTED.LoginID VALUES(@username, @password_hash, @salt)";
+                string sql = "INSERT INTO Login (username, PasswordHash, salt) OUTPUT INSERTED.LoginID VALUES(@username, @password_hash, @salt)";
                 SqlCommand cmd = new(sql, conn);
                 string salt = GetSalt();
                 cmd.Parameters.AddWithValue("@username", username);
