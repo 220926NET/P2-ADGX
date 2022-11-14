@@ -15,4 +15,6 @@ public class Post
     public bool isTextPost { get; set; }
     public DateTime DatePosted { get; set; }
     public IFormFile? Image { get; set; }
+    public string? ImageUrl { get; set;}
+    public string? Description {get; set;}
 }
