@@ -19,10 +19,10 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { PostComponent } from "./components/post/post.component";
-import { PostLikeComponent } from './components/like/post-like/post-like.component';
-import { PostLikeCounterComponent } from './components/like/post-like-counter/post-like-counter.component';
-import { PostLikeButtonComponent } from './components/like/post-like-button/post-like-button.component';
-
+import { httpInterceptorProviders } from "./http-interceptors";
+import { PostLikeComponent } from "./components/like/post-like/post-like.component";
+import { PostLikeCounterComponent } from "./components/like/post-like-counter/post-like-counter.component";
+import { PostLikeButtonComponent } from "./components/like/post-like-button/post-like-button.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { PostLikeButtonComponent } from './components/like/post-like-button/post
     PostComponent,
     PostLikeComponent,
     PostLikeCounterComponent,
-    PostLikeButtonComponent
+    PostLikeButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +56,7 @@ import { PostLikeButtonComponent } from './components/like/post-like-button/post
     MatCardModule,
     MatSidenavModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

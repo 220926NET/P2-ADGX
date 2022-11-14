@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User } from "src/Models/User";
-import { FormGroup } from "@angular/forms";
+import { User } from "src/Models/user";
 
 const AUTH_API = "https://localhost:7219/api/Auth/";
 
@@ -10,6 +9,14 @@ const AUTH_API = "https://localhost:7219/api/Auth/";
   providedIn: "root",
 })
 export class AuthService {
+  getAuthorizationToken() {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      return token;
+    } else {
+      return "";
+    }
+  }
   constructor(private http: HttpClient) {}
 
   public login(user: FormData): Observable<string> {

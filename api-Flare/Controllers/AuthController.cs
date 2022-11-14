@@ -47,6 +47,7 @@ namespace api_Flare.Controllers
             }
             if (authService.TestPassword(user.Username, user.Password))
             {
+
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.AuthSecretKey));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
