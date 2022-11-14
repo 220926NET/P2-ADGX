@@ -28,11 +28,10 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpGet("profileDetails")]
-    public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails()
+    [HttpGet("profileDetails/{userId}")]
+    public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails(int userId)
     {
-
-        ResponseMessage<ProfilePage> getProfilePageRes = await _profileService.GetProfileDetails(_mockUserId);
+        ResponseMessage<ProfilePage> getProfilePageRes = await _profileService.GetProfileDetails(userId);
 
         return Ok(getProfilePageRes);
 
@@ -93,24 +92,23 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpPost("/hobbies")]
+    [HttpPost("/hobbies/{userId}")]
 
-    public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies)
+    public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies, int userId)
     {
-        ResponseMessage<string> uploadUserDetailsRes = await _profileService.UploadProfileHobbies(_mockUserId, hobbies);
+        ResponseMessage<string> uploadUserDetailsRes = await _profileService.UploadProfileHobbies(userId, hobbies);
 
         return Ok(uploadUserDetailsRes);
     }
 
 
-
-    [HttpPost("/interests")]
-    public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests)
+    [HttpPost("/interests/{userId}")]
+    public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests, int userId)
     {
 
 
         ResponseMessage<string> uploadUserInterestsRes = new ResponseMessage<string>();
-        uploadUserInterestsRes = await _profileService.UploadProfileInterests(_mockUserId, interests);
+        uploadUserInterestsRes = await _profileService.UploadProfileInterests(userId, interests);
         return Ok(uploadUserInterestsRes);
 
 

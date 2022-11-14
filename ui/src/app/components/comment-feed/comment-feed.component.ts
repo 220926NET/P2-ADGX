@@ -11,7 +11,7 @@ export class CommentFeedComponent implements OnInit {
   @Input() postId: number = -1;
   public comments: Comment[] = [];
   constructor(private commentService: CommentService) {}
-
+  
   updateComments() {
     this.commentService.getComments(this.postId).subscribe((comments) => {
       console.log(comments);
