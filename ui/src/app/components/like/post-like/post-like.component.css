@@ -3,6 +3,11 @@
     opacity: 50%;
 }
 
+.fire:hover {
+    cursor: pointer;
+    opacity: 100%;
+}
+
 .fire.unliked{
     content: url("../../../../assets/like/fire-black.svg");
 }
