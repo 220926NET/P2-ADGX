@@ -19,6 +19,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { PostComponent } from "./components/post/post.component";
+import { httpInterceptorProviders } from "./http-interceptors";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { PostComponent } from "./components/post/post.component";
     MatCardModule,
     MatSidenavModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Models;
-using NuGet.Common;
-using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -48,6 +46,7 @@ namespace api_Flare.Controllers
             }
             if (authService.TestPassword(user.Username, user.Password))
             {
+
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.AuthSecretKey));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
