@@ -5,6 +5,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/Models/Post';
 import { readBuilderProgram } from "typescript";
 
+
 @Component({
   selector: "app-post",
   templateUrl: "./post.component.html",
@@ -60,6 +61,10 @@ export class PostComponent implements OnInit {
       post.append("isTextPost", "false");
       post.append("image", this.image)
       this._postService.createPost(post).subscribe(res => {
+
+      post.append("image", this.image);
+      this._postService.createPost(post).subscribe((res) => {
+        console.log(res);
       });
     }
     this.postForm.enable();

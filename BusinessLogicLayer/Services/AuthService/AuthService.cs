@@ -23,16 +23,12 @@ namespace BusinessLogicLayer.Services.AuthService
 
         public User Login(string username, string password)
         {
-            return _authRepository.GetUser(username, password);
+            return _authRepository.Login(username, password);
         }
 
-        public User Register(string username, string password)
+        public bool Register(string username, string password)
         {
-            User user = new();
-            user.Id = _authRepository.CreateUser(username, password);
-            user.Username = username;
-            user.Password = password;
-            return user;
+            return _authRepository.Register(username, password);
         }
 
         public bool TestPassword(string username, string password)

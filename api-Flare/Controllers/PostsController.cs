@@ -1,13 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using DataAccessLayer;
 using Models;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace api_Flare.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PostsController : ControllerBase
 {
+
+
     private readonly IPostRepository postRepository;
 
     private readonly IPostService _postService;
@@ -22,13 +28,15 @@ public class PostsController : ControllerBase
 
     }
 
-    [HttpPost]
-    [Route("create")]
+    [HttpPost, Route("create")]
     public async void CreatePost([FromForm] NewPost post)
     {
-        //postRepository.Create(post);
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        IEnumerable<Claim> claims = identity!.Claims;
+        int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+        string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
 
-        await _postService.CreatePost(post);
+        await _postService.CreatePost(post, id, name);
     }
 
     [HttpGet]
