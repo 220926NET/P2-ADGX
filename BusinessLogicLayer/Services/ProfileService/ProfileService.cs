@@ -23,9 +23,8 @@ public class ProfileService : IProfileService
 
     // This method takes in user Photo and uploads it inside a blob storage container 
     // the url is then returned and saved inside the database 
-    public async Task<ResponseMessage<string>> uploadUserPhoto(IFormFile userPhoto, int userId)
+    public async Task<ResponseMessage<string>> UploadUserPhoto(IFormFile userPhoto, int userId, string name)
     {
-        string mockUserName = "John";
 
         if (!Validator.IsFileValid(userPhoto))
         {
@@ -39,14 +38,14 @@ public class ProfileService : IProfileService
 
         string fileExtension = userPhoto.FileName.Split(".")[1];
 
-        string imageUrl = await _blobStorage.uploadPhoto(mockUserName, userPhoto, fileExtension);
+        string imageUrl = await _blobStorage.uploadPhoto(name, userPhoto, fileExtension);
 
         if (string.IsNullOrEmpty(imageUrl))
         {
             return _ServerResponse.IssueUploadingToBlobStorage();
         }
 
-        string newPhotoFileName = mockUserName + "." + fileExtension;
+        string newPhotoFileName = name + "." + fileExtension;
 
         bool successUploadingPhoto = await _repo.UploadUserPhoto(userId, imageUrl!, newPhotoFileName);
 
@@ -54,7 +53,6 @@ public class ProfileService : IProfileService
         {
             return _ServerResponse.IssueUploadingProfilePhotoToDb();
         }
-
 
         return _ServerResponse.SuccessfullyUploadedProfilePhoto();
 
@@ -122,7 +120,6 @@ public class ProfileService : IProfileService
 
     }
 
-
     public async Task<ResponseMessage<string>> UploadProfileInterests(int userId, ProfileInterests interests)
     {
         bool deleteInterests = await _repo.DeleteProfileInterests(userId);
@@ -144,7 +141,6 @@ public class ProfileService : IProfileService
         return _ServerResponse.UploadProfileInterestsSuccess();
 
     }
-
 
     public async Task<ResponseMessage<string>> SetProfileAboutMe(int userId, ProfileAboutMe aboutMe)
     {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 public interface IProfileService
 {
 
-    Task<ResponseMessage<string>> uploadUserPhoto(IFormFile userPhoto, int UserId);
+    Task<ResponseMessage<string>> UploadUserPhoto(IFormFile userPhoto, int UserId, string name);
     Task<ResponseMessage<ProfilePage>> GetProfileDetails(int userId);
     Task<ResponseMessage<string>> DeleteProfilePicture(int userId);
     Task<ResponseMessage<string>> UploadProfileHobbies(int userId, ProfileHobbies hobbies);
