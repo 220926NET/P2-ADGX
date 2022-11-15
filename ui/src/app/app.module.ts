@@ -22,8 +22,7 @@ import { PostComponent } from "./components/post/post.component";
 import { PostLikeComponent } from './components/like/post-like/post-like.component';
 import { PostLikeCounterComponent } from './components/like/post-like-counter/post-like-counter.component';
 import { PostLikeButtonComponent } from './components/like/post-like-button/post-like-button.component';
-
-
+import { ProfileOthersComponent } from './components/profile-others/profile-others.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +41,8 @@ import { PostLikeButtonComponent } from './components/like/post-like-button/post
     PostComponent,
     PostLikeComponent,
     PostLikeCounterComponent,
-    PostLikeButtonComponent
+    PostLikeButtonComponent,
+    ProfileOthersComponent
   ],
   imports: [
     BrowserModule,

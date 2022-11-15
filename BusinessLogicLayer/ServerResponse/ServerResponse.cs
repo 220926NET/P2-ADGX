@@ -69,6 +69,11 @@ public class ServerResponse
         return setResponse("Issues with database, please try again later");
     }
 
+     public ResponseMessage<string> DeletingUserPostSuccess()
+    {
+        return setResponse("Successfully post!");
+    }
+
 
 
     public ResponseMessage<string> setResponse(string message, bool success = false)

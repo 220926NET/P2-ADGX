@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import UserPosts from 'src/Models/UserPosts';
 import ResponseMessage from 'src/Models/Profile/ResponseMessage';
-import { MatCardModule } from '@angular/material/card';
+import { OtherProfileService } from 'src/app/services/other-profile.service';
+import ProfilePost from 'src/Models/Profile/ProfilePost';
 
 @Component({
   selector: 'app-users-posts',
@@ -13,13 +13,17 @@ import { MatCardModule } from '@angular/material/card';
 
 export class UsersPostsComponent implements OnInit {
 
-  getUserPostsUrl : string = "https://localhost:7219/profilePosts"; 
+  /**
+   *
+   */
 
-  userPosts : UserPosts[] | null = null; 
+  getUserPostsUrl : string = "https://localhost:7219/Profile/profilePosts/4"; 
+
+  userPosts : ProfilePost[] | null = null; 
 
   isViewGallery : boolean = false; 
 
-  constructor(private _httpClient : HttpClient) { }
+  constructor(private _httpClient : HttpClient, private _profileService : OtherProfileService) { }
 
   ngOnInit(): void {
     this._httpClient.get<ResponseMessage>(this.getUserPostsUrl).subscribe(res => {

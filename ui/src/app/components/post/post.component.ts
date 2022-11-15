@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/Models/Post';
+import { readBuilderProgram } from "typescript";
 
 @Component({
   selector: "app-post",
@@ -16,7 +17,15 @@ export class PostComponent implements OnInit {
 
   image: any;
 
+  imagePreview : any; 
+
   isText: boolean = false;
+
+  postText : string = ""; 
+
+  titleText : string = ""; 
+
+
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
@@ -26,43 +35,62 @@ export class PostComponent implements OnInit {
       image: new FormControl(),
     });
   }
+  public commentForm: FormGroup = new FormGroup({
+    text: new FormControl("", [Validators.required]),
+  });
+
 
   onSubmit() {
+    this.postForm.disable()
     const post: FormData = new FormData();
+    
     if (this.isText) {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("Text", this.postForm.controls["text"].value);
       post.append("isTextPost", "true");
 
       this._postService.createPost(post).subscribe((res) => {
-        console.log(res);
+      
       });
+    
     } else {
       console.log(this.image);
       this.isValidFile(this.image);
       post.append("Title", this.postForm.controls["title"].value);
       post.append("isTextPost", "false");
-
       post.append("image", this.image)
-      let submitPost:Partial<Post> = {title:this.postForm.controls["title"].value, text:this.postForm.controls["text"].value};
-      this._postService.createPost(submitPost).subscribe(res => {
-        console.log(res)
+      this._postService.createPost(post).subscribe(res => {
       });
     }
+    this.postForm.enable();
     this.postForm.reset();
   }
   setImage(event: any) {
     this.image = event.target.files[0];
+    var fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      this.imagePreview = event.target?.result
+    }
+    fileReader.readAsDataURL(event.target.files[0])
   }
 
+  setPostText(event : any){
+    this.postText = event; 
+    console.log(event)
+  }
+
+  setTitleText(event :any){
+    this.titleText = event; 
+  }
   setText() {
+    
     this.isText = true;
-    console.log(this.isText);
+    this.imagePreview = null;
   }
 
   setTextFalse() {
     this.isText = false;
-    console.log(this.isText);
+    this.imagePreview = null;
   }
 
   isValidFile(image: any) {

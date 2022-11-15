@@ -27,4 +27,8 @@ public interface IProfileRepository
     Task<bool> DeleteProfileAboutMe(int userId);
 
     Task<bool> UserImagePostAlreadyExists(string imageName);
+
+    Task<List<ProfilePost>> GetProfilePosts(int userId);
+
+    Task<bool> DeleteUserPost(int userId, int postId); 
 }

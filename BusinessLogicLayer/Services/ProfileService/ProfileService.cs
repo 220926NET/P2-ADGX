@@ -159,6 +159,31 @@ public class ProfileService : IProfileService
         return setProfileAboutMeRes;
     }
 
+    public async Task<ResponseMessage<List<ProfilePost>>> GetProfilePosts(int userId)
+    {
+
+        ResponseMessage<List<ProfilePost>> getProfilePostsRes = new ResponseMessage<List<ProfilePost>>();
+
+        getProfilePostsRes.data = await _repo.GetProfilePosts(userId);
+
+        return getProfilePostsRes;
+
+    }
+
+    public async Task<ResponseMessage<string>> DeleteProfilePost(int userId, int postId){
+
+        ResponseMessage<string> getProfilePostsRes = new ResponseMessage<string>();
+
+        bool success = await _repo.DeleteUserPost(userId, postId);
+
+        if(success){
+            return _ServerResponse.DeletingUserPostSuccess();
+        }else {
+            return _ServerResponse.SqlError();
+        }
+
+
+    }
 
 
 }
