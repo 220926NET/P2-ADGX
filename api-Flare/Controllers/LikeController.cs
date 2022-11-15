@@ -2,6 +2,7 @@ using BusinessLogicLayer;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using DataAccessLayer;
+using System.Security.Claims;
 
 namespace api_Flare.Controllers;
 
@@ -22,14 +23,34 @@ public class LikeController : ControllerBase
     }
 
     [HttpPost]
-    public void CreateLike([FromBody] Like like)
+    public void CreateLike([FromBody] int postId)
     {
-        likeRepository.CreateLike(like.UserId, like.PostId);
+        try
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity!.Claims;
+            int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+            likeRepository.CreateLike(id, postId);
+        }
+        catch(Exception exception)
+        {
+            // log error
+        }
     }
 
     [HttpDelete]
-    public void DeleteLike([FromBody] Like like)
+    public void DeleteLike([FromBody] int postId)
     {
-        likeRepository.DeleteLike(like.UserId, like.PostId);
+        try
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity!.Claims;
+            int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+            likeRepository.DeleteLike(id, postId);
+        }
+        catch(Exception exception)
+        {
+            // log error
+        }
     }
 }
