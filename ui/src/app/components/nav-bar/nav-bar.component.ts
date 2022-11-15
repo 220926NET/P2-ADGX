@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.checkLogin();
     /* TODO document why this method 'ngOnInit' is empty */
   }
 
