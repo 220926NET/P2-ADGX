@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LikeService } from 'src/app/services/like/like.service';
 import { Like } from 'src/Models/Like';
+import jwt_decode from "jwt-decode";
+import { CurrentUserService } from 'src/app/services/current-user/current-user.service';
 
 @Component({
   selector: 'app-post-like',
@@ -12,20 +14,18 @@ export class PostLikeComponent implements OnInit {
   @Input() postId:number = 0;
   likeCount:number = 0;
   likeList:Like[] = [];
-  didILike:boolean = false;
+  isLiked:boolean = false;
   
-  constructor(private likeService:LikeService){}
+  constructor(private likeService:LikeService, private currentUserService:CurrentUserService){}
+
+  userId:number = 0;
 
   ngOnInit(): void {
+    this.userId = this.currentUserService.getUserId();
     this.likeService.getPostLike(this.postId).subscribe(data => {
       this.likeList = data;
       this.likeCount = this.likeList.length;
-      let userId:number = this.getUserId();
-      this.didILike = this.likeList.some(l => l.UserId = userId)
+      this.isLiked = this.likeList.some(l => {return l.userId == this.userId;})
     });
-  }
-
-  getUserId() {
-    return 4;
   }
 }

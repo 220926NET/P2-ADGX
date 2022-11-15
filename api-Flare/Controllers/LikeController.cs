@@ -2,6 +2,7 @@ using BusinessLogicLayer;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using DataAccessLayer;
+using System.Security.Claims;
 
 namespace api_Flare.Controllers;
 
