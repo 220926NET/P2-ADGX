@@ -8,10 +8,12 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./nav-bar.component.css"],
 })
 export class NavBarComponent implements OnInit {
-  @Input() loggedIn: boolean = false;
+  loggedIn: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
-    /* TODO document why this constructor is empty */
+    authService.loggedIn$.subscribe((loggedIn) => {
+      this.loggedIn = loggedIn;
+    });
   }
 
   ngOnInit(): void {
