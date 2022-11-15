@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
@@ -8,7 +9,9 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
+  @Output() loginEmitter = new EventEmitter<boolean>();
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
@@ -23,9 +26,9 @@ export class LoginComponent {
     login.append("Password", this.loginForm.controls["password"].value);
 
     this.authService.login(login).subscribe((token) => {
-      console.log(token);
       localStorage.setItem("authToken", token);
-      this.loginForm.reset();
+      this.loginEmitter.emit(true);
+      this.router.navigate(["../feed"]);
     });
   }
 }
