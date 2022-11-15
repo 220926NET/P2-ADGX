@@ -23,6 +23,15 @@ export class AuthService {
   }
   constructor(private http: HttpClient) {}
 
+  public checkLogin(): void {
+    let token = localStorage.getItem("authToken");
+    if (token) {
+      this.loggedInSource.next(true);
+    } else {
+      this.loggedInSource.next(false);
+    }
+  }
+
   public login(user: FormData): Observable<string> {
     this.loggedInSource.next(true);
     return this.http.post(AUTH_API + "login", user, {
