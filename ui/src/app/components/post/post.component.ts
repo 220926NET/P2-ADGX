@@ -36,6 +36,7 @@ export class PostComponent implements OnInit {
       image: new FormControl(),
     });
   }
+
   public commentForm: FormGroup = new FormGroup({
     text: new FormControl("", [Validators.required]),
   });
@@ -60,16 +61,13 @@ export class PostComponent implements OnInit {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("isTextPost", "false");
       post.append("image", this.image)
-      this._postService.createPost(post).subscribe(res => {
-
       post.append("image", this.image);
       this._postService.createPost(post).subscribe((res) => {
         console.log(res);
       });
-    }
-    this.postForm.enable();
-    this.postForm.reset();
   }
+  this.postForm.enable();
+}
   setImage(event: any) {
     this.image = event.target.files[0];
     var fileReader = new FileReader();
