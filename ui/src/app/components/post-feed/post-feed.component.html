@@ -1,4 +1,3 @@
-
 <app-post></app-post>
 <div *ngFor="let post of posts">
   <mat-card>
@@ -8,7 +7,7 @@
     </mat-card-header>
     <mat-card-content>{{ post.text }}</mat-card-content>
     <div *ngIf="post.imageUrl">
-      <img [src]="post.imageUrl" [alt]="post.description">
+      <a routerLink="profile/{{post.userID}}"><img [src]="post.imageUrl" [alt]="post.description"></a>
     </div>
     <div>
       <app-post-like [postId]="post.postID"></app-post-like>

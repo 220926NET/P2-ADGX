@@ -1,8 +1,9 @@
 .post-container {
-    width:50%;
+    background-color: rgb(33, 131, 218, .2);
+    width:30%;
     margin:auto;
     text-align:center;
-    border: 1px solid black ;
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
     padding: 20px;
     border-radius: 5px;
    
@@ -23,14 +24,15 @@
 
 .btn-post{
     width: 50%;
-    border: 1px solid black;
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
+   
 }
 
 
 .btn-image {
-   
     width: 50%;
-    border: 1px solid black;
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
+    
 }
 
 .post-title-container {
@@ -38,17 +40,25 @@
 }
 .post-title{
     border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
+    border: 1px solid white;
     width: 100%;
     height: 39px;
 }
 .post-text-container{
     padding: 10px 20px 0px 20px;
+   
 }
 
 .post-text-area {
     width: 100%;
     border-radius: 5px;
     height: 138px;
+    text-decoration: none;
+    border: 1px solid white;
+    background-color: rgb(70, 65, 65, .2);
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
    
 }
 
@@ -56,6 +66,16 @@
     margin-bottom: 10px;
     width: 100%;
     padding: 10px 20px 0px 20px;
+   
+}
+
+.post-image-container label {
+    text-decoration: none;
+    border: 1px solid white;
+    background-color: rgb(70, 65, 65, .2);
+    box-shadow: 0px 0px 5px rgb(114, 111, 111);
+
+   
 }
 
 .active {
@@ -78,4 +98,15 @@
 
 .upload-image-text {
     width: 20%;
+}
+
+.image-preview {
+    border-radius: 5px;
+    width: 200px;
+}
+
+.image-input-label-with-preview{
+    border-radius: 5px;
+    background-color: rgb(185, 63, 63, .2);
+    padding: 0px 10px 0px 10px;
 }

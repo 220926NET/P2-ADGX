@@ -14,7 +14,6 @@ export class PostFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe((posts) => {
-      console.log(posts);
       this.posts = posts.reverse();
     });
   }

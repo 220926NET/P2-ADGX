@@ -40,10 +40,12 @@ export class ProfileComponent implements OnInit {
 
   isDeleteBtn: boolean = false;
 
+  createPostText : string = !this.createPost ? "Create a Post!" : "Hide"; 
+
   // on each init fetch user profile details 
   ngOnInit(): void {
     // set profile data 
-    this._profileService.getUserProfileDetails(2).subscribe(res => {
+    this._profileService.getUserProfileDetails().subscribe(res => {
       this.userProfile = res.data;
     })
   }

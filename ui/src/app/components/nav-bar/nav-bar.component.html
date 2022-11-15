@@ -1,16 +1,16 @@
 <ul class="nav">
-  <li class="nav-item nav-link" *ngIf="!loggedIn">
+  <li class="nav-item nav-link" [hidden]="loggedIn">
     <a class="nav-link active" aria-current="page" routerLink="/login"
       >Log in</a
     >
   </li>
-  <li class="nav-item nav-link" *ngIf="!loggedIn">
+  <li class="nav-item nav-link" [hidden]="loggedIn">
     <a class="nav-link" routerLink="/register">Register</a>
   </li>
-  <li class="nav-item nav-link" *ngIf="!loggedIn">
+  <li class="nav-item nav-link" [hidden]="!loggedIn">
     <a class="nav-link" routerLink="/profile">Profile</a>
   </li>
-  <li class="nav-item nav-link" *ngIf="!loggedIn">
+  <li class="nav-item nav-link" [hidden]="!loggedIn">
     <a class="nav-link" routerLink="/feed">Feed</a>
   </li>
 </ul>

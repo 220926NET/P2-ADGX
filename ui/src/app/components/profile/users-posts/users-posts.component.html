@@ -8,25 +8,26 @@
         <mat-card>
             <img class="card-profile-img" src="https://revatureproject2.blob.core.windows.net/userphotos/John.jpg" />
             <mat-card-header class="card-title">
-                <mat-card-title class="user-post-title">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat
-                    placeat natus quisquam dolorum earum voluptatibus officiis architecto laboriosam eum, corporis
-                    alias, laborum ex qui, reprehenderit voluptate sequi aut sed ducimus!</mat-card-title>
+                <mat-card-title class="user-post-title">{{post.title}}</mat-card-title>
 
             </mat-card-header>
-
-
             <mat-card-content class="card-image">
-                <img mat-card-image src="{{post.postUrl}}" />
+                <img mat-card-image src="{{post.imageUrl}}" alt="{{post.description}}" *ngIf="post.imageUrl" />
+                <div class="post-text" *ngIf="post.text">
+                    <p>{{post.text}}</p>
+                </div>
             </mat-card-content>
             <div class="grid-content">
 
                 <mat-card-actions>
-                    <div class="like-post">
-                        <p class="like-post-description">This is the like button</p>
+                    <div *ngFor="let tags of post.imageTags" class="tags-container">
+                        <span class="tags"> {{ tags }} </span>
                     </div>
-                    <div class="amount-of-likes">
+                    <!-- <div class="like-post">
+                    </div> -->
+                    <!-- <div class="amount-of-likes">
                         <p>600</p>
-                    </div>
+                    </div> -->
                 </mat-card-actions>
             </div>
         </mat-card>

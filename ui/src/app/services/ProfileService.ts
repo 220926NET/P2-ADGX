@@ -1,9 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import ResponseMessage from "src/Models/Profile/ResponseMessage";
-import Profile from "src/Models/Profile/Profile";
-import { R3SelectorScopeMode } from "@angular/compiler";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -34,8 +33,8 @@ export class ProfileService
           return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl)
      }
 
-     getUserProfileDetails(userId :number) : Observable<ResponseMessage>{
-          return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl + userId)
+     getUserProfileDetails() : Observable<ResponseMessage>{
+          return this._httpClient.get<ResponseMessage>(this.getProfileDetailsUrl)
      }
 
    postProfileAboutMe(aboutMe : string) : Observable<ResponseMessage> {
@@ -48,11 +47,11 @@ export class ProfileService
         return this._httpClient.post<ResponseMessage>(this.postProfilePictureUrl, photo)
    }
 
-   postProfileInterests(interests : string[], userId : number) : Observable<ResponseMessage>{
-    return this._httpClient.post<ResponseMessage>(this.postProfileInterestsUrl + userId, {"interests" : interests})
+   postProfileInterests(interests : string[]) : Observable<ResponseMessage>{
+    return this._httpClient.post<ResponseMessage>(this.postProfileInterestsUrl , {"interests" : interests})
    }
 
-   postProfileHobbies(hobbies : string[], userId : number) : Observable<ResponseMessage>{
-    return this._httpClient.post<ResponseMessage>(this.postProfileHobbiesUrl + userId, {"hobbies" : hobbies})
+   postProfileHobbies(hobbies : string[]) : Observable<ResponseMessage>{
+    return this._httpClient.post<ResponseMessage>(this.postProfileHobbiesUrl , {"hobbies" : hobbies})
    }
 }

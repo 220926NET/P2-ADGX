@@ -1,0 +1,56 @@
+<div class="outer-profile-container">
+    <div class="outer-profile-container-logo"></div>
+    <div class="profile-container">
+        <div class="profile-img-container" data-testid="profile-image-container">
+            <img [ngClass]="myImage ? 'profile-img' : 'no-profile-img'" class="profile-img" src="{{ myImage }}"
+                [alt]="myImage ? 'Users profile picture' : ''" />
+        </div>
+    </div>
+    <app-profile-details [myHobbies]="myHobbies" [myInterests]="myInterests" [myAboutMe]="myAboutMe">
+    </app-profile-details>
+
+</div>
+<hr />
+<div class="sort-by-container">
+    <span>View As : </span>
+    <span [ngClass]="isViewGallery ? 'active-view': ''" class="sort-by-gallery" (click)="setView()">Gallery </span>
+    <span [ngClass]="!isViewGallery ? 'active-view': ''" class="sort-by-row" (click)="setView()">List</span>
+</div>
+
+<div class="app-user-posts-container">
+    <div class="profile-recent-posts">
+        <h2>Posts</h2>
+    </div>
+    <div [ngClass]="isViewGallery ? 'grid-container-gallery' : 'grid-container-list'">
+        <div class="grid-item" *ngFor="let post of posts">
+
+            <mat-card>
+                <img class="card-profile-img"
+                    src="https://revatureproject2.blob.core.windows.net/userphotos/John.jpg" />
+                <mat-card-header class="card-title">
+                    <mat-card-title class="user-post-title">{{post.title}}</mat-card-title>
+
+                </mat-card-header>
+                <mat-card-content class="card-image">
+                    <img mat-card-image src="{{post.imageUrl}}" />
+                    <div class="post-text" *ngIf="post.text">
+                        {{post.text}}
+                    </div>
+                </mat-card-content>
+                <div class="grid-content">
+
+                    <mat-card-actions>
+                        <div *ngFor="let tags of post.imageTags" class="tags-container">
+                            <span class="tags"> {{ tags }} </span>
+                        </div>
+                        <!-- <div class="like-post">
+                </div> -->
+                        <!-- <div class="amount-of-likes">
+                    <p>600</p>
+                </div> -->
+                    </mat-card-actions>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

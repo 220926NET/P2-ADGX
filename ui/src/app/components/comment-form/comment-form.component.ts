@@ -27,7 +27,7 @@ export class CommentFormComponent implements OnInit {
       .createComment({
         commentId: -1,
         postId: this.postId,
-        userId: this.userId,
+        userID: this.userId,
         text: this.commentForm.controls["text"].value,
       })
       .subscribe((comment) => {
