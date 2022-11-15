@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-nav-bar",
@@ -6,13 +8,21 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./nav-bar.component.css"],
 })
 export class NavBarComponent implements OnInit {
-  @Input() loggedIn: boolean = false;
+  loggedIn: boolean = false;
 
-  constructor() {
-    /* TODO document why this constructor is empty */
+  constructor(private authService: AuthService, private router: Router) {
+    authService.loggedIn$.subscribe((loggedIn) => {
+      this.loggedIn = loggedIn;
+    });
   }
 
   ngOnInit(): void {
+    this.authService.checkLogin();
     /* TODO document why this method 'ngOnInit' is empty */
+  }
+
+  Logout() {
+    this.router.navigate(["../login"]);
+    this.authService.logout();
   }
 }

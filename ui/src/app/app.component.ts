@@ -12,11 +12,7 @@ export class AppComponent {
 
   title = "Flare";
 
-  constructor(private authService: AuthService) {
-    authService.loggedIn$.subscribe((loggedIn) => {
-      this.loggedIn = loggedIn;
-    });
-  }
+  constructor() {}
 
   login() {
     this.loggedIn = true;
