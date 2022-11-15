@@ -2,12 +2,20 @@
 <div *ngFor="let post of posts">
   <mat-card>
     <mat-card-header>
+      <button [hidden]="!hideDelete(post.userID)">
+        <em
+          class="bi bi-x-lg"
+          (click)="DeletePost(post.postID, post.userID)"
+        ></em>
+      </button>
       <mat-card-title>{{ post.title }}</mat-card-title>
       <mat-card-subtitle>{{ post.datePosted | date }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>{{ post.text }}</mat-card-content>
     <div *ngIf="post.imageUrl">
-      <a routerLink="profile/{{post.userID}}"><img [src]="post.imageUrl" [alt]="post.description"></a>
+      <a routerLink="profile/{{ post.userID }}"
+        ><img [src]="post.imageUrl" [alt]="post.description"
+      /></a>
     </div>
     <div>
       <app-post-like [postId]="post.postID"></app-post-like>

@@ -119,11 +119,12 @@ public class PostRepository : RepositoryBase<Post>, IPostRepository
         command.Parameters.AddWithValue("@Text", entity.Text);
         ExecuteNonQuery(command);
     }
-    public void Delete(Post entity)
+    public void Delete(int userId, int postId)
     {
-        string query = $"DELETE FROM {tableName} WHERE PostID = @postId";
+        string query = "exec delete_user_post @userId, @postId";
         SqlCommand command = new SqlCommand(query);
-        command.Parameters.Add(new SqlParameter("@postId", entity.PostID));
+        command.Parameters.Add(new SqlParameter("@userId", userId));
+        command.Parameters.Add(new SqlParameter("@postId", postId));
         ExecuteNonQuery(command);
     }
 }

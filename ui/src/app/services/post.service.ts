@@ -23,5 +23,8 @@ export class PostService {
     return this.http.get<Post[]>(POST_API);
   }
   // updatePost() {}
-  // deletePost() {}
+  deletePost(postId: number, userid: number) {
+    console.log(POST_API + postId + "/delete");
+    return this.http.delete(POST_API + postId + "/delete");
+  }
 }
