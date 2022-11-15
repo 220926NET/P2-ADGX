@@ -18,7 +18,6 @@ public class PostsController : ControllerBase
 
     private readonly IPostService _postService;
 
-    private readonly int _mockUserId = 4;
 
     public PostsController(IPostRepository postRepository, IPostService postService)
     {

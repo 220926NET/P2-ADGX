@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import ResponseMessage from 'src/Models/Profile/ResponseMessage';
 import { OtherProfileService } from 'src/app/services/other-profile.service';
 import ProfilePost from 'src/Models/Profile/ProfilePost';
@@ -13,6 +13,7 @@ import ProfilePost from 'src/Models/Profile/ProfilePost';
 
 export class UsersPostsComponent implements OnInit {
 
+  @Input() userPhoto : any; 
 
   getUserPostsUrl : string = "https://localhost:7219/Profile/profilePosts"; 
 
@@ -24,11 +25,9 @@ export class UsersPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this._httpClient.get<ResponseMessage>(this.getUserPostsUrl).subscribe(res => {
-
       this.userPosts = res.data; 
       console.log(res);
     })
-    //TODO: get a list of user posts pictures and titles 
 
   }
   setView() {

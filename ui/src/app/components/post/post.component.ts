@@ -43,7 +43,6 @@ export class PostComponent implements OnInit {
 
 
   onSubmit() {
-    this.postForm.disable()
     const post: FormData = new FormData();
     
     if (this.isText) {
@@ -52,7 +51,7 @@ export class PostComponent implements OnInit {
       post.append("isTextPost", "true");
 
       this._postService.createPost(post).subscribe((res) => {
-      
+        
       });
     
     } else {
@@ -64,9 +63,9 @@ export class PostComponent implements OnInit {
       post.append("image", this.image);
       this._postService.createPost(post).subscribe((res) => {
         console.log(res);
+
       });
   }
-  this.postForm.enable();
 }
   setImage(event: any) {
     this.image = event.target.files[0];
