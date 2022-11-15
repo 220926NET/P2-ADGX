@@ -18,6 +18,7 @@ export class PostFeedComponent implements OnInit {
 
   updatePosts() {
     this.postService.getPosts().subscribe((posts) => {
+
       this.posts = posts;
       posts.reverse();
     });
@@ -35,6 +36,7 @@ export class PostFeedComponent implements OnInit {
     this.postService.deletePost(postId, userId).subscribe((res) => {
       console.log(res);
       this.updatePosts();
+
     });
   }
 
