@@ -66,7 +66,7 @@ namespace api_Flare.Controllers
                         new Claim(ClaimTypes.Name, loggedIn.Username),
                         new Claim(ClaimTypes.Sid, loggedIn.UserId.ToString())
                     },
-                    expires: DateTime.Now.AddMinutes(10),
+                    expires: DateTime.Now.AddHours(24),
                     signingCredentials: signingCredentials
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

@@ -29,6 +29,10 @@ export class AuthService {
       responseType: "text",
     });
   }
+  public logout(): void {
+    localStorage.setItem("authToken", "");
+    this.loggedInSource.next(false);
+  }
 
   public register(user: FormData): Observable<User> {
     return this.http.post<User>(AUTH_API + "register", user);
