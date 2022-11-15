@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { User } from "src/Models/user";
 
 const AUTH_API = "https://localhost:7219/api/Auth/";
@@ -9,6 +9,10 @@ const AUTH_API = "https://localhost:7219/api/Auth/";
   providedIn: "root",
 })
 export class AuthService {
+  private loggedInSource = new Subject<boolean>();
+
+  loggedIn$ = this.loggedInSource.asObservable();
+
   getAuthorizationToken() {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -20,6 +24,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public login(user: FormData): Observable<string> {
+    this.loggedInSource.next(true);
     return this.http.post(AUTH_API + "login", user, {
       responseType: "text",
     });
