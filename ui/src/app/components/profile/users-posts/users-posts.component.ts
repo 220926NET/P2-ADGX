@@ -13,11 +13,8 @@ import ProfilePost from 'src/Models/Profile/ProfilePost';
 
 export class UsersPostsComponent implements OnInit {
 
-  /**
-   *
-   */
 
-  getUserPostsUrl : string = "https://localhost:7219/Profile/profilePosts/4"; 
+  getUserPostsUrl : string = "https://localhost:7219/Profile/profilePosts"; 
 
   userPosts : ProfilePost[] | null = null; 
 

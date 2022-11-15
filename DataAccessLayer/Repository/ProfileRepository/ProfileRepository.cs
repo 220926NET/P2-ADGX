@@ -23,8 +23,9 @@ public class ProfileRepository : IProfileRepository
             _connection.Close();
             return true;
         }
-        catch (SqlException)
+        catch (SqlException e)
         {
+            Console.WriteLine(e);
             return false;
 
         }
