@@ -23,34 +23,14 @@ public class LikeController : ControllerBase
     }
 
     [HttpPost]
-    public void CreateLike([FromBody] int postId)
+    public void CreateLike([FromBody] Like like)
     {
-        try
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IEnumerable<Claim> claims = identity!.Claims;
-            int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
-            likeRepository.CreateLike(id, postId);
-        }
-        catch(Exception exception)
-        {
-            // log error
-        }
+        likeRepository.CreateLike(like.UserId, like.PostId);
     }
 
     [HttpDelete]
-    public void DeleteLike([FromBody] int postId)
+    public void DeleteLike([FromBody] Like like)
     {
-        try
-        {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IEnumerable<Claim> claims = identity!.Claims;
-            int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
-            likeRepository.DeleteLike(id, postId);
-        }
-        catch(Exception exception)
-        {
-            // log error
-        }
+        likeRepository.DeleteLike(like.UserId, like.PostId);
     }
 }

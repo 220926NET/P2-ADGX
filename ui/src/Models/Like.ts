@@ -1,4 +1,4 @@
 export interface Like {
-    PostId:number,
-    UserId:number
+    postId:number,
+    userId:number
 }
