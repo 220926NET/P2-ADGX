@@ -341,6 +341,96 @@ public class ProfileRepository : IProfileRepository
 
 
     }
+    public async Task<List<ProfilePost>> GetProfilePosts(int userId)
+    {
+        List<ProfilePost>? profilePosts = new List<ProfilePost>();
+        string? text = null;
+        string? imageUrl = null;
+        string? description = null;
+        string? tag = null;
+        try
+        {
+            _connection.Open();
+            //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
+            SqlCommand cmd = new SqlCommand("exec get_profile_posts @userId", _connection);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    int postId = (int)reader["PostID"];
+                    string title = (string)reader["Title"];
+                    DateTime datePosted = (DateTime)reader["DatePosted"];
+                    if (reader["Text"] != DBNull.Value)
+                    {
+                        text = (string)reader["Text"];
+                    }
+
+                    if (reader["imageUrl"] != DBNull.Value)
+                    {
+                        imageUrl = (string)reader["ImageUrl"];
+                    }
+                    if (reader["Description"] != DBNull.Value)
+                    {
+                        description = (string)reader["Description"];
+                    }
+
+                    if (reader["Tag"] != DBNull.Value)
+                    {
+                        tag = (string)reader["Tag"];
+                    }
+
+                    //todo check if list has a post 
+                    // check if post id = postid 
+                    // add tag else create a new post 
+
+                    if (profilePosts.Count > 0 && profilePosts[profilePosts.Count - 1].PostId == postId && profilePosts[profilePosts.Count - 1].ImageUrl != null)
+                    {
+                        profilePosts[profilePosts.Count - 1].ImageTags!.Add(tag);
+
+                        text = null;
+                        imageUrl = null; 
+                        description = null; 
+                        tag = null; 
+                    }
+                    else
+                    {
+                        ProfilePost post = new ProfilePost()
+                        {
+                            PostId = postId,
+                            Title = title,
+                            DatePosted = datePosted,
+                            ImageUrl = imageUrl,
+                            Text = text,
+                            Description = description,
+                            ImageTags = new List<string>() { tag }
+                        };
+                        profilePosts.Add(post);
+                        text = null;
+                        imageUrl = null; 
+                        description = null; 
+                        tag = null; 
+                    }
+
+
+                }
+            }
+        }
+        catch (SqlException)
+        {
+            //TODO: Log error to file 
+
+        }
+        finally
+        {
+            _connection.Close();
+        }
+
+        return profilePosts;
+
+
+    }
 
     public async Task<bool> DeleteProfileInterests(int userId)
     {
@@ -351,6 +441,28 @@ public class ProfileRepository : IProfileRepository
             //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
             SqlCommand cmd = new SqlCommand("exec delete_profile_interests @UserId", _connection);
             cmd.Parameters.AddWithValue("@UserId", userId);
+            await cmd.ExecuteNonQueryAsync();
+            _connection.Close();
+            return true;
+        }
+        catch (SqlException e)
+        {
+            Console.WriteLine(e);
+            //TODO: Log error to file 
+            _connection.Close();
+            return false;
+        }
+
+    }
+
+    public async Task<bool> DeleteUserPost(int userId, int postId){
+          try
+        {
+            _connection.Open();
+            //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
+            SqlCommand cmd = new SqlCommand("delete_user_post @UserId, @PostId ", _connection);
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            cmd.Parameters.AddWithValue("@postId", postId);
             await cmd.ExecuteNonQueryAsync();
             _connection.Close();
             return true;

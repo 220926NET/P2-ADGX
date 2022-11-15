@@ -16,7 +16,6 @@
 .sort-by-row{
     text-align: center;
     font-size: large;
-    width: 100px;
     border-radius: 5rem;
 }
 .sort-by-gallery{
@@ -44,23 +43,17 @@
 
 .grid-container-list {
     border-radius: 3em;
-    width: 100vw;
     display: grid;
-    grid-template-columns: 50%;
-    text-align: center;
-    
-  
+    grid-template-columns: 100%;
 }
 
 .grid-container-gallery {
-
     border-radius: 3em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: left;
     
 }
-
 
 
 .card-profile-img {
@@ -86,10 +79,24 @@
    padding: 20px;
 }
 .grid-item{
+
     border-radius: 2rem;
     margin:10px;
 
 }   
+
+.mat-card-header {
+    justify-content: center;
+}
+
+.tags{
+    padding: 0px 10px 0px 10px ;
+    margin-left: 10px;
+    float: left;
+    background-color: rgb(213, 213, 224);
+    color: black;
+    border-radius: 4px;
+}
 
 
 .like-post{
@@ -120,11 +127,36 @@
 }
 
 
-
-.user-post-title{
-   display: block;
-   position: relative;
-   bottom: 1px;
-   z-index: 0;
+.grid-container-gallery .mat-card{
+    min-height: 500px;
+    max-height: 500px;
+    background-color: rgba(96, 109, 226, 0.5);
+   color: black;
 }
- 
+
+.grid-container-gallery .post-text{
+   
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(25, 28, 31, 0.1);
+    height: 300px;
+   
+}
+.grid-container-list .mat-card{
+    background-color: rgba(96, 109, 226, 0.5);
+    color: black;
+}
+
+.grid-container-list .post-text{
+    text-align: left;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(25, 28, 31, 0.1);
+    height: 300px;
+}
+
+.post-text{
+    overflow:hidden;
+}

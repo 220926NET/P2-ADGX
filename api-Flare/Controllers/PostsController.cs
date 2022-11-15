@@ -65,7 +65,7 @@ public class PostsController : ControllerBase
     [Route(("{id}/delete"))]
     public void DeletePost()
     {
-
+        
     }
 
 }

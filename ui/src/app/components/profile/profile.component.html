@@ -27,9 +27,9 @@
   <hr />
 </div>
 <hr />
-<div class="btn btn-create-post" (click)="showCreatePost()">Create a post</div>
+<div class="btn btn-create-post" (click)="showCreatePost()" *ngIf="!createPost">I have something to share!</div>
+<div class="btn btn-hide-post" (click)="showCreatePost()" *ngIf="createPost">Never mind...</div>
 <app-post [hidden]="!createPost"></app-post>
-
 <div class="app-user-posts-container">
   <div class="profile-recent-posts">
     <h2>My Recent Posts</h2>
