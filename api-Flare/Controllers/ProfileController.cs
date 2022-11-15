@@ -147,7 +147,7 @@ public class ProfileController : ControllerBase
         ResponseMessage<string> uploadUserInterestsRes = new ResponseMessage<string>();
         uploadUserInterestsRes = await _profileService.UploadProfileInterests(id, interests);
         return Ok(uploadUserInterestsRes);
-
+        //test 
 
     }
 
