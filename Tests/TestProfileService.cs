@@ -21,6 +21,7 @@ public class TestProfileService
         ServerResponse serverResponses = new ServerResponse();
 
         int mockUserId = 2;
+        string mockName = "test";
         var mockedRepository = new Mock<IProfileRepository>();
         var mockedStorage = new Mock<BlobStorage>();
 
@@ -28,7 +29,7 @@ public class TestProfileService
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
-        ResponseMessage<string> responseMessage = await profileService.uploadUserPhoto(file, mockUserId);
+        ResponseMessage<string> responseMessage = await profileService.UploadUserPhoto(file, mockUserId, mockName);
 
         Assert.Equal(serverResponses.InvalidFileResponse().message, responseMessage.message);
 
@@ -56,12 +57,13 @@ public class TestProfileService
         int mockUserId = 2;
         var mockedRepository = new Mock<IProfileRepository>();
         var mockedStorage = new Mock<BlobStorage>();
+        string mockName = "test";
 
         mockedRepository.Setup(repo => repo.UserHasProfilePhoto(mockUserId)).Returns(returnTrue);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
-        ResponseMessage<string> responseMessage = await profileService.uploadUserPhoto(file, mockUserId);
+        ResponseMessage<string> responseMessage = await profileService.UploadUserPhoto(file, mockUserId, mockName);
 
         Assert.Equal(serverResponses.UserHasProfilePhotoSet().message, responseMessage.message);
     }

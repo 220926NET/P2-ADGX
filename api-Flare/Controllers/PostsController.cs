@@ -18,7 +18,6 @@ public class PostsController : ControllerBase
 
     private readonly IPostService _postService;
 
-    private readonly int _mockUserId = 4;
 
     public PostsController(IPostRepository postRepository, IPostService postService)
     {
@@ -62,10 +61,16 @@ public class PostsController : ControllerBase
     }
 
     [HttpDelete]
-    [Route(("{id}/delete"))]
-    public void DeletePost()
+    [Route(("{postId}/delete"))]
+    public void DeletePost(int postId)
     {
-        
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        IEnumerable<Claim> claims = identity!.Claims;
+        int userId = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+        string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
+        postRepository.Delete(userId, postId);
+
     }
 
 }
