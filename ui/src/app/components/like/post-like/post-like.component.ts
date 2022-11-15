@@ -22,12 +22,10 @@ export class PostLikeComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.currentUserService.getUserId();
-    console.log(this.userId);
     this.likeService.getPostLike(this.postId).subscribe(data => {
       this.likeList = data;
       this.likeCount = this.likeList.length;
-      this.isLiked = this.likeList.some(l => {console.log("UserIds:", l.userId, this.userId); return l.userId == this.userId;})
-      console.log(this.postId, this.isLiked);
+      this.isLiked = this.likeList.some(l => {return l.userId == this.userId;})
     });
   }
 }
