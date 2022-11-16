@@ -10,7 +10,6 @@ import { Comment } from "src/Models/Comment";
 })
 export class CommentFormComponent implements OnInit {
   @Input() postId: number = -1;
-  @Input() userId: number = -1;
   @Input() comments: Comment[] = [];
 
   public commentForm: FormGroup = new FormGroup({
@@ -23,16 +22,15 @@ export class CommentFormComponent implements OnInit {
   ngOnInit(): void {}
 
   submitForm() {
+
     this.commentService
       .createComment({
         commentId: -1,
         postId: this.postId,
-        userID: this.userId,
         text: this.commentForm.controls["text"].value,
       })
       .subscribe((comment) => {
         this.comments.push(comment);
-        console.log(comment);
         this.commentForm.reset();
       });
   }

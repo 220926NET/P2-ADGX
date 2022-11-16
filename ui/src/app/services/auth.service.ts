@@ -13,18 +13,15 @@ export class AuthService {
 
   loggedIn$ = this.loggedInSource.asObservable();
 
-
-   headers: HttpHeaders = new HttpHeaders()
-  .set('Access-Control-Allow-Origin', '*');
-
-
+   headers: HttpHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*').set("Authorization" , `bearer jdskalfasjdfkljasdfkljasklfjlaskdjf`).set("reponse-type" , "text");
+  
 
   getAuthorizationToken() {
     const token = localStorage.getItem("authToken");
     if (token) {
       return token;
     } else {
-      return "";
+      return ""; 
     }
   }
   constructor(private http: HttpClient) {}
@@ -53,7 +50,9 @@ export class AuthService {
   }
 
   public register(user: FormData): Observable<User> {
-    return this.http.post<User>(AUTH_API + "register", user);
+    return this.http.post<User>(AUTH_API + "register", user, {
+      headers : this.headers
+    });
   }
 
   public getMe(): Observable<string> {

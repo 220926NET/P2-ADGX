@@ -30,8 +30,6 @@ namespace api_Flare.Controllers
             this.authSettings = authSettings.Value;
         }
 
-
-
         [HttpPost, Route("register")]
         public ActionResult Register([FromForm] User user)
         {

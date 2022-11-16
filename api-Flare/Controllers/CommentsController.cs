@@ -1,6 +1,8 @@
 ﻿using BusinessLogicLayer;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System.Security.Claims;
+
 
 
 namespace api_Flare.Controllers
@@ -36,9 +38,21 @@ namespace api_Flare.Controllers
         // POST api/<CommentsController>
         [HttpPost]
         [Route("create")]
-        public Comment Post([FromBody] Comment comment)
+        public Comment Post([FromBody] CommentDto commentDto)
         {
 
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            IEnumerable<Claim> claims = identity!.Claims;
+
+             int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+
+            Comment comment = new Comment(){
+                UserID = id,
+                PostID = commentDto.PostId,
+                Text = commentDto.Text
+            }; 
+            
             return commentService.create_comment(comment);
         }
 
