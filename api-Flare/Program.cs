@@ -83,18 +83,6 @@ builder.Services.AddSwaggerGen(configuration =>
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-    builder =>
-    {
-
-        builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
-    });
-
-});
-
-
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
