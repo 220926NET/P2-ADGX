@@ -9,6 +9,7 @@ import jwtDecode from "jwt-decode";
 })
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
+  
 
   constructor(private postService: PostService) {}
 
@@ -23,6 +24,12 @@ export class PostFeedComponent implements OnInit {
     });
   }
 
+  deletePost(postId:number) {
+    console.log("Deleting the post from the feed.")
+    this.posts = this.posts.filter(i => i.postID != postId);
+  }
+
+  /*
   hideDelete(userId: number): boolean {
     let tokenString = localStorage.getItem("authToken");
     let tokenInfo = this.getDecodedAccessToken(tokenString ? tokenString : "");
@@ -45,4 +52,5 @@ export class PostFeedComponent implements OnInit {
       return null;
     }
   }
+  */
 }

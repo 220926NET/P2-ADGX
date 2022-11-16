@@ -1,5 +1,10 @@
 .cards {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.post-feed-component {
+  width:800px;
 }
