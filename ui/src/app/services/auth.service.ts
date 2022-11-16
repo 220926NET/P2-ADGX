@@ -13,6 +13,11 @@ export class AuthService {
 
   loggedIn$ = this.loggedInSource.asObservable();
 
+  headers: HttpHeaders = new HttpHeaders().set(
+    "Access-Control-Allow-Origin",
+    "*"
+  );
+
   getAuthorizationToken() {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -36,6 +41,7 @@ export class AuthService {
     this.loggedInSource.next(true);
     return this.http.post(AUTH_API + "login", user, {
       responseType: "text",
+      headers: this.headers,
     });
   }
   public logout(): void {
