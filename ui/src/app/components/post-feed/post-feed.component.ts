@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { PostService } from "src/app/services/post.service";
-import { Post } from "src/Models/Post";
+import { PostService } from "../../services/post.service";
+import { Post } from "../../Models/Post";
 import jwtDecode from "jwt-decode";
 @Component({
   selector: "app-post-feed",
@@ -18,7 +18,6 @@ export class PostFeedComponent implements OnInit {
 
   updatePosts() {
     this.postService.getPosts().subscribe((posts) => {
-
       this.posts = posts;
       posts.reverse();
     });
@@ -36,7 +35,6 @@ export class PostFeedComponent implements OnInit {
     this.postService.deletePost(postId, userId).subscribe((res) => {
       console.log(res);
       this.updatePosts();
-
     });
   }
 

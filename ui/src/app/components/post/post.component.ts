@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
-import { PostService } from "src/app/services/post.service";
-import { Post } from "src/Models/Post";
-import { readBuilderProgram } from "typescript";
+import { PostService } from "../../services/post.service";
 
 @Component({
   selector: "app-post",
