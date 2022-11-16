@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://lemon-tree-03b841910.2.azurestaticapps.net/", "https://localhost:4200")
+                          policy.AllowAnyOrigin()
                               .AllowAnyHeader()
                               .AllowAnyMethod();
                       });
