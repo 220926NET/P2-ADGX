@@ -18,11 +18,11 @@ export class ProfileService {
   deleteProfilePictureUrl: string =
     "https://flar-e.azurewebsites.net/api/Profile/profilePhoto";
   postProfileHobbiesUrl: string =
-    "https://flar-e.azurewebsites.net/api/hobbies/";
+    "https://flar-e.azurewebsites.net/api/Profile/hobbies/";
   postProfileInterestsUrl: string =
-    "https://flar-e.azurewebsites.net/api/interests/";
+    "https://flar-e.azurewebsites.net/api/Profile/interests/";
   postProfileAboutMeUrl: string =
-    "https://flar-e.azurewebsites.net/api/AboutMe";
+    "https://flar-e.azurewebsites.net/api/Profile/AboutMe/";
 
   deleteProfilePhoto(): Observable<ResponseMessage> {
     return this._httpClient.delete<ResponseMessage>(
