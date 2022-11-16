@@ -11,12 +11,15 @@ import { ProfileService } from "src/app/services/ProfileService";
 export class ProfileComponent implements OnInit {
   constructor(private _profileService: ProfileService) {}
 
-  _mockUserId = 2;
+
+
   postProfilePictureUrl: string =
-    "https://localhost:7219/Profile/uploadUserPhoto";
+    "https://flar-e.azurewebsites.net/api/Profile/uploadUserPhoto";
+
 
   uploadingPhoto: boolean = false;
 
+  imagePreview: any;
   // this makes sure that the button to upload photo cannot be pressed
   // until user adds a photo to upload
 
@@ -48,19 +51,30 @@ export class ProfileComponent implements OnInit {
   uploadPhoto(): void {
     const formData: FormData = new FormData();
     formData.append("userPhoto", this.userPhoto, this.userPhoto?.name);
+
     this._profileService.postProfilePhoto(formData).subscribe((res) => {
       console.log(res);
     });
+
   }
 
   setPhoto(event: any) {
     this.userPhoto = event.target.files[0];
+  }
+  setImage(event: any) {
+    this.userPhoto = event.target.files[0];
+    var fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      this.imagePreview = event.target?.result;
+    };
+    fileReader.readAsDataURL(event.target.files[0]);
   }
 
   deleteProfilePhoto() {
     this._profileService
       .deleteProfilePhoto()
       .subscribe((res) => console.log(res));
+    
   }
 
   showDeleteBtn() {

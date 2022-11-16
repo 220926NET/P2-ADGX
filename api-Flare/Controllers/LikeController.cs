@@ -11,8 +11,11 @@ namespace api_Flare.Controllers;
 public class LikeController : ControllerBase
 {
     private readonly ILikeRepository likeRepository;
-    public LikeController(ILikeRepository likeRepository)
+
+    private readonly ILogger<LikeController> _logger; 
+    public LikeController(ILikeRepository likeRepository, ILogger<LikeController> logger)
     {
+        _logger = logger; 
         this.likeRepository = likeRepository;
     }
 

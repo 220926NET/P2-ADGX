@@ -1,6 +1,9 @@
 .about-me-container {
     word-break: break-word;
 }
+.about-me-container p{
+   padding: 5px 10px 0px 10px;
+}
 .about-me-edit-btn{
     cursor: pointer;
 }

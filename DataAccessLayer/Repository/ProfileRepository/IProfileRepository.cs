@@ -1,4 +1,6 @@
 using Models;
+
+namespace DataAccessLayer;
 public interface IProfileRepository
 {
 
@@ -30,5 +32,5 @@ public interface IProfileRepository
 
     Task<List<ProfilePost>> GetProfilePosts(int userId);
 
-    Task<bool> DeleteUserPost(int userId, int postId); 
+    Task<bool> DeleteUserPost(int userId, int postId);
 }

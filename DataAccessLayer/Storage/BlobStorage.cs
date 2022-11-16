@@ -1,7 +1,6 @@
 using Azure.Storage.Blobs;
 using Azure.Storage;
 using Microsoft.AspNetCore.Http;
-using Models;
 
 namespace DataAccessLayer;
 public class BlobStorage : IBlobStorage
@@ -36,12 +35,7 @@ public class BlobStorage : IBlobStorage
             return "";
 
         }
-
     }
-
-
-
-
 
 
 
@@ -70,13 +64,13 @@ public class BlobStorage : IBlobStorage
             BlobClient blobClient = container.GetBlobClient(fileName + "." + extension);
 
 
-            var memoryStream = new MemoryStream();
-            await photo.CopyToAsync(memoryStream);
-            memoryStream.Position = 0;
-            await blobClient.UploadAsync(memoryStream);
-            url = blobClient.Uri.AbsoluteUri;
-
-
+            using (MemoryStream ms = new MemoryStream())
+            {
+                await photo.CopyToAsync(ms);
+                ms.Position = 0;
+                await blobClient.UploadAsync(ms);
+                url = blobClient.Uri.AbsoluteUri;
+            }
 
 
 

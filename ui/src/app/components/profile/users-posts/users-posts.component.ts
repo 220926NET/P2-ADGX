@@ -12,7 +12,8 @@ import ProfilePost from "../../../Models/Profile/ProfilePost";
 export class UsersPostsComponent implements OnInit {
   @Input() userPhoto: any;
 
-  getUserPostsUrl: string = "https://localhost:7219/Profile/profilePosts";
+  getUserPostsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profilePosts";
 
   userPosts: ProfilePost[] | null = null;
 
