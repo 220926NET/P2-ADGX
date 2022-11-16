@@ -9,9 +9,9 @@ import ResponseMessage from "../Models/Profile/ResponseMessage";
 export class OtherProfileService {
   constructor(private _httpClient: HttpClient) {}
 
-  private getUserProfileDetailsUrl: string = "/Profile/profileDetails/";
+  private getUserProfileDetailsUrl: string = "/api/Profile/profileDetails/";
 
-  private getUserPostsUrl: string = "/Profile/profilePosts/";
+  private getUserPostsUrl: string = "/api/Profile/profilePosts/";
 
   public getUserProfileDetails(userId: number): Observable<ResponseMessage> {
     return this._httpClient.get<ResponseMessage>(

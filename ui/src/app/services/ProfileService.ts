@@ -11,12 +11,12 @@ export class ProfileService {
    *
    */
   constructor(private _httpClient: HttpClient) {}
-  postProfilePictureUrl: string = "/Profile/Photo";
-  getProfileDetailsUrl: string = "/Profile/profileDetails/";
-  deleteProfilePictureUrl: string = "/Profile/profilePhoto";
-  postProfileHobbiesUrl: string = "/hobbies/";
-  postProfileInterestsUrl: string = "/interests/";
-  postProfileAboutMeUrl: string = "/AboutMe";
+  postProfilePictureUrl: string = "/api/Profile/Photo";
+  getProfileDetailsUrl: string = "/api/Profile/profileDetails/";
+  deleteProfilePictureUrl: string = "/api/Profile/profilePhoto";
+  postProfileHobbiesUrl: string = "/api/hobbies/";
+  postProfileInterestsUrl: string = "/api/interests/";
+  postProfileAboutMeUrl: string = "/api/AboutMe";
 
   deleteProfilePhoto(): Observable<ResponseMessage> {
     return this._httpClient.delete<ResponseMessage>(

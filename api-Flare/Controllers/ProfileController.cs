@@ -8,7 +8,7 @@ namespace api_Flare.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProfileController : ControllerBase
 {
 
@@ -38,7 +38,7 @@ public class ProfileController : ControllerBase
     [HttpGet("profileDetails")]
     public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails()
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
@@ -83,7 +83,7 @@ public class ProfileController : ControllerBase
 
     }
 
-   
+
 
     [HttpDelete("profilePhoto")]
 
@@ -104,7 +104,7 @@ public class ProfileController : ControllerBase
     }
 
     [HttpDelete("profilePost/{postId}")]
-     public async Task<ActionResult<ResponseMessage<string>>> DeleteProfilePost(int postId)
+    public async Task<ActionResult<ResponseMessage<string>>> DeleteProfilePost(int postId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
@@ -124,7 +124,7 @@ public class ProfileController : ControllerBase
 
     public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies)
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
@@ -157,7 +157,7 @@ public class ProfileController : ControllerBase
 
     public async Task<ActionResult<ResponseMessage<string>>> AddProfileAboutMe([FromBody] ProfileAboutMe aboutMe)
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;

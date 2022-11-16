@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Like } from "../../Models/Like";
 
-const LIKE_API = "https://localhost:7219/api/like/";
+const LIKE_API = "/api/like/";
 
 @Injectable({
   providedIn: "root",
