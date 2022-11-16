@@ -30,6 +30,9 @@ builder.Services.AddAuthentication((opt) =>
     };
 });
 
+
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
