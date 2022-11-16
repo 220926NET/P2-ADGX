@@ -9,7 +9,3 @@
 .post-comment-button:hover {
     background-color: #fff;
 }
-
-.post-comment-button-icon {
-    content: url("../../assets/comment/comment.svg");
-}

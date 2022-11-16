@@ -32,23 +32,34 @@
             <app-post-like [postId]="post.postID" class="mb-2"></app-post-like>
 
             <app-post-comment-button [(showComments)]="showComments" class="mb-2"></app-post-comment-button>
-
+            <app-post-delete-button  [hidden]="!isMyPost" (click)="DeletePost(post.postID, post.userID)" class="mb-2"></app-post-delete-button>
+            <!--
             <button [hidden]="!isMyPost" class="float-right" (click)="DeletePost(post.postID, post.userID)">
               <em class="bi bi-x-lg"></em>
           </button>
+          -->
         </div>
         <div class="col-sm-10 col-md-9">
+          <mat-card-header>
             <mat-card-title>
                 {{ post.title }}
             </mat-card-title>
-            <div>{{ post.datePosted | date }}</div>
-            <div>{{ post.text }}</div>
+            <mat-card-subtitle>
+              {{ post.datePosted | date }}
+            </mat-card-subtitle>
+          </mat-card-header>
+            <mat-card-content>
+              {{ post.text }}
+            </mat-card-content>
             <div *ngIf="post.imageUrl">
-                <img
-                [src]="post.imageUrl"
-                [alt]="post.description"
-                class="post-feed-item-img"
-              />
+              <a routerLink="profile/{{ post.userID }}">
+                  <img
+                  [src]="post.imageUrl"
+                  [alt]="post.description"
+                  class="post-feed-item-img"
+                />
+              </a>
+
             </div>
         </div>
     </div>
