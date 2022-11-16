@@ -1,44 +1,45 @@
 .post-container {
     background-color: rgb(33, 131, 218, .2);
-    width:30%;
-    margin:auto;
-    text-align:center;
+    width: 30%;
+    margin: auto;
+    text-align: center;
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
     padding: 20px;
     border-radius: 5px;
-   
+
 }
 
-.text-image-selection-container{
+.text-image-selection-container {
     height: 40px;
-  
+
     display: flex;
 
 }
 
-.text-selector{
+.text-selector {
     float: left;
 }
 
 
 
-.btn-post{
+.btn-post {
     width: 50%;
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
-   
+
 }
 
 
 .btn-image {
     width: 50%;
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
-    
+
 }
 
 .post-title-container {
     padding: 10px 20px 0px 20px;
 }
-.post-title{
+
+.post-title {
     border-radius: 5px;
     text-decoration: none;
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
@@ -46,9 +47,10 @@
     width: 100%;
     height: 39px;
 }
-.post-text-container{
+
+.post-text-container {
     padding: 10px 20px 0px 20px;
-   
+
 }
 
 .post-text-area {
@@ -59,14 +61,14 @@
     border: 1px solid white;
     background-color: rgb(70, 65, 65, .2);
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
-   
+
 }
 
 .post-image-container {
     margin-bottom: 10px;
     width: 100%;
     padding: 10px 20px 0px 20px;
-   
+
 }
 
 .post-image-container label {
@@ -75,7 +77,7 @@
     background-color: rgb(70, 65, 65, .2);
     box-shadow: 0px 0px 5px rgb(114, 111, 111);
 
-   
+
 }
 
 .active {
@@ -89,10 +91,10 @@
     border: 1px solid;
     height: 200px;
     width: 100%;
-   
-}   
 
-.image-input{
+}
+
+.image-input {
     display: none;
 }
 
@@ -105,8 +107,19 @@
     width: 200px;
 }
 
-.image-input-label-with-preview{
+.image-input-label-with-preview {
     border-radius: 5px;
     background-color: rgb(185, 63, 63, .2);
     padding: 0px 10px 0px 10px;
+}
+
+@media (max-width: 440px) {
+    .post-container {
+        background-color: rgba(32, 34, 36, 0.2);
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        box-shadow: 0px 0px 5px rgb(32, 31, 31);
+        border-radius: 5px;
+    }
 }

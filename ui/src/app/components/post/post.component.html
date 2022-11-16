@@ -2,87 +2,43 @@
   <form [formGroup]="postForm">
     <div>
       <fieldset class="text-image-selection-container">
-        <div
-          (click)="setText()"
-          class="btn-post btn"
-          [ngClass]="isText ? 'active' : ''"
-        >
+        <div (click)="setText()" class="btn-post btn" [ngClass]="isText ? 'active' : ''">
           <span class="btn-text">Post</span>
         </div>
-        <div
-          (click)="setTextFalse()"
-          class="btn-image btn"
-          [ngClass]="!isText ? 'active' : ''"
-        >
+        <div (click)="setTextFalse()" class="btn-image btn" [ngClass]="!isText ? 'active' : ''">
           <span class="btn-text">Image</span>
         </div>
       </fieldset>
     </div>
     <div>
       <div class="post-title-container">
-        <input
-          name="post-text"
-          id="post-text"
-          formControlName="title"
-          placeholder="Post title (10 Characters Minimum)"
-          class="post-title"
-          (ngModelChange)="setTitleText($event)"
-          [disabled]="true"
-        />
-        <span
-          *ngIf="!postForm.get('text')?.valid && postForm.get('title')?.touched"
-          >Please enter a Title for your post!</span
-        >
+        <input name="post-text" id="post-text" formControlName="title" placeholder="Post title (10 Characters Minimum)"
+          class="post-title" (ngModelChange)="setTitleText($event)" />
+        <span *ngIf="!postForm.get('text')?.valid && postForm.get('title')?.touched">Please enter a Title for your
+          post!</span>
       </div>
       <div class="post-text-container">
-        <textarea
-          formControlName="text"
-          placeholder="text"
-          maxlength="1000"
-          *ngIf="isText"
-          (ngModelChange)="setPostText($event)"
-          class="post-text-area"
-        ></textarea>
+        <textarea formControlName="text" placeholder="text" maxlength="1000" *ngIf="isText"
+          (ngModelChange)="setPostText($event)" class="post-text-area"></textarea>
       </div>
       <img [src]="imagePreview" class="image-preview" />
       <div class="post-image-container" *ngIf="!isText">
         <label class="image-input-label-with-preview" *ngIf="imagePreview">
           Click here to change the image
-          <input
-            type="file"
-            formControlName="image"
-            *ngIf="!isText"
-            accept="image/png, image/jpeg"
-            (change)="setImage($event)"
-            class="image-input"
-          />
+          <input type="file" formControlName="image" *ngIf="!isText" accept="image/png, image/jpeg"
+            (change)="setImage($event)" class="image-input" />
         </label>
         <label class="image-input-label" *ngIf="!imagePreview">
           Click here to upload an image!
-          <input
-            type="file"
-            formControlName="image"
-            *ngIf="!isText"
-            accept="image/png, image/jpeg"
-            (change)="setImage($event)"
-            class="image-input"
-          />
+          <input type="file" formControlName="image" *ngIf="!isText" accept="image/png, image/jpeg"
+            (change)="setImage($event)" class="image-input" />
         </label>
       </div>
-      <button
-        class="btn btn-primary"
-        type="submit"
-        (click)="onSubmit()"
-        *ngIf="imagePreview && titleText.length > 10"
-      >
+      <button class="btn btn-primary" type="submit" (click)="onSubmit()" *ngIf="imagePreview && titleText.length > 10">
         Post
       </button>
-      <button
-        class="btn btn-primary"
-        type="submit"
-        (click)="onSubmit()"
-        *ngIf="postText.length > 10 && titleText.length > 10"
-      >
+      <button class="btn btn-primary" type="submit" (click)="onSubmit()"
+        *ngIf="postText.length > 10 && titleText.length > 10">
         Upload Text Post
       </button>
     </div>

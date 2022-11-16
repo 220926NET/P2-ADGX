@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
-import { PostService } from "src/app/services/post.service";
-import { Post } from "src/Models/Post";
-import { readBuilderProgram } from "typescript";
+import { PostService } from "../../services/post.service";
 
 @Component({
   selector: "app-post",
@@ -39,18 +36,14 @@ export class PostComponent implements OnInit {
   });
 
   onSubmit() {
-
     const post: FormData = new FormData();
 
     if (this.isText) {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("Text", this.postForm.controls["text"].value);
       post.append("isTextPost", "true");
-
       this._postService.createPost(post).subscribe((res) => {
-
         this.postForm.reset();
-
       });
     } else {
       console.log(this.image);
@@ -61,11 +54,11 @@ export class PostComponent implements OnInit {
       post.append("image", this.image);
       this._postService.createPost(post).subscribe((res) => {
         this.postForm.reset();
-        console.log(res);
 
       });
+
+      this.postForm.enable();
     }
-    this.postForm.enable();
   }
 
   setImage(event: any) {

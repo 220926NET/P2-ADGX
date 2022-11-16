@@ -18,10 +18,13 @@ public class PostsController : ControllerBase
 
     private readonly IPostService _postService;
 
+    private readonly ILogger<PostsController> _logger; 
 
-    public PostsController(IPostRepository postRepository, IPostService postService)
+
+    public PostsController(IPostRepository postRepository, IPostService postService, ILogger<PostsController> logger)
     {
 
+        _logger = logger; 
         _postService = postService;
         this.postRepository = postRepository;
 
@@ -64,6 +67,7 @@ public class PostsController : ControllerBase
     [Route(("{postId}/delete"))]
     public void DeletePost(int postId)
     {
+        _logger.LogInformation("post deleted " + postId); 
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int userId = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);

@@ -6,14 +6,14 @@ using BusinessLogicLayer;
 public class ProfileService : IProfileService
 {
 
-    private readonly BlobStorage _blobStorage;
+    private readonly IBlobStorage _blobStorage;
 
     private readonly IProfileRepository _repo;
 
 
     private readonly ServerResponse _ServerResponse;
 
-    public ProfileService(BlobStorage blobStorage, IProfileRepository repo, ServerResponse ServerResponse)
+    public ProfileService(IBlobStorage blobStorage, IProfileRepository repo, ServerResponse ServerResponse)
     {
 
         _blobStorage = blobStorage;
@@ -69,8 +69,6 @@ public class ProfileService : IProfileService
             Hobbies = await _repo.GetProfileHobbies(userId),
             Interests = await _repo.GetProfileInterests(userId)
         };
-
-
         getProfileDetailsRes.data = profilePage;
         getProfileDetailsRes.message = "Successfully Retrieved profile details!";
         getProfileDetailsRes.success = true;
@@ -166,20 +164,20 @@ public class ProfileService : IProfileService
 
     }
 
-    public async Task<ResponseMessage<string>> DeleteProfilePost(int userId, int postId){
+    public async Task<ResponseMessage<string>> DeleteProfilePost(int userId, int postId)
+    {
 
         ResponseMessage<string> getProfilePostsRes = new ResponseMessage<string>();
 
         bool success = await _repo.DeleteUserPost(userId, postId);
 
-        if(success){
+        if (success)
+        {
             return _ServerResponse.DeletingUserPostSuccess();
-        }else {
+        }
+        else
+        {
             return _ServerResponse.SqlError();
         }
-
-
     }
-
-
 }

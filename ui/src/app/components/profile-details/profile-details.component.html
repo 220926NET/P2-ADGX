@@ -1,5 +1,5 @@
 <div class="about-me-container">
-    <b>About me</b> <span (click)="setAboutMeEditable()" class="about-me-edit-btn"> &#x270E;</span>
+    <b>About me</b> <span (click)="setAboutMeEditable()" class="about-me-edit-btn" [hidden]="setHidden"> &#x270E;</span>
 
     <p [ngClass]="isAboutMeEditable ? 'active' : ''" [contentEditable]="isAboutMeEditable" #aboutMe>{{myAboutMe}}
     </p>
@@ -7,9 +7,9 @@
         save
     </div>
 </div>
-
 <div class="my-hobbies-container">
-    <b>My Hobbies</b><span (click)="setMyHobbiesEditable()" class="about-me-edit-btn"> &#x270E;</span>
+    <b>My Hobbies</b><span (click)="setMyHobbiesEditable()" class="about-me-edit-btn" [hidden]="setHidden">
+        &#x270E;</span>
     <ul #hobbies>
         <li #hobby2 [ngClass]="isMyHobbiesEditable ? 'active-hobbies' : '' " [contentEditable]="isMyHobbiesEditable"
             *ngFor="let hobby of myHobbies; let i = index">{{hobby}}
@@ -22,7 +22,8 @@
 </div>
 
 <div>
-    <b>My Interests</b><span (click)="setMyInterestsEditable()" class="about-me-edit-btn"> &#x270E;</span>
+    <b>My Interests</b><span (click)="setMyInterestsEditable()" class="about-me-edit-btn" [hidden]="setHidden">
+        &#x270E;</span>
     <ul #interests>
         <li [ngClass]="isMyInterestsEditable ? 'active-hobbies' : '' " [contentEditable]="isMyInterestsEditable"
             *ngFor="let interest of myInterests">{{interest}}

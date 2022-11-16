@@ -1,27 +1,25 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Comment } from "src/Models/Comment";
-import { Observable, Subject } from "rxjs";
-import { Like } from "src/Models/Like";
+import { Like } from "../../Models/Like";
+import { Observable } from "rxjs";
 
-const LIKE_API = "https://localhost:7219/api/like/";
+const LIKE_API = "https://flar-e.azurewebsites.net/api/like/";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LikeService {
-
-  constructor(public http: HttpClient) { }
-
-  createLike(like:Like) {
+  constructor(private http: HttpClient) {}
+  createLike(like: Like) {
     return this.http.post<Like>(LIKE_API, like);
   }
 
-  deleteLike(like:Like) {
-    return this.http.delete<Like>(LIKE_API, {body: like});
+  deleteLike(like: Like) {
+    return this.http.delete<Like>(LIKE_API, { body: like });
   }
 
-  getPostLike(postId:number):Observable<Like[]> {
-    return this.http.get<Like[]>(LIKE_API+postId);
+
+  getPostLike(postId: number) {
+    return this.http.get<Like[]>(LIKE_API + postId);
   }
 }

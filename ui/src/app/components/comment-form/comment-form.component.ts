@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { CommentService } from "src/app/services/comment.service";
-import { Comment } from "src/Models/Comment";
+import { CommentService } from "../../services/comment.service";
+import { Comment } from "../../Models/Comment";
 
 @Component({
   selector: "app-comment-form",
@@ -10,29 +10,26 @@ import { Comment } from "src/Models/Comment";
 })
 export class CommentFormComponent implements OnInit {
   @Input() postId: number = -1;
-  @Input() userId: number = -1;
   @Input() comments: Comment[] = [];
 
   public commentForm: FormGroup = new FormGroup({
     text: new FormControl("", [Validators.required]),
   });
 
-
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {}
 
   submitForm() {
+
     this.commentService
       .createComment({
         commentId: -1,
         postId: this.postId,
-        userID: this.userId,
         text: this.commentForm.controls["text"].value,
       })
       .subscribe((comment) => {
         this.comments.push(comment);
-        console.log(comment);
         this.commentForm.reset();
       });
   }
