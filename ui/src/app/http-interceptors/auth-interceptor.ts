@@ -17,12 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Clone the request and replace the original headers with
     // cloned headers, updated with the authorization.
-    let headers = new HttpHeaders();
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Authorization", `Bearer ${authToken}`);
 
     const authReq = req.clone({
-      headers: headers,
+      headers: req.headers
+        .set("Authorization", `Bearer ${authToken}`)
+        .set("Access-Control-Allow-Origin", "*"),
     });
 
     // send cloned request with header to the next handler.
