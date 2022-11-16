@@ -25,8 +25,8 @@ builder.Services.AddAuthentication((opt) =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
 
-        ValidIssuer = "https://localhost:7219",
-        ValidAudience = "https://localhost:4200",
+        ValidIssuer = "https://flar-e.azurewebsites.net/",
+        ValidAudience = "https://lemon-tree-03b841910.2.azurestaticapps.net/",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecret12345"))
     };
 });
