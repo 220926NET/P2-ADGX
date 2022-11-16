@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LikeService } from 'src/app/services/like/like.service';
-import { Like } from 'src/Models/Like';
 
 @Component({
   selector: 'app-post-like-counter',
@@ -9,12 +7,8 @@ import { Like } from 'src/Models/Like';
 })
 export class PostLikeCounterComponent implements OnInit {
 
-  @Input() postId:number = 0;
   @Input() postLikes:number = 0;
 
-  constructor(private likeService:LikeService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

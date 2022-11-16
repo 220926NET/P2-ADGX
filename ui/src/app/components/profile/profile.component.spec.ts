@@ -6,7 +6,7 @@ import {
 } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ProfileComponent } from "./profile.component";
-import { ProfileService } from "../services/ProfileService";
+import { ProfileService } from "../../services/ProfileService";
 import Profile from "src/Models/Profile/Profile";
 import { Observable } from "rxjs";
 import ResponseMessage from "src/Models/Profile/ResponseMessage";
@@ -38,6 +38,12 @@ describe("ProfileComponent", () => {
       subscriber.complete();
     });
   });
+
+  let mockProfileService = {
+    postProfilePhoto(photo :FormData) : Observable<ResponseMessage>{
+      return mockRes;
+ }
+  }
 
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;

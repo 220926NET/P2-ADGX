@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PostLikeCounterComponent } from './post-like-counter.component';
 
 describe('PostLikeCounterComponent', () => {
@@ -20,4 +19,12 @@ describe('PostLikeCounterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display correct number', () => {
+    component.postLikes = 0;
+    expect(fixture.nativeElement.innerText).toBe('0');
+    component.postLikes = 987;
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerText).toBe('987');
+  })
 });

@@ -21,7 +21,7 @@ export class LikeService {
     return this.http.delete<Like>(LIKE_API, {body: like});
   }
 
-  getPostLike(postId:number) {
+  getPostLike(postId:number):Observable<Like[]> {
     return this.http.get<Like[]>(LIKE_API+postId);
   }
 }

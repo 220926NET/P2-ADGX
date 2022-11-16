@@ -29,7 +29,6 @@ export class PostLikeButtonComponent implements OnInit {
   }
 
   like() {
-    let userId:number = this.userId; 
     this.isLiked = true;
     this.isLikedChange.emit(this.isLiked);
     if (this.likeList.findIndex(i => i.userId == this.userId) == -1)

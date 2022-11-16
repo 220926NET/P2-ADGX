@@ -13,4 +13,9 @@ describe('CurrentUserService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should read user id', () => {
+    
+    //expect(service.getUserId()).toBe(999);
+  });
 });

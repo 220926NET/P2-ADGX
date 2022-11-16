@@ -9,11 +9,12 @@ import { AuthService } from "src/app/services/auth.service";
 export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
+
   registerForm: FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required]),
   });
-
+  
   onSubmit() {
     if (this.registerForm.invalid) return;
 

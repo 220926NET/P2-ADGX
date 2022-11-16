@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LikeService } from 'src/app/services/like/like.service';
 import { Like } from 'src/Models/Like';
-import jwt_decode from "jwt-decode";
+import { LikeService } from 'src/app/services/like/like.service';
 import { CurrentUserService } from 'src/app/services/current-user/current-user.service';
 
 @Component({
