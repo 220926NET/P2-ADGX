@@ -20,7 +20,8 @@ public class ProfileController : ControllerBase
         _profileService = profileService;
     }
 
-    [HttpPost("Photo")]
+    [HttpPost]
+    [Route("Photo")]
     public async Task<ActionResult<ResponseMessage<string>>> PostUserProfilePhoto(IFormFile userPhoto)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -35,7 +36,8 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpGet("profileDetails")]
+    [HttpGet]
+    [Route("profileDetails")]
     public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails()
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -48,7 +50,8 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpGet("profileDetails/{userId}")]
+    [HttpGet]
+    [Route("profileDetails/{userId}")]
     public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails(int userId)
     {
         ResponseMessage<ProfilePage> getProfilePageRes = await _profileService.GetProfileDetails(userId);
@@ -57,7 +60,8 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpGet("profilePosts/{userId}")]
+    [HttpGet]
+    [Route("profilePosts/{userId}")]
     public async Task<ActionResult<ResponseMessage<List<ProfilePost>>>> GetOtherUserProfileDetails(int userId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -70,7 +74,8 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpGet("profilePosts")]
+    [HttpGet]
+    [Route("profilePosts")]
     public async Task<ActionResult<ResponseMessage<List<ProfilePost>>>> GetProfilePosts(int userId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -85,7 +90,8 @@ public class ProfileController : ControllerBase
 
 
 
-    [HttpDelete("profilePhoto")]
+    [HttpDelete]
+    [Route("profilePhoto")]
 
     public async Task<ActionResult<ResponseMessage<string>>> DeleteUserPhoto()
     {
@@ -103,7 +109,8 @@ public class ProfileController : ControllerBase
 
     }
 
-    [HttpDelete("profilePost/{postId}")]
+    [HttpDelete]
+    [Route("profilePost/{postId}")]
     public async Task<ActionResult<ResponseMessage<string>>> DeleteProfilePost(int postId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -120,7 +127,8 @@ public class ProfileController : ControllerBase
     }
 
 
-    [HttpPost("/hobbies")]
+    [HttpPost]
+    [Route("hobbies")]
 
     public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies)
     {
@@ -135,7 +143,8 @@ public class ProfileController : ControllerBase
     }
 
 
-    [HttpPost("/interests")]
+    [HttpPost]
+    [Route("interests")]
     public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -153,7 +162,8 @@ public class ProfileController : ControllerBase
 
 
 
-    [HttpPost("/AboutMe")]
+    [HttpPost]
+    [Route("AboutMe")]
 
     public async Task<ActionResult<ResponseMessage<string>>> AddProfileAboutMe([FromBody] ProfileAboutMe aboutMe)
     {
@@ -171,7 +181,8 @@ public class ProfileController : ControllerBase
 
 
 
-    [HttpGet("/profile/{userId}")]
+    [HttpGet]
+    [Route("profile/{userId}")]
     public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetUserProfileDetails(int userId)
     {
 
