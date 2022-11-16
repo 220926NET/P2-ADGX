@@ -13,6 +13,7 @@ using System.Text;
 namespace api_Flare.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors(origins: "https://lemon-tree-03b841910.2.azurestaticapps.net/", headers: "*", methods: "*")]
     [ApiController]
     public class AuthController : ControllerBase
     {
