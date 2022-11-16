@@ -15,7 +15,6 @@ export class AuthService {
 
 
    headers: HttpHeaders = new HttpHeaders()
-  .set('content-type', '*')
   .set('Access-Control-Allow-Origin', '*');
 
 
