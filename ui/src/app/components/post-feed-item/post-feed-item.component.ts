@@ -13,6 +13,7 @@ export class PostFeedItemComponent implements OnInit {
   @Output() deletePost = new EventEmitter<number>();
 
   isMyPost:boolean = false;
+  showComments:boolean = false;
 
   constructor(private currentUserService:CurrentUserService, private postService: PostService) { }
 
@@ -21,11 +22,8 @@ export class PostFeedItemComponent implements OnInit {
   }
 
   DeletePost(postId: number, userId: number) {
-    console.log("This is inside post-feed-item delete post")
     if (this.isMyPost){
-      console.log("Emitting delete post event")
       this.deletePost.emit(postId);
-      console.log("Sending DELETE post request")
       this.postService.deletePost(postId, userId).subscribe((res) => {console.log(res);});
     }
   }

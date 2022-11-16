@@ -1,0 +1,22 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-post-comment-button',
+  templateUrl: './post-comment-button.component.html',
+  styleUrls: ['./post-comment-button.component.css']
+})
+export class PostCommentButtonComponent implements OnInit {
+
+  @Input() showComments:boolean = false;
+  @Output() showCommentsChange:EventEmitter<boolean> = new EventEmitter<boolean>();
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onClick(){
+    this.showComments = !this.showComments;
+    this.showCommentsChange.emit(this.showComments);
+  }
+
+}

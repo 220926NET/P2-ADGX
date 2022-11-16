@@ -25,6 +25,7 @@ import { PostLikeButtonComponent } from './components/like/post-like-button/post
 import { ProfileOthersComponent } from './components/profile-others/profile-others.component';
 import { httpInterceptorProviders } from "./http-interceptors";
 import { PostFeedItemComponent } from './components/post-feed-item/post-feed-item.component';
+import { PostCommentButtonComponent } from './post-comment-button/post-comment-button.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PostFeedItemComponent } from './components/post-feed-item/post-feed-ite
     PostLikeCounterComponent,
     PostLikeButtonComponent,
     ProfileOthersComponent,
-    PostFeedItemComponent
+    PostFeedItemComponent,
+    PostCommentButtonComponent
   ],
   imports: [
     BrowserModule,
