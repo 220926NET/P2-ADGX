@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "../Models/user";
+import { TokenStorageService } from "./token-storage.service";
 
 const AUTH_API = "https://flar-e.azurewebsites.net/api/Auth/";
 
@@ -18,18 +19,13 @@ export class AuthService {
     "*"
   );
 
-  getAuthorizationToken() {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      return token;
-    } else {
-      return "";
-    }
-  }
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   public checkLogin(): void {
-    let token = localStorage.getItem("authToken");
+    let token = this.tokenStorage.getToken();
     if (token) {
       this.loggedInSource.next(true);
     } else {
