@@ -1,5 +1,6 @@
 import {
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from "@angular/common/http";
@@ -16,8 +17,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Clone the request and replace the original headers with
     // cloned headers, updated with the authorization.
+    let headers = new HttpHeaders();
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Authorization", `Bearer ${authToken}`);
+
     const authReq = req.clone({
-      headers: req.headers.set("Authorization", `Bearer ${authToken}`),
+      headers: headers,
     });
 
     // send cloned request with header to the next handler.
