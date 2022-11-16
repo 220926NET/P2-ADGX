@@ -8,9 +8,9 @@
 }
 
 .unliked {
-    content: url("../../../../assets/like/fire-black.svg");
+    content: url("../../../../assets/icons/fire-black.svg");
 }
 
 .liked {
-    content: url("../../../../assets/like/fire-red.svg");
+    content: url("../../../../assets/icons/fire-red.svg");
 }

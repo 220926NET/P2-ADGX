@@ -10,6 +10,7 @@ import { TokenStorageService } from "src/app/services/token-storage.service";
 })
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
+  
 
   constructor(
     private postService: PostService,
@@ -27,6 +28,12 @@ export class PostFeedComponent implements OnInit {
     });
   }
 
+  deletePost(postId:number) {
+    console.log("Deleting the post from the feed.")
+    this.posts = this.posts.filter(i => i.postID != postId);
+  }
+
+  /*
   hideDelete(userId: number): boolean {
     let tokenString = this.tokenStorage.getToken();
     let tokenInfo = this.getDecodedAccessToken(tokenString ? tokenString : "");
@@ -50,4 +57,5 @@ export class PostFeedComponent implements OnInit {
       return null;
     }
   }
+  */
 }

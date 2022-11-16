@@ -1,0 +1,67 @@
+<!--
+<div class="post-feed-item">
+    <mat-card class=" mb-2">
+        <mat-card-header>
+          <mat-card-title>{{ post.title }}</mat-card-title>
+          <button [hidden]="!isMyPost" class="float-right" (click)="DeletePost(post.postID, post.userID)">
+            <em class="bi bi-x-lg"></em>
+          </button>
+          <mat-card-subtitle>{{ post.datePosted | date }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>{{ post.text }}</mat-card-content>
+        <div *ngIf="post.imageUrl">
+          <a routerLink="profile/{{ post.userID }}">
+            <img
+              [src]="post.imageUrl"
+              [alt]="post.description"
+              class="post-feed-item-img"
+            />
+          </a>
+        </div>
+        <div>
+          <app-post-like [postId]="post.postID"></app-post-like>
+        </div>
+        <app-comment-feed [postId]="post.postID"></app-comment-feed>
+      </mat-card>
+</div>
+-->
+
+<mat-card class="w-auto mb-2 container overflow-hidden">
+    <div class="row">
+        <div class="col-sm-2 col-md-3 d-flex flex-column">
+            <app-post-like [postId]="post.postID" class="mb-2"></app-post-like>
+
+            <app-post-comment-button [(showComments)]="showComments" class="mb-2"></app-post-comment-button>
+            <app-post-delete-button  [hidden]="!isMyPost" (click)="DeletePost(post.postID, post.userID)" class="mb-2"></app-post-delete-button>
+            <!--
+            <button [hidden]="!isMyPost" class="float-right" (click)="DeletePost(post.postID, post.userID)">
+              <em class="bi bi-x-lg"></em>
+          </button>
+          -->
+        </div>
+        <div class="col-sm-10 col-md-9">
+          <mat-card-header>
+            <mat-card-title>
+                {{ post.title }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ post.datePosted | date }}
+            </mat-card-subtitle>
+          </mat-card-header>
+            <mat-card-content>
+              {{ post.text }}
+            </mat-card-content>
+            <div *ngIf="post.imageUrl">
+              <a routerLink="profile/{{ post.userID }}">
+                  <img
+                  [src]="post.imageUrl"
+                  [alt]="post.description"
+                  class="post-feed-item-img"
+                />
+              </a>
+
+            </div>
+        </div>
+    </div>
+    <app-comment-feed *ngIf="showComments" [postId]="post.postID"></app-comment-feed>
+</mat-card>

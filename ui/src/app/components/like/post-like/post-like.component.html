@@ -1,4 +1,4 @@
-<div class="post-like d-flex flex-column justify-content-center align-items-center" [class.post-like-is-liked]="isLiked" [class.post-like-isnt-liked]="!isLiked">
+<div class="post-like d-flex flex-column justify-content-center align-items-center overflow-hidden" [class.post-like-is-liked]="isLiked" [class.post-like-isnt-liked]="!isLiked">
     <div>
         <app-post-like-button [(likeList)]="likeList" [(isLiked)]="isLiked" [postId]="postId" [userId]="userId"></app-post-like-button>
     </div>

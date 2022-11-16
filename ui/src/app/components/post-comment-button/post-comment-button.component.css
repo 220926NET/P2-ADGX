@@ -1,0 +1,11 @@
+.post-comment-button {
+    width: 50px;
+    border-radius: 10%;
+    padding:5px;
+    background-color: #aaa;
+    cursor: pointer;
+}
+
+.post-comment-button:hover {
+    background-color: #fff;
+}
