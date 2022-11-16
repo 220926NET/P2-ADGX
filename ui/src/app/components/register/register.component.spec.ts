@@ -13,7 +13,7 @@ let MockAuthService = {
   }
 }
 
-fdescribe('RegisterComponent', () => {
+describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
@@ -39,6 +39,5 @@ fdescribe('RegisterComponent', () => {
     component.registerForm.patchValue({username:"username", password:"password"});
     expect(component.registerForm.invalid).toBeFalse();
     component.onSubmit();
-    //fixture.nativeElement.querySelector()
   });
 });

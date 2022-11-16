@@ -68,8 +68,6 @@ export class PostComponent implements OnInit {
     this.postForm.enable();
   }
 
-}
-
   setImage(event: any) {
     this.image = event.target.files[0];
     var fileReader = new FileReader();

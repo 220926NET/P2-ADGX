@@ -20,6 +20,11 @@ describe('PostLikeCounterComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it ('should start with 0 likes', () => {
+    component.ngOnInit();
+    expect(component.postLikes).toBe(0);
+  })
+
   it('should display correct number', () => {
     component.postLikes = 0;
     expect(fixture.nativeElement.innerText).toBe('0');

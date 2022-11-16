@@ -7,8 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PostLikeCounterComponent implements OnInit {
 
-  @Input() postLikes:number = 0;
-
+  @Input() postLikes:number=0;
   ngOnInit(): void {}
-
 }

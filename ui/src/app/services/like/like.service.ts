@@ -11,7 +11,7 @@ const LIKE_API = "https://localhost:7219/api/like/";
 })
 export class LikeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   createLike(like:Like) {
     return this.http.post<Like>(LIKE_API, like);

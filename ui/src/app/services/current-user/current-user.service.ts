@@ -10,12 +10,13 @@ export class CurrentUserService {
 
   getUserId():number {
     var token = localStorage.getItem("authToken");
+    
     if (token != null)
     {
       var decoded:any = jwt_decode(token);
       let property:string = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid";
       if (decoded && decoded.hasOwnProperty(property))
-        return decoded[property] ;
+        return  parseInt(decoded[property]);
     }
     return 0;
   }
