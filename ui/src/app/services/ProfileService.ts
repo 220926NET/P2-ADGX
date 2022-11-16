@@ -11,12 +11,18 @@ export class ProfileService {
    *
    */
   constructor(private _httpClient: HttpClient) {}
-  postProfilePictureUrl: string = "/api/Profile/Photo";
-  getProfileDetailsUrl: string = "/api/Profile/profileDetails/";
-  deleteProfilePictureUrl: string = "/api/Profile/profilePhoto";
-  postProfileHobbiesUrl: string = "/api/hobbies/";
-  postProfileInterestsUrl: string = "/api/interests/";
-  postProfileAboutMeUrl: string = "/api/AboutMe";
+  postProfilePictureUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/Photo";
+  getProfileDetailsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profileDetails/";
+  deleteProfilePictureUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profilePhoto";
+  postProfileHobbiesUrl: string =
+    "https://flar-e.azurewebsites.net/api/hobbies/";
+  postProfileInterestsUrl: string =
+    "https://flar-e.azurewebsites.net/api/interests/";
+  postProfileAboutMeUrl: string =
+    "https://flar-e.azurewebsites.net/api/AboutMe";
 
   deleteProfilePhoto(): Observable<ResponseMessage> {
     return this._httpClient.delete<ResponseMessage>(

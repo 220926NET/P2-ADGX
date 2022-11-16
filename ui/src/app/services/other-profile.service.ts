@@ -9,9 +9,11 @@ import ResponseMessage from "../Models/Profile/ResponseMessage";
 export class OtherProfileService {
   constructor(private _httpClient: HttpClient) {}
 
-  private getUserProfileDetailsUrl: string = "/api/Profile/profileDetails/";
+  private getUserProfileDetailsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profileDetails/";
 
-  private getUserPostsUrl: string = "/api/Profile/profilePosts/";
+  private getUserPostsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profilePosts/";
 
   public getUserProfileDetails(userId: number): Observable<ResponseMessage> {
     return this._httpClient.get<ResponseMessage>(

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "../Models/user";
 
-const AUTH_API = "/api/Auth/";
+const AUTH_API = "https://flar-e.azurewebsites.net/api/Auth/";
 
 @Injectable({
   providedIn: "root",

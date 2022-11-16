@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Comment } from "../Models/Comment";
 import { Observable, Subject } from "rxjs";
 
-const COMMENT_API = "/api/Comments/";
+const COMMENT_API = "https://flar-e.azurewebsites.net/api/Comments/";
 
 @Injectable({
   providedIn: "root",

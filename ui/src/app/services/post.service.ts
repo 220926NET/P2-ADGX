@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Post } from "../Models/Post";
 
-const POST_API = "/api/Posts/";
+const POST_API = "https://flar-e.azurewebsites.net/api/Posts/";
 
 @Injectable({
   providedIn: "root",
