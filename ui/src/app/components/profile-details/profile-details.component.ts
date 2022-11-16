@@ -11,7 +11,7 @@ export class ProfileDetailsComponent implements OnInit {
   isAboutMeEditable : boolean = false; 
   isMyHobbiesEditable : boolean = false; 
   isMyInterestsEditable : boolean = false; 
-
+ @Input() setHidden : boolean = false; 
  @Input() myHobbies : string[]= []; 
  @Input() myInterests : string[] = [];
  @Input() myAboutMe : string = "";

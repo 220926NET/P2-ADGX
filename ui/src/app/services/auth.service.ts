@@ -14,6 +14,8 @@ export class AuthService {
 
   loggedIn$ = this.loggedInSource.asObservable();
 
+
+
   headers: HttpHeaders = new HttpHeaders().set(
     "Access-Control-Allow-Origin",
     "*"
@@ -35,7 +37,10 @@ export class AuthService {
 
   public login(user: FormData): Observable<string> {
     this.loggedInSource.next(true);
+    console.log(user.get("Username"));
+    console.log(user.get("Password"));
     return this.http.post(AUTH_API + "login", user, {
+      headers: this.headers,
       responseType: "text",
       headers: this.headers,
     });
@@ -46,7 +51,9 @@ export class AuthService {
   }
 
   public register(user: FormData): Observable<User> {
-    return this.http.post<User>(AUTH_API + "register", user);
+    return this.http.post<User>(AUTH_API + "register", user, {
+      headers : this.headers
+    });
   }
 
   public getMe(): Observable<string> {

@@ -25,7 +25,7 @@ public class TestProfileService
         var mockedRepository = new Mock<IProfileRepository>();
         var mockedStorage = new Mock<BlobStorage>();
 
-        mockedRepository.Setup(repo => repo.UserHasProfilePhoto(mockUserId)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.UserHasProfilePhoto(mockUserId)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -59,7 +59,7 @@ public class TestProfileService
         var mockedStorage = new Mock<BlobStorage>();
         string mockName = "test";
 
-        mockedRepository.Setup(repo => repo.UserHasProfilePhoto(mockUserId)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.UserHasProfilePhoto(mockUserId)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -84,7 +84,7 @@ public class TestProfileService
 
         ProfilePage mockPage = new ProfilePage()
         {
-            Image = await GetProfileImageUrl(),
+            Image = "https://mockurl.com",
             AboutMe = await GetProfileAboutMe(),
             Hobbies = await GetProfileHobbies(),
             Interests = await GetProfileInterests(),
@@ -95,7 +95,7 @@ public class TestProfileService
         response.message = "Successfully Retrieved profile details!";
         response.success = true;
 
-        mockedRepository.Setup(repo => repo.GetProfilePhoto(mockUserId)).Returns(GetProfileImageUrl()!);
+        mockedRepository.Setup(repo => repo.GetProfilePhoto(mockUserId)).ReturnsAsync(mockPage.Image);
         mockedRepository.Setup(repo => repo.GetProfileAboutMe(mockUserId)).Returns(GetProfileAboutMe());
         mockedRepository.Setup(repo => repo.GetProfileHobbies(mockUserId)).Returns(GetProfileHobbies());
         mockedRepository.Setup(repo => repo.GetProfileInterests(mockUserId)).Returns(GetProfileInterests());
@@ -156,8 +156,8 @@ public class TestProfileService
 
 
 
-        mockedRepository.Setup(repo => repo.DeleteUserHobbies(mockUserId)).Returns(returnTrue);
-        mockedRepository.Setup(repo => repo.UploadUserHobbies(mockUserId, mockHobbies)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteUserHobbies(mockUserId)).ReturnsAsync(true);
+        mockedRepository.Setup(repo => repo.UploadUserHobbies(mockUserId, mockHobbies)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -186,8 +186,8 @@ public class TestProfileService
             }
         };
 
-        mockedRepository.Setup(repo => repo.DeleteUserHobbies(mockUserId)).Returns(returnFalse);
-        mockedRepository.Setup(repo => repo.UploadUserHobbies(mockUserId, mockHobbies)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteUserHobbies(mockUserId)).ReturnsAsync(false);
+        mockedRepository.Setup(repo => repo.UploadUserHobbies(mockUserId, mockHobbies)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -216,8 +216,8 @@ public class TestProfileService
         };
 
 
-        mockedRepository.Setup(repo => repo.DeleteProfileInterests(mockUserId)).Returns(returnTrue);
-        mockedRepository.Setup(repo => repo.UploadProfileInterests(mockUserId, mockInterests)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteProfileInterests(mockUserId)).ReturnsAsync(true);
+        mockedRepository.Setup(repo => repo.UploadProfileInterests(mockUserId, mockInterests)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -247,8 +247,8 @@ public class TestProfileService
         };
 
 
-        mockedRepository.Setup(repo => repo.DeleteProfileInterests(mockUserId)).Returns(returnFalse);
-        mockedRepository.Setup(repo => repo.UploadProfileInterests(mockUserId, mockInterests)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteProfileInterests(mockUserId)).ReturnsAsync(false);
+        mockedRepository.Setup(repo => repo.UploadProfileInterests(mockUserId, mockInterests)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -273,8 +273,8 @@ public class TestProfileService
         { AboutMe = "I love traveling and eating food!" };
 
 
-        mockedRepository.Setup(repo => repo.DeleteProfileAboutMe(mockUserId)).Returns(returnTrue);
-        mockedRepository.Setup(repo => repo.SetProfileAboutMe(mockUserId, mockAboutMe)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteProfileAboutMe(mockUserId)).ReturnsAsync(true);
+        mockedRepository.Setup(repo => repo.SetProfileAboutMe(mockUserId, mockAboutMe)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -301,8 +301,8 @@ public class TestProfileService
         { AboutMe = "I love traveling and eating food!" };
 
 
-        mockedRepository.Setup(repo => repo.DeleteProfileAboutMe(mockUserId)).Returns(returnFalse);
-        mockedRepository.Setup(repo => repo.SetProfileAboutMe(mockUserId, mockAboutMe)).Returns(returnTrue);
+        mockedRepository.Setup(repo => repo.DeleteProfileAboutMe(mockUserId)).ReturnsAsync(false);
+        mockedRepository.Setup(repo => repo.SetProfileAboutMe(mockUserId, mockAboutMe)).ReturnsAsync(true);
 
         ProfileService profileService = new ProfileService(blobStorage, mockedRepository.Object, serverResponses);
 
@@ -311,21 +311,12 @@ public class TestProfileService
         Assert.Equal(mockResponse.message, serverResponses.SqlError().message);
     }
 
-    public async Task<bool> returnTrue()
-    {
-        return true;
-    }
+  
+  
 
-    public async Task<bool> returnFalse()
-    {
-        return false;
-    }
-
-    public async Task<string> GetProfileImageUrl()
-    {
-
-        return "https://mockurl.com";
-    }
+   
+       // return "https://mockurl.com";
+    
     public async Task<string?> GetProfileImageUrlNull()
     {
         string? url = null;

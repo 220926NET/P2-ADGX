@@ -42,7 +42,6 @@ export class PostComponent implements OnInit {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("Text", this.postForm.controls["text"].value);
       post.append("isTextPost", "true");
-
       this._postService.createPost(post).subscribe((res) => {
         this.postForm.reset();
       });
@@ -55,12 +54,13 @@ export class PostComponent implements OnInit {
       post.append("image", this.image);
       this._postService.createPost(post).subscribe((res) => {
         this.postForm.reset();
-        console.log(res);
+
       });
 
       this.postForm.enable();
     }
   }
+
 
   setImage(event: any) {
     this.image = event.target.files[0];

@@ -1,88 +1,165 @@
-* {
-  font-family: "Courier New", Courier, monospace;
+@media (min-width: 500px) {
+  * {
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  .outer-profile-container {
+    width: 50%;
+    margin: auto;
+    height: fit-content;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profile-img {
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .preview-image{
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .no-profile-img {
+    height: 20px;
+  }
+  
+ 
+  .btn-delete-user-photo {
+    position: absolute;
+    top: 50%;
+    left: 19.5%;
+    margin: 0 auto 0 auto;
+    font-size: small;
+    text-align: center;
+    width: fit-content;
+    background-color: rgba(141, 26, 26, 1);
+  }
+
+  .btn-upload-photo {
+    background-color: pink;
+  }
+
+  .profile-details-container {
+    width: 50%;
+  }
+
+  .app-user-posts-container {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 20px;
+    justify-content: center;
+  }
+
+  .profile-recent-posts {
+    text-align: center;
+  }
+
+  .photo-label {
+    padding: 20px;
+    display: block;
+    border: 1px solid black;
+    height: 20px;
+   
+  }
+
+  .no-photo-label{
+    height: 20px;
+    background-color: red;
+  }
+
+  .no-photo-text{
+    padding: 5px; 
+    border-radius: 5px;
+    background-color: rgb(236, 139, 155,.2);
+  }
+
+  .photo-input {
+    display: none;
+  }
+
+  .btn-create-post {
+    margin: 10px;
+    background-color: rgba(22, 22, 126, 0.5);
+  }
+
+  .btn-hide-post {
+    margin: 10px;
+    background-color: rgba(22, 22, 126, 0.5);
+  }
 }
 
-.outer-profile-container {
-  width: 50%;
-  margin: auto;
-  height: fit-content;
-  background-size: cover;
-  position: relative;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+@media (max-width: 440px) {
+  .outer-profile-container {
+    background-color: rgba(96, 109, 226, .7);
+    margin: 10px;
+    border-radius: 5px;
+  }
 
-.profile-img {
-  width: 168px;
-  height: 168px;
-  border-radius: 3rem;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+  .profile-img{
+    width: 168px;
+    object-fit: cover;
+    border-radius: 50%;
+    height: 168px;
+  }
+  .profile-img-container {
+    padding-top: 10px;
+    text-align: center;
+    
+  }
 
-.no-profile-img {
-  height: 20px;
-}
+  .create-post-container {
+    padding: 20px;
+  }
 
-.btn-upload-photo {
-  width: 20%;
-}
+  .profile-details-container {
+    padding: 20px;
+  }
+  .btn-create-post-container{
+    text-align: center;
+  }
 
-.btn-delete-user-photo {
-  position: absolute;
-  top: 50%;
-  left: 19.5%;
-  margin: 0 auto 0 auto;
-  font-size: small;
-  text-align: center;
-  width: fit-content;
-  background-color: rgba(141, 26, 26, 1);
-}
+  .btn-create-post {
+    background-color: rgb(153, 35, 94,.2);
 
-.btn-upload-photo {
-  position: absolute;
-  top: 50%;
-  left: 19.5%;
-  background-color: rgb(23, 24, 26, 0.4);
-  color: black;
-  width: fit-content;
-}
+  }
+  .btn-hide-post{
+    background-color: rgb(226, 80, 43);
+  }
+  .profile-recent-posts{
+    text-align: center;
+  }
 
-.profile-details-container {
-  width: 50%;
-}
+  .photo-input{
+    display: none;
+  }
+ 
+  .image-preview-container{
+    text-align: center;
+  }
+  .preview-image {
+    width: 200px;
+  }
+  .photo-label{
+    display: block;
+    background-color:  rgb(202, 87, 87, .2);
+    padding:20px;
+  }
+  .btn-upload-photo{
+    display: block;
+   
+    background-color: rgb(202, 87, 87);
+  }
 
-.app-user-posts-container {
-  margin-left: 30%;
-  margin-right: 30%;
-  padding-top: 20px;
-  justify-content: center;
-}
-
-.profile-recent-posts {
-  text-align: center;
-}
-
-.photo-label {
-  padding: 20px;
-  display: block;
-  border: 1px solid black;
-  height: 200px;
-}
-
-.photo-input {
-  display: none;
-}
-
-.btn-create-post{
-  margin: 10px;
-  background-color: rgba(22, 22, 126, 0.5);
-}
-
-.btn-hide-post{
-  margin: 10px;
-  background-color: rgba(22, 22, 126, 0.5);
+  
 }

@@ -1,11 +1,14 @@
 
-using DataAccessLayer;
 using Microsoft.Data.SqlClient;
 using Models;
+
+namespace DataAccessLayer;
 public class ProfileRepository : IProfileRepository
 {
 
     private readonly SqlConnection _connection = SqlConnectionFactory.GetConnection();
+
+
 
     public async Task<bool> UploadUserPhoto(int userId, string imageUrl, string imageFileName)
     {
@@ -391,9 +394,9 @@ public class ProfileRepository : IProfileRepository
                         profilePosts[profilePosts.Count - 1].ImageTags!.Add(tag);
 
                         text = null;
-                        imageUrl = null; 
-                        description = null; 
-                        tag = null; 
+                        imageUrl = null;
+                        description = null;
+                        tag = null;
                     }
                     else
                     {
@@ -409,9 +412,9 @@ public class ProfileRepository : IProfileRepository
                         };
                         profilePosts.Add(post);
                         text = null;
-                        imageUrl = null; 
-                        description = null; 
-                        tag = null; 
+                        imageUrl = null;
+                        description = null;
+                        tag = null;
                     }
 
 
@@ -456,8 +459,9 @@ public class ProfileRepository : IProfileRepository
 
     }
 
-    public async Task<bool> DeleteUserPost(int userId, int postId){
-          try
+    public async Task<bool> DeleteUserPost(int userId, int postId)
+    {
+        try
         {
             _connection.Open();
             //exec insert_into_articles "emmanuiel", "title", "description", "url", "urltoiamge", "2022-05-09", 1
