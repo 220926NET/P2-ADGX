@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using BusinessLogicLayer;
-using System.Configuration;
 using BusinessLogicLayer.Services.AuthService;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -36,11 +35,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy
-                          .AllowAnyOrigin()
-                          .AllowCredentials()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                          policy.WithOrigins("https://lemon-tree-03b841910.2.azurestaticapps.net/", "https://localhost:4200")
+                              .AllowCredentials()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
                       });
 });
 // Add services to the container.
