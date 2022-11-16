@@ -19,13 +19,8 @@ builder.Services.AddAuthentication((opt) =>
 {
     options.TokenValidationParameters = new()
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-
-        ValidIssuer = "https://flar-e.azurewebsites.net/",
-        ValidAudience = "https://lemon-tree-03b841910.2.azurestaticapps.net/",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecret12345"))
     };
 });
