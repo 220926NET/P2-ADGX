@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   _mockUserId = 2;
   postProfilePictureUrl: string =
-    "https://localhost:7219/Profile/uploadUserPhoto";
+    "https://flar-e.azurewebsites.net/api/Profile/uploadUserPhoto";
 
   uploadingPhoto: boolean = false;
 
