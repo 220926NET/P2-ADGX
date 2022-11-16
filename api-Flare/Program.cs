@@ -36,7 +36,6 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://lemon-tree-03b841910.2.azurestaticapps.net/", "https://localhost:4200")
-                              .AllowCredentials()
                               .AllowAnyHeader()
                               .AllowAnyMethod();
                       });
