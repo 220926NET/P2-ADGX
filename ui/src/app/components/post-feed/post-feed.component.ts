@@ -32,6 +32,7 @@ export class PostFeedComponent implements OnInit {
     return loggedInId == userId;
   }
 
+ 
   DeletePost(postId: number, userId: number) {
     this.postService.deletePost(postId, userId).subscribe((res) => {
       console.log(res);

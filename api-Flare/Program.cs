@@ -3,14 +3,25 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using BusinessLogicLayer;
-using System.Configuration;
 using BusinessLogicLayer.Services.AuthService;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using Serilog;
+using Serilog.Events;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddAuthentication((opt) =>
 {
@@ -47,6 +58,7 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IBlobStorage, BlobStorage>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
@@ -57,7 +69,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
 
 
-builder.Services.AddSingleton<BlobStorage>();
+
 builder.Services.AddSingleton<VisionApi>();
 builder.Services.AddSingleton<ServerResponse>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();

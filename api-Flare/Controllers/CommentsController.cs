@@ -11,8 +11,11 @@ namespace api_Flare.Controllers
     {
         private readonly ICommentService commentService;
 
-        public CommentsController(ICommentService commentService)
+        private readonly ILogger<CommentsController> _logger; 
+
+        public CommentsController(ICommentService commentService, ILogger<CommentsController> logger)
         {
+            _logger = logger; 
             this.commentService = commentService;
         }
 

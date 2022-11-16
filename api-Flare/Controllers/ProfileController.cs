@@ -13,10 +13,11 @@ public class ProfileController : ControllerBase
 {
 
     private readonly IProfileService _profileService;
-    private readonly int _mockUserId = 4;
 
-    public ProfileController(IProfileService profileService)
+    private readonly ILogger<IProfileService> _logger;
+    public ProfileController(IProfileService profileService, ILogger<IProfileService> logger)
     {
+        _logger = logger;
         _profileService = profileService;
     }
 
@@ -28,7 +29,6 @@ public class ProfileController : ControllerBase
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
 
-
         ResponseMessage<string> postUserPhotoRes = await _profileService.UploadUserPhoto(userPhoto, id, name);
 
         return Ok(postUserPhotoRes);
@@ -38,10 +38,14 @@ public class ProfileController : ControllerBase
     [HttpGet("profileDetails")]
     public async Task<ActionResult<ResponseMessage<ProfilePage>>> GetProfileDetails()
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<ProfilePage> getProfilePageRes = await _profileService.GetProfileDetails(id);
 
         return Ok(getProfilePageRes);
@@ -61,9 +65,12 @@ public class ProfileController : ControllerBase
     public async Task<ActionResult<ResponseMessage<List<ProfilePost>>>> GetOtherUserProfileDetails(int userId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(userId);
 
         return Ok(getProfilePageRes);
@@ -74,16 +81,19 @@ public class ProfileController : ControllerBase
     public async Task<ActionResult<ResponseMessage<List<ProfilePost>>>> GetProfilePosts(int userId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
 
         return Ok(getProfilePageRes);
 
     }
 
-   
+
 
     [HttpDelete("profilePhoto")]
 
@@ -91,10 +101,14 @@ public class ProfileController : ControllerBase
     {
 
         ResponseMessage<string> deleteUserPhotoRes = new ResponseMessage<string>();
+
         var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
 
         deleteUserPhotoRes = await _profileService.DeleteProfilePicture(id);
@@ -104,12 +118,15 @@ public class ProfileController : ControllerBase
     }
 
     [HttpDelete("profilePost/{postId}")]
-     public async Task<ActionResult<ResponseMessage<string>>> DeleteProfilePost(int postId)
+    public async Task<ActionResult<ResponseMessage<string>>> DeleteProfilePost(int postId)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
         ResponseMessage<string> deleteProfilePostRes = new ResponseMessage<string>();
 
@@ -124,10 +141,13 @@ public class ProfileController : ControllerBase
 
     public async Task<ActionResult<ResponseMessage<List<string>>>> UploadUserDetails([FromBody] ProfileHobbies hobbies)
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
+
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
         ResponseMessage<string> uploadUserDetailsRes = await _profileService.UploadProfileHobbies(id, hobbies);
 
@@ -139,15 +159,19 @@ public class ProfileController : ControllerBase
     public async Task<ActionResult<ResponseMessage<string>>> UploadUserInterests([FromBody] ProfileInterests interests)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
+
         IEnumerable<Claim> claims = identity!.Claims;
+
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
-        ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
 
+        ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(id);
         ResponseMessage<string> uploadUserInterestsRes = new ResponseMessage<string>();
+
         uploadUserInterestsRes = await _profileService.UploadProfileInterests(id, interests);
+
         return Ok(uploadUserInterestsRes);
-        //test 
+       
 
     }
 
@@ -157,7 +181,7 @@ public class ProfileController : ControllerBase
 
     public async Task<ActionResult<ResponseMessage<string>>> AddProfileAboutMe([FromBody] ProfileAboutMe aboutMe)
     {
-         var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
@@ -178,6 +202,7 @@ public class ProfileController : ControllerBase
         ResponseMessage<List<ProfilePost>> getProfilePageRes = await _profileService.GetProfilePosts(userId);
         ResponseMessage<ProfilePage> response = new ResponseMessage<ProfilePage>();
         response = await _profileService.GetProfileDetails(userId);
+
         return Ok(response);
     }
 

@@ -160,3 +160,21 @@
 .post-text{
     overflow:hidden;
 }
+
+@media (max-width: 440px) {
+    .sort-by-container{
+        display: none;
+    }
+
+    .grid-container-gallery {
+        border-radius: 3em;
+        display: grid;
+        grid-template-columns: 1fr ;
+        text-align: left;
+        
+    }
+
+    .profile-recent-posts{
+        justify-content: center;
+    }
+}

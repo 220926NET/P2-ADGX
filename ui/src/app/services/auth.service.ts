@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { User } from "src/Models/user";
 
-const AUTH_API = "https://localhost:7219/api/Auth/";
+const AUTH_API = "https://flar-e.azurewebsites.net/api/Auth/";
 
 @Injectable({
   providedIn: "root",
@@ -12,6 +12,13 @@ export class AuthService {
   private loggedInSource = new Subject<boolean>();
 
   loggedIn$ = this.loggedInSource.asObservable();
+
+
+   headers: HttpHeaders = new HttpHeaders()
+  .set('content-type', '*')
+  .set('Access-Control-Allow-Origin', '*');
+
+
 
   getAuthorizationToken() {
     const token = localStorage.getItem("authToken");
@@ -34,7 +41,10 @@ export class AuthService {
 
   public login(user: FormData): Observable<string> {
     this.loggedInSource.next(true);
+    console.log(user.get("Username"));
+    console.log(user.get("Password"));
     return this.http.post(AUTH_API + "login", user, {
+      headers: this.headers,
       responseType: "text",
     });
   }
