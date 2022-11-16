@@ -61,8 +61,6 @@ namespace api_Flare.Controllers
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: authSettings.Issuer,
-                    audience: authSettings.Audience,
                     claims: new List<Claim>{
                         new Claim(ClaimTypes.Name, loggedIn.Username),
                         new Claim(ClaimTypes.Sid, loggedIn.UserId.ToString())
