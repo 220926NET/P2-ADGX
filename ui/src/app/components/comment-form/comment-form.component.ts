@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { CommentService } from "src/app/services/comment.service";
-import { Comment } from "src/Models/Comment";
+import { CommentService } from "../../services/comment.service";
+import { Comment } from "../../Models/Comment";
 
 @Component({
   selector: "app-comment-form",
@@ -15,7 +15,6 @@ export class CommentFormComponent implements OnInit {
   public commentForm: FormGroup = new FormGroup({
     text: new FormControl("", [Validators.required]),
   });
-
 
   constructor(private commentService: CommentService) {}
 

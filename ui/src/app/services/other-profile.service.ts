@@ -1,27 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import ResponseMessage from 'src/Models/Profile/ResponseMessage';
+import ResponseMessage from "../Models/Profile/ResponseMessage";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class OtherProfileService {
+  constructor(private _httpClient: HttpClient) {}
 
-  constructor(private _httpClient : HttpClient) { }
+  private getUserProfileDetailsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profileDetails/";
 
-  private getUserProfileDetailsUrl : string = "https://localhost:7219/Profile/profileDetails/"
+  private getUserPostsUrl: string =
+    "https://flar-e.azurewebsites.net/api/Profile/profilePosts/";
 
-  private getUserPostsUrl : string = "https://localhost:7219/Profile/profilePosts/"; 
-
-  public getUserProfileDetails(userId : number) : Observable<ResponseMessage> {
-    return this._httpClient.get<ResponseMessage>(this.getUserProfileDetailsUrl + userId)
+  public getUserProfileDetails(userId: number): Observable<ResponseMessage> {
+    return this._httpClient.get<ResponseMessage>(
+      this.getUserProfileDetailsUrl + userId
+    );
   }
 
-  public getUserPosts(userId : number) : Observable<ResponseMessage> {
-    return this._httpClient.get<ResponseMessage>(this.getUserPostsUrl + userId)
+  public getUserPosts(userId: number): Observable<ResponseMessage> {
+    return this._httpClient.get<ResponseMessage>(this.getUserPostsUrl + userId);
   }
-
-
 }
-

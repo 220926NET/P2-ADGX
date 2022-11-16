@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { PostService } from "src/app/services/post.service";
-import { Post } from "src/Models/Post";
+import { PostService } from "../../services/post.service";
+import { Post } from "../../Models/Post";
 import jwtDecode from "jwt-decode";
+import { TokenStorageService } from "src/app/services/token-storage.service";
 @Component({
   selector: "app-post-feed",
   templateUrl: "./post-feed.component.html",
@@ -10,7 +11,10 @@ import jwtDecode from "jwt-decode";
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   ngOnInit(): void {
     this.updatePosts();
@@ -18,14 +22,13 @@ export class PostFeedComponent implements OnInit {
 
   updatePosts() {
     this.postService.getPosts().subscribe((posts) => {
-
       this.posts = posts;
       posts.reverse();
     });
   }
 
   hideDelete(userId: number): boolean {
-    let tokenString = localStorage.getItem("authToken");
+    let tokenString = this.tokenStorage.getToken();
     let tokenInfo = this.getDecodedAccessToken(tokenString ? tokenString : "");
     let loggedInId =
       tokenInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
@@ -37,7 +40,6 @@ export class PostFeedComponent implements OnInit {
     this.postService.deletePost(postId, userId).subscribe((res) => {
       console.log(res);
       this.updatePosts();
-
     });
   }
 

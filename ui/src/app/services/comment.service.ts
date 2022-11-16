@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Comment } from "src/Models/Comment";
+import { Comment } from "../Models/Comment";
 import { Observable, Subject } from "rxjs";
 
-const COMMENT_API = "https://localhost:7219/api/Comments/";
+const COMMENT_API = "https://flar-e.azurewebsites.net/api/Comments/";
 
 @Injectable({
   providedIn: "root",

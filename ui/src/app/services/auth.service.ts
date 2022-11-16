@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
-import { User } from "src/Models/user";
+import { User } from "../Models/user";
+import { TokenStorageService } from "./token-storage.service";
 
 const AUTH_API = "https://flar-e.azurewebsites.net/api/Auth/";
 
@@ -13,21 +14,20 @@ export class AuthService {
 
   loggedIn$ = this.loggedInSource.asObservable();
 
-   headers: HttpHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*').set("Authorization" , `bearer jdskalfasjdfkljasdfkljasklfjlaskdjf`).set("reponse-type" , "text");
-  
 
-  getAuthorizationToken() {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      return token;
-    } else {
-      return ""; 
-    }
-  }
-  constructor(private http: HttpClient) {}
+
+  headers: HttpHeaders = new HttpHeaders().set(
+    "Access-Control-Allow-Origin",
+    "*"
+  );
+
+  constructor(
+    private http: HttpClient,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   public checkLogin(): void {
-    let token = localStorage.getItem("authToken");
+    let token = this.tokenStorage.getToken();
     if (token) {
       this.loggedInSource.next(true);
     } else {
@@ -42,10 +42,11 @@ export class AuthService {
     return this.http.post(AUTH_API + "login", user, {
       headers: this.headers,
       responseType: "text",
+      headers: this.headers,
     });
   }
   public logout(): void {
-    localStorage.setItem("authToken", "");
+    this.tokenStorage.logOut();
     this.loggedInSource.next(false);
   }
 

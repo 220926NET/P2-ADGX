@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
-import { PostService } from "src/app/services/post.service";
-import { Post } from "src/Models/Post";
-import { readBuilderProgram } from "typescript";
+import { PostService } from "../../services/post.service";
 
 @Component({
   selector: "app-post",
@@ -39,7 +36,6 @@ export class PostComponent implements OnInit {
   });
 
   onSubmit() {
-
     const post: FormData = new FormData();
 
     if (this.isText) {
@@ -60,10 +56,10 @@ export class PostComponent implements OnInit {
         this.postForm.reset();
 
       });
-    }
-    this.postForm.enable();
-  }
 
+      this.postForm.enable();
+    }
+  }
 
 
   setImage(event: any) {

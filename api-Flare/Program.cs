@@ -36,21 +36,23 @@ builder.Services.AddAuthentication((opt) =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
 
-        ValidIssuer = "https://localhost:7219",
-        ValidAudience = "https://localhost:4200",
+        ValidIssuer = "https://flar-e.azurewebsites.net/",
+        ValidAudience = "https://lemon-tree-03b841910.2.azurestaticapps.net/",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecret12345"))
     };
 });
+
+
+
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy
-                          .AllowAnyOrigin()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                          policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
                       });
 });
 // Add services to the container.
@@ -93,18 +95,6 @@ builder.Services.AddSwaggerGen(configuration =>
 });
 
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
-
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-    builder =>
-    {
-
-        builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
-    });
-
-});
 
 
 
