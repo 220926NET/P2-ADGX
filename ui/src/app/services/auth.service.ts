@@ -42,7 +42,6 @@ export class AuthService {
     return this.http.post(AUTH_API + "login", user, {
       headers: this.headers,
       responseType: "text",
-      headers: this.headers,
     });
   }
   public logout(): void {
