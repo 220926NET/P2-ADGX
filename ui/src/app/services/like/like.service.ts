@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Like } from "../../Models/Like";
+import { Like } from "src/app/Models/Like";
+import { Observable } from "rxjs";
 
 const LIKE_API = "https://flar-e.azurewebsites.net/api/like/";
 
@@ -9,7 +10,6 @@ const LIKE_API = "https://flar-e.azurewebsites.net/api/like/";
 })
 export class LikeService {
   constructor(private http: HttpClient) {}
-
   createLike(like: Like) {
     return this.http.post<Like>(LIKE_API, like);
   }
@@ -17,6 +17,7 @@ export class LikeService {
   deleteLike(like: Like) {
     return this.http.delete<Like>(LIKE_API, { body: like });
   }
+
 
   getPostLike(postId: number) {
     return this.http.get<Like[]>(LIKE_API + postId);

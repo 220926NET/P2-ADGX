@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { LikeService } from "src/app/services/like/like.service";
-import { Like } from "../../../Models/Like";
-import { CurrentUserService } from "src/app/services/current-user/current-user.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { Like } from 'src/app/Models/Like';
+import { LikeService } from 'src/app/services/like/like.service';
+import { CurrentUserService } from 'src/app/services/current-user/current-user.service';
 
 @Component({
   selector: "app-post-like",
