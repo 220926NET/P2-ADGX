@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { LikeService } from "src/app/services/like/like.service";
+import { LikeService } from "../../../services/like/like.service";
 
 @Component({
   selector: "app-post-like-counter",

@@ -8,6 +8,7 @@ import { ProfileOthersComponent } from "./components/profile-others/profile-othe
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
+  { path: "", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "profile", component: ProfileComponent },
   { path: "feed", component: PostFeedComponent },

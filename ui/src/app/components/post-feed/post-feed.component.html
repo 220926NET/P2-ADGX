@@ -4,12 +4,12 @@
     (click)="showCreatePost()"
     *ngIf="!createPost"
   >
-    I have something to share.. 
+    Create Post
   </div>
   <div class="btn btn-hide-post" (click)="showCreatePost()" *ngIf="createPost">
-    Never mind...
+    Back
   </div>
-<app-post [hidden]="!createPost" class="app-post"></app-post>
+  <app-post [hidden]="!createPost" class="app-post"></app-post>
 </div>
 <div
   class="container d-flex flex-column justify-content-center align-items-center post-feed-component"

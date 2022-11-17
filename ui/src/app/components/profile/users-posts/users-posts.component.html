@@ -17,8 +17,7 @@
   [ngClass]="isViewGallery ? 'grid-container-gallery' : 'grid-container-list'"
 >
   <div class="grid-item" *ngFor="let post of userPosts">
-   
-    <mat-card class="" (mouseenter)="showDelete = true" (mouseleave)="showDelete = false">
+    <mat-card>
       <div class="d-flex flex-column flex-grow-1">
         <div class="d-flex flex-row">
           <div>
@@ -48,23 +47,29 @@
             <div *ngFor="let tags of post.imageTags" class="tags-container">
               <span class="tags"> {{ tags }} </span>
             </div>
+            <div class="d-flex flex-row like-comment-delete-container">
+              <app-post-like
+                [postId]="post.postId"
+                class="like"
+              ></app-post-like>
+              <app-post-comment-button
+                class="comment-btn"
+                [(showComments)]="showComments"
+              ></app-post-comment-button>
+              <app-post-delete-button
+                class="delete-btn"
+                (click)="DeletePost(post.postId)"
+              ></app-post-delete-button>
+            </div>
           </mat-card-actions>
         </div>
+      </div>
+      <mat-card-footer>
         <app-comment-feed
           *ngIf="showComments"
           [postId]="post.postId"
         ></app-comment-feed>
-      </div>
-      <div class="d-flex flex-row like-comment-delete-container">
-        <app-post-like [postId]="post.postId" class="like"></app-post-like>
-        <app-post-comment-button class="comment-btn"
-          [(showComments)]="showComments"
-        ></app-post-comment-button >
-        <app-post-delete-button class="delete-btn"
-          (click)="DeletePost(post.postId)"
-          [hidden]="!showDelete"
-        ></app-post-delete-button>
-      </div>
+      </mat-card-footer>
     </mat-card>
   </div>
 </div>
