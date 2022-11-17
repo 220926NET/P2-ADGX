@@ -1,34 +1,68 @@
 <div class="sort-by-container">
-    <span>View As : </span>
-    <span [ngClass]="isViewGallery ? 'active-view': ''" class="sort-by-gallery" (click)="setView()">Gallery </span>
-    <span [ngClass]="!isViewGallery ? 'active-view': ''" class="sort-by-row" (click)="setView()">List</span>
+  <span>View As : </span>
+  <span
+    [ngClass]="isViewGallery ? 'active-view' : ''"
+    class="sort-by-gallery"
+    (click)="setView()"
+    >Gallery
+  </span>
+  <span
+    [ngClass]="!isViewGallery ? 'active-view' : ''"
+    class="sort-by-row"
+    (click)="setView()"
+    >List</span
+  >
 </div>
-<div [ngClass]="isViewGallery ? 'grid-container-gallery' : 'grid-container-list'">
-    <div class="grid-item" *ngFor="let post of userPosts">
-        <mat-card>
-            <img class="card-profile-img" src="{{userPhoto}}" />
+<div
+  [ngClass]="isViewGallery ? 'grid-container-gallery' : 'grid-container-list'"
+>
+  <div class="grid-item" *ngFor="let post of userPosts">
+    <mat-card class="d-flex flex-row">
+      <div class="d-flex flex-column">
+        <app-post-like [postId]="post.postId"></app-post-like>
+        <app-post-comment-button
+          [(showComments)]="showComments"
+        ></app-post-comment-button>
+        <app-post-delete-button
+          (click)="DeletePost(post.postId)"
+        ></app-post-delete-button>
+      </div>
+      <div class="d-flex flex-column flex-grow-1">
+        <div class="d-flex flex-row">
+          <div>
+            <img class="card-profile-img" src="{{ userPhoto }}" />
+          </div>
+          <div class="flex-grow-1">
             <mat-card-header class="card-title">
-                <mat-card-title class="user-post-title">{{post.title}}</mat-card-title>
+              <mat-card-title class="user-post-title">{{
+                post.title
+              }}</mat-card-title>
             </mat-card-header>
-            <mat-card-content class="card-image">
-                <img mat-card-image src="{{post.imageUrl}}" alt="{{post.description}}" *ngIf="post.imageUrl" />
-                <div class="post-text" *ngIf="post.text">
-                    <p>{{post.text}}</p>
-                </div>
-            </mat-card-content>
-            <div class="grid-content">
-
-                <mat-card-actions>
-                    <div *ngFor="let tags of post.imageTags" class="tags-container">
-                        <span class="tags"> {{ tags }} </span>
-                    </div>
-                    <!-- <div class="like-post">
-                    </div> -->
-                    <!-- <div class="amount-of-likes">
-                        <p>600</p>
-                    </div> -->
-                </mat-card-actions>
+          </div>
+        </div>
+        <mat-card-content class="card-image">
+          <img
+            mat-card-image
+            src="{{ post.imageUrl }}"
+            alt="{{ post.description }}"
+            *ngIf="post.imageUrl"
+          />
+          <div class="post-text" *ngIf="post.text">
+            <p>{{ post.text }}</p>
+          </div>
+        </mat-card-content>
+        <div class="grid-content">
+          <mat-card-actions>
+            <div *ngFor="let tags of post.imageTags" class="tags-container">
+              <span class="tags"> {{ tags }} </span>
             </div>
-        </mat-card>
-    </div>
+          </mat-card-actions>
+        </div>
+        <app-comment-feed
+          *ngIf="showComments"
+          [postId]="post.postId"
+        ></app-comment-feed>
+      </div>
+    </mat-card>
+  </div>
 </div>

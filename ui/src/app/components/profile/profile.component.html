@@ -2,39 +2,81 @@
   <div class="outer-profile-container-logo"></div>
   <div class="profile-container">
     <div class="profile-img-container" data-testid="profile-image-container">
-      <img [ngClass]="userProfile.image ? 'profile-img' : 'no-profile-img'" class="profile-img"
-        src="{{ userProfile.image }}" [alt]="userProfile.image ? 'Users profile picture' : ''"
-        [hidden]="!userProfile.image" (mouseenter)="showDeleteBtn()" (mouseleave)="hideDeleteBtn()" />
+      <img
+        [ngClass]="userProfile.image ? 'profile-img' : 'no-profile-img'"
+        class="profile-img"
+        src="{{ userProfile.image }}"
+        [alt]="userProfile.image ? 'Users profile picture' : ''"
+        [hidden]="!userProfile.image"
+        (mouseenter)="showDeleteBtn()"
+        (mouseleave)="hideDeleteBtn()"
+      />
       <div class="image-preview-container">
-        <img *ngIf="imagePreview" src="{{imagePreview}}" class="preview-image">
+        <img
+          *ngIf="imagePreview"
+          src="{{ imagePreview }}"
+          class="preview-image"
+        />
       </div>
-      <div #delete class="btn btn-delete-user-photo" *ngIf="userProfile.image; else noPhotoSet"
-        (click)="deleteProfilePhoto()" [hidden]="!isDeleteBtn" (mouseenter)="showDeleteBtn()">
+      <div
+        #delete
+        class="btn btn-delete-user-photo"
+        *ngIf="userProfile.image; else noPhotoSet"
+        (click)="deleteProfilePhoto()"
+        [hidden]="!isDeleteBtn"
+        (mouseenter)="showDeleteBtn()"
+      >
         Delete photo
       </div>
       <ng-template #noPhotoSet class="no-photo-set-container">
         <label [ngClass]="!imagePreview ? 'photo-label' : 'choose-photo-label'">
-          <span *ngIf="!imagePreview">Click Here to upload a profile photo</span>
+          <span *ngIf="!imagePreview"
+            >Click Here to upload a profile photo</span
+          >
           <span *ngIf="imagePreview" class="no-photo-text">Change Image</span>
-          <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" (change)="setPhoto($event)"
-            value="upload user photo" [hidden]="userProfile.image" class="photo-input" (change)="setImage($event)" />
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/png, image/jpeg"
+            (change)="setPhoto($event)"
+            value="upload user photo"
+            [hidden]="userProfile.image"
+            class="photo-input"
+            (change)="setImage($event)"
+          />
         </label>
-        <div class="btn btn-upload-photo" (click)="uploadPhoto()" *ngIf="imagePreview">
+        <div
+          class="btn btn-upload-photo"
+          (click)="uploadPhoto()"
+          *ngIf="imagePreview"
+        >
           Upload Photo
         </div>
       </ng-template>
     </div>
   </div>
   <div class="profile-details-container">
-    <app-profile-details [myHobbies]="userProfile.hobbies" [myInterests]="userProfile.interests"
-      [myAboutMe]="userProfile.aboutMe"></app-profile-details>
+    <app-profile-details
+      [myHobbies]="userProfile.hobbies"
+      [myInterests]="userProfile.interests"
+      [myAboutMe]="userProfile.aboutMe"
+    ></app-profile-details>
   </div>
   <hr />
 </div>
 <hr />
 <div class="btn-create-post-container">
-  <div class="btn btn-create-post" (click)="showCreatePost()" *ngIf="!createPost">I have something to share!</div>
-  <div class="btn btn-hide-post" (click)="showCreatePost()" *ngIf="createPost">Never mind...</div>
+  <div
+    class="btn btn-create-post"
+    (click)="showCreatePost()"
+    *ngIf="!createPost"
+  >
+    Create Post
+  </div>
+  <div class="btn btn-hide-post" (click)="showCreatePost()" *ngIf="createPost">
+    Never mind...
+  </div>
 </div>
 <div class="create-post-container">
   <app-post [hidden]="!createPost"></app-post>
