@@ -11,6 +11,5 @@ export class PostLikeCounterComponent implements OnInit {
   @Input() postLikes: number = 0;
 
   constructor(private likeService: LikeService) {}
-
   ngOnInit(): void {}
 }

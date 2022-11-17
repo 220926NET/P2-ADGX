@@ -45,6 +45,14 @@
       </div>
       <img [src]="imagePreview" class="image-preview" />
       <div class="post-image-container" *ngIf="!isText">
+
+        <label [class.image-input-label-with-preview]="imagePreview" [class.image-input-label]="!imagePreview">
+          {{imagePreview?"Click here to change the image":"Click here to upload an image!"}}
+          <input type="file" formControlName="image" *ngIf="!isText" accept="image/png, image/jpeg"
+            (change)="setImage($event)" class="image-input" />
+        </label>
+        <!--
+          The original
         <label class="image-input-label-with-preview" *ngIf="imagePreview">
           Click here to change the image
           <input
@@ -67,6 +75,7 @@
             class="image-input"
           />
         </label>
+      -->
       </div>
       <button
         class="btn btn-primary"

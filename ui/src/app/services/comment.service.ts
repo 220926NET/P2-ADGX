@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Comment } from "../Models/Comment";
+import { Comment } from "src/app/Models/Comment";
 import { Observable, Subject } from "rxjs";
 
 const COMMENT_API = "https://flar-e.azurewebsites.net/api/Comments/";
