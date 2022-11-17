@@ -2,6 +2,8 @@
   background-color: #424242;
 }
 
-.nav-bar-logo {
-  height: 10vh;
+.logo {
+  object-fit: cover;
+  width: 80vw;
+  height: 5vh;
 }

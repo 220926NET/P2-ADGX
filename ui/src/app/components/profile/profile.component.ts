@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
 import Profile from "../../Models/Profile/Profile";
-import { ProfileService } from "src/app/services/ProfileService";
+import { ProfileService } from "../../services/ProfileService";
+import jwtDecode, { JwtPayload } from "jwt-decode";
+import { TokenStorageService } from "src/app/services/token-storage.service";
 
 @Component({
   selector: "app-profile",
@@ -9,13 +12,14 @@ import { ProfileService } from "src/app/services/ProfileService";
   providers: [ProfileService],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private _profileService: ProfileService) {}
-
-
+  constructor(
+    private _profileService: ProfileService,
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   postProfilePictureUrl: string =
     "https://flar-e.azurewebsites.net/api/Profile/uploadUserPhoto";
-
 
   uploadingPhoto: boolean = false;
 
@@ -34,6 +38,8 @@ export class ProfileComponent implements OnInit {
     image: "",
   };
 
+  username: string = "";
+
   createPost: boolean = false;
 
   isDeleteBtn: boolean = false;
@@ -46,6 +52,13 @@ export class ProfileComponent implements OnInit {
     this._profileService.getUserProfileDetails().subscribe((res) => {
       this.userProfile = res.data;
     });
+    let token = this.tokenStorage.getToken();
+    if (token) {
+      let tokenData = jwtDecode<any>(token);
+      this.username =
+        tokenData["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+      console.log(this.username);
+    }
   }
 
   uploadPhoto(): void {
@@ -55,7 +68,6 @@ export class ProfileComponent implements OnInit {
     this._profileService.postProfilePhoto(formData).subscribe((res) => {
       console.log(res);
     });
-
   }
 
   setPhoto(event: any) {
@@ -74,7 +86,6 @@ export class ProfileComponent implements OnInit {
     this._profileService
       .deleteProfilePhoto()
       .subscribe((res) => console.log(res));
-    
   }
 
   showDeleteBtn() {

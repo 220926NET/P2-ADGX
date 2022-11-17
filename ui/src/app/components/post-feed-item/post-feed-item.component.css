@@ -13,8 +13,9 @@
 
 .post-feed-item-img {
   border-radius: 5px;
-  object-fit: contain;
-  height: 168px;
+  object-fit: cover;
+  width: auto;
+  height: 300px;
 }
 
 .mat-card {

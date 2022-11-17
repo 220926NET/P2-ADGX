@@ -10,7 +10,6 @@ import ProfilePost from "../../Models/Profile/ProfilePost";
 })
 export class ProfileOthersComponent implements OnInit {
   userId: number = 0;
-
   myHobbies: string[] = [];
   myInterests: string[] = [];
   myAboutMe: string = "";

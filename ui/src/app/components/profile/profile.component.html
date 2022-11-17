@@ -16,6 +16,7 @@
           *ngIf="imagePreview"
           src="{{ imagePreview }}"
           class="preview-image"
+          alt="image preview"
         />
       </div>
       <div
@@ -57,6 +58,7 @@
     </div>
   </div>
   <div class="profile-details-container">
+    <h1>@{{ username }}</h1>
     <app-profile-details
       [myHobbies]="userProfile.hobbies"
       [myInterests]="userProfile.interests"
@@ -72,10 +74,10 @@
     (click)="showCreatePost()"
     *ngIf="!createPost"
   >
-    I have something to share.. 
+    Create Post
   </div>
   <div class="btn btn-hide-post" (click)="showCreatePost()" *ngIf="createPost">
-    Never mind...
+    Back
   </div>
 </div>
 <div class="create-post-container">
