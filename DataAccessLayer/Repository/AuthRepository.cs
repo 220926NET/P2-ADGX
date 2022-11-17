@@ -15,7 +15,7 @@ public interface IAuthRepository : IDisposable
     bool VerifyPassword(string username, string password, string salt);
     string GetUserSalt(string username);
     bool LookupUser(string username);
-
+    UserInfo GetUserInfo(int userId);
 }
 
 
@@ -247,6 +247,34 @@ public class AuthRepository : IAuthRepository
             conn.Close();
         }
         return user;
+    }
+
+    public UserInfo GetUserInfo(int userId)
+    {
+        UserInfo userInfo = new();
+        try
+        {
+            conn.Open();
+            string sql = "exec get_username_userpic @userId";
+            SqlCommand cmd = new(sql, conn);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                userInfo.Username = (string)dataReader["Name"];
+                userInfo.AvatarUrl = (string)dataReader["ImageUrl"];
+            }
+            cmd.Dispose();
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return userInfo;
     }
 }
 // EOC
