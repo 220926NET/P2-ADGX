@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "src/app/services/auth.service";
+import { AuthService } from "../../services/auth.service";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -9,12 +9,11 @@ import { AuthService } from "src/app/services/auth.service";
 export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
-
   registerForm: FormGroup = new FormGroup({
     username: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required]),
   });
-  
+
   onSubmit() {
     if (this.registerForm.invalid) return;
 

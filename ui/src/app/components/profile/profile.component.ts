@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "src/app/services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import Profile from "../../Models/Profile/Profile";
 import { ProfileService } from "../../services/ProfileService";
-import jwtDecode, { JwtPayload } from "jwt-decode";
-import { TokenStorageService } from "src/app/services/token-storage.service";
+import jwtDecode from "jwt-decode";
+import { TokenStorageService } from "../../services/token-storage.service";
 
 @Component({
   selector: "app-profile",

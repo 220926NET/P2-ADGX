@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import ResponseMessage from "../../../Models/Profile/ResponseMessage";
 import { OtherProfileService } from "../../../services/other-profile.service";
 import ProfilePost from "../../../Models/Profile/ProfilePost";
-import { PostService } from "src/app/services/post.service";
+import { PostService } from "../../../services/post.service";
 
 @Component({
   selector: "app-users-posts",
@@ -13,8 +13,7 @@ import { PostService } from "src/app/services/post.service";
 export class UsersPostsComponent implements OnInit {
   showComments: boolean = false;
 
-
-  showDelete : boolean = false; 
+  showDelete: boolean = false;
 
   @Input() userPhoto: any;
   @Output() deletePost = new EventEmitter<number>();

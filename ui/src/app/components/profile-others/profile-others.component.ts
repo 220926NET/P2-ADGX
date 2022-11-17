@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { OtherProfileService } from "src/app/services/other-profile.service";
+import { OtherProfileService } from "../../services/other-profile.service";
 import { ActivatedRoute } from "@angular/router";
 import ProfilePost from "../../Models/Profile/ProfilePost";
 

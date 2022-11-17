@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { LikeService } from "src/app/services/like/like.service";
+import { LikeService } from "../../../services/like/like.service";
 import { Like } from "../../../Models/Like";
 
 @Component({
@@ -25,7 +25,6 @@ export class PostLikeButtonComponent implements OnInit {
   }
 
   like() {
-
     this.isLiked = true;
     this.isLikedChange.emit(this.isLiked);
     if (this.likeList.findIndex((i) => i.userId == this.userId) == -1)
