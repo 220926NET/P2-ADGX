@@ -4,6 +4,7 @@
       <app-post-like [postId]="post.postID" class="mb-2"></app-post-like>
       <app-post-comment-button
         [(showComments)]="showComments"
+        [commentCount]="comments.length"
         class="mb-2"
       ></app-post-comment-button>
       <app-post-delete-button
@@ -48,6 +49,6 @@
   </div>
   <app-comment-feed
     *ngIf="showComments"
-    [postId]="post.postID"
+    [comments]="comments"
   ></app-comment-feed>
 </mat-card>

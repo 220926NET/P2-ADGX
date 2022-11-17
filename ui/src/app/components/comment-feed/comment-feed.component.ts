@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Comment } from "../../Models/Comment";
-import { CommentService } from "../../services/comment.service";
 
 @Component({
   selector: "app-comment-feed",
@@ -9,17 +8,8 @@ import { CommentService } from "../../services/comment.service";
 })
 export class CommentFeedComponent implements OnInit {
   @Input() postId: number = -1;
-  public comments: Comment[] = [];
-  constructor(private commentService: CommentService) {}
+  @Input() comments: Comment[] = [];
+  constructor() {}
 
-  updateComments() {
-    this.commentService.getComments(this.postId).subscribe((comments) => {
-      this.comments = comments;
-      console.log(comments);
-    });
-  }
-
-  ngOnInit(): void {
-    this.updateComments();
-  }
+  ngOnInit(): void {}
 }

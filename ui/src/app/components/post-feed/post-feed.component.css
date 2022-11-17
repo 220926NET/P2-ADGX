@@ -8,3 +8,31 @@
 .post-feed-component {
   width:800px;
 }
+
+.btn-create-post{
+  background-color: rgb(78, 99, 168);
+  margin:10px;
+}
+
+.btn-hide-post{
+  background-color: rgb(158, 71, 71);
+  margin:10px;
+
+}
+
+.post-container{
+  text-align: center;
+}
+
+.app-post {
+  margin: 10px;
+}
+
+@media (max-width: 440px) {
+ 
+  .container{
+    width: 100%;
+  }
+
+  }
+  

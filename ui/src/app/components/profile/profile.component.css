@@ -46,7 +46,7 @@
   }
 
   .btn-upload-photo {
-    background-color: pink;
+    background-color: rgba(134, 62, 62, 0.5);
   }
 
   .profile-details-container {
@@ -85,10 +85,32 @@
   .photo-input {
     display: none;
   }
-
+  .btn-create-post-container {
+    text-align: center;
+  }
   .btn-create-post {
     margin: 10px;
-    background-color: rgba(22, 22, 126, 0.5);
+    background-color: rgba(134, 62, 62, 0.5);
+  }
+  .like-comment-delete-container {
+    align-items: center;
+  }
+
+  .d-flex {
+    padding: 0px;
+  }
+  .like {
+    float: left;
+    padding: 5px;
+    margin-right: 200px;
+  }
+  .comment-btn {
+    padding: 10px;
+    height: 0px;
+  }
+  .delete-btn {
+    padding: 5px;
+    height: 0px;
   }
 
   .btn-hide-post {
@@ -122,13 +144,7 @@
   .profile-details-container {
     padding: 20px;
   }
-  .btn-create-post-container {
-    text-align: center;
-  }
 
-  .btn-create-post {
-    background-color: rgb(153, 35, 94, 0.2);
-  }
   .btn-hide-post {
     background-color: rgb(226, 80, 43);
   }

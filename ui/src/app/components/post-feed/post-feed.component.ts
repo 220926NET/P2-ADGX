@@ -11,6 +11,8 @@ import { AuthService } from "../../services/auth.service";
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
 
+  createPost: boolean = false;
+
   constructor(
     private postService: PostService,
     private otherProfileService: OtherProfileService,
@@ -42,6 +44,10 @@ export class PostFeedComponent implements OnInit {
         post.postUserImageUrl = res.data["image"];
         console.log(post);
       });
+  }
+
+  showCreatePost() {
+    this.createPost = !this.createPost;
   }
 
   deletePost(postId: number) {
