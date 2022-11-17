@@ -21,11 +21,21 @@ namespace api_Flare.Controllers
         private readonly IConfiguration configuration;
         private readonly AuthSettings authSettings;
 
-        private readonly ILogger<AuthController> _logger; 
+        private readonly ILogger<AuthController> _logger;
+
+
+        [HttpGet]
+        [Route("{userId}/info")]
+        public UserInfo GetUserInfo(int userId)
+        {
+            return authService.GetUserInfo(userId);
+        }
+
+
 
         public AuthController(IAuthService authService, IConfiguration configuration, IOptions<AuthSettings> authSettings, ILogger<AuthController> logger)
         {
-            _logger = logger; 
+            _logger = logger;
             this.authService = authService;
             this.configuration = configuration;
             this.authSettings = authSettings.Value;
@@ -34,7 +44,7 @@ namespace api_Flare.Controllers
         [HttpPost, Route("register")]
         public ActionResult Register([FromForm] User user)
         {
-            
+
             if (authService.Register(user.Username, user.Password))
             {
                 return Ok();
@@ -52,8 +62,8 @@ namespace api_Flare.Controllers
         public IActionResult login([FromForm] User user)
         {
 
-            _logger.LogInformation("User logged in " + user + DateTime.UtcNow); 
-            
+            _logger.LogInformation("User logged in " + user + DateTime.UtcNow);
+
             if (user == null)
             {
                 return BadRequest("Invalid client request");

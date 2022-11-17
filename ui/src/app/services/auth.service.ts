@@ -14,8 +14,6 @@ export class AuthService {
 
   loggedIn$ = this.loggedInSource.asObservable();
 
-
-
   headers: HttpHeaders = new HttpHeaders().set(
     "Access-Control-Allow-Origin",
     "*"
@@ -51,11 +49,11 @@ export class AuthService {
 
   public register(user: FormData): Observable<User> {
     return this.http.post<User>(AUTH_API + "register", user, {
-      headers : this.headers
+      headers: this.headers,
     });
   }
 
-  public getMe(): Observable<string> {
-    return this.http.get<string>(AUTH_API);
+  public getUserInfo(userId: number): Observable<any> {
+    return this.http.get(AUTH_API + userId + "/info");
   }
 }

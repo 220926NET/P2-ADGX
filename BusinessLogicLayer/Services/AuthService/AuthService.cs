@@ -20,6 +20,10 @@ namespace BusinessLogicLayer.Services.AuthService
 
         }
 
+        public UserInfo GetUserInfo(int userId)
+        {
+            return _authRepository.GetUserInfo(userId);
+        }
 
         public User Login(string username, string password)
         {
