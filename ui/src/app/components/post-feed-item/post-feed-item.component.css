@@ -6,3 +6,19 @@
     width: 400px;
     height: auto;
 }
+.mat-card-title {
+    width: 400px;
+    word-break: break-all;
+}
+
+.post-feed-item-img{
+    border-radius: 5px;
+    object-fit: contain;
+    height: 168px;
+}
+
+.mat-card{
+    background-color: rgba(80, 71, 71, 0.5);
+}
+
+

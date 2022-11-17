@@ -11,6 +11,7 @@ import { TokenStorageService } from "src/app/services/token-storage.service";
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
   
+  createPost: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -31,6 +32,10 @@ export class PostFeedComponent implements OnInit {
   deletePost(postId:number) {
     console.log("Deleting the post from the feed.")
     this.posts = this.posts.filter(i => i.postID != postId);
+  }
+
+  showCreatePost() {
+    this.createPost = !this.createPost;
   }
 
   /*
