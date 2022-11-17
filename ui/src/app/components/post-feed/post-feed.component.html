@@ -1,40 +1,11 @@
 <app-post></app-post>
-<div class="container d-flex flex-column justify-content-center align-items-center post-feed-component">
-  <app-post-feed-item *ngFor="let post of posts" [post]="post" (deletePost)="deletePost($event)" class="align-self-stretch"></app-post-feed-item>
+<div
+  class="container d-flex flex-column justify-content-center align-items-center post-feed-component"
+>
+  <app-post-feed-item
+    *ngFor="let post of posts"
+    [post]="post"
+    (deletePost)="deletePost($event)"
+    class="align-self-stretch"
+  ></app-post-feed-item>
 </div>
-
-<!--
-<div *ngFor="let post of posts" class="cards">
-  <app-post-feed-item [post]="post" (deletePost)="deletePost($event)"></app-post-feed-item>
-
-  
-  <mat-card class="w-75 h-25">
-    <mat-card-header>
-      <mat-card-title>{{ post.title }}</mat-card-title>
-      <button [hidden]="!hideDelete(post.userID)" class="float-right">
-        <em
-          class="bi bi-x-lg"
-          (click)="DeletePost(post.postID, post.userID)"
-        ></em>
-      </button>
-      <mat-card-subtitle>{{ post.datePosted | date }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>{{ post.text }}</mat-card-content>
-    <div *ngIf="post.imageUrl">
-      <a routerLink="profile/{{ post.userID }}"
-        ><img
-          [src]="post.imageUrl"
-          [alt]="post.description"
-          class="img-fluid w-100"
-      /></a>
-    </div>
-    <div>
-      <app-post-like [postId]="post.postID"></app-post-like>
-    </div>
-    <app-comment-feed [postId]="post.postID"></app-comment-feed>
-  </mat-card>
-  
-  <mat-divider></mat-divider>
-  
-</div>
--->
