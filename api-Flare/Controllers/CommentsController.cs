@@ -1,23 +1,23 @@
 ﻿using BusinessLogicLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System.Security.Claims;
-
-
 
 namespace api_Flare.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CommentsController : ControllerBase
     {
         private readonly ICommentService commentService;
 
-        private readonly ILogger<CommentsController> _logger; 
+        private readonly ILogger<CommentsController> _logger;
 
         public CommentsController(ICommentService commentService, ILogger<CommentsController> logger)
         {
-            _logger = logger; 
+            _logger = logger;
             this.commentService = commentService;
         }
 
@@ -45,14 +45,15 @@ namespace api_Flare.Controllers
 
             IEnumerable<Claim> claims = identity!.Claims;
 
-             int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
+            int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
 
-            Comment comment = new Comment(){
+            Comment comment = new Comment()
+            {
                 UserID = id,
                 PostID = commentDto.PostId,
                 Text = commentDto.Text
-            }; 
-            
+            };
+
             return commentService.create_comment(comment);
         }
 
