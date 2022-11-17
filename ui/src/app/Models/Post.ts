@@ -5,7 +5,9 @@ export interface Post {
   text: string;
   datePosted: Date;
   image: any;
-  imageUrl?: string,
-  description?:string
+  imageUrl?: string;
+  description?: string;
   isTextPost: string;
+  postUserImageUrl: string;
+  postUsername: string;
 }
