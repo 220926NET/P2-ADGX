@@ -18,27 +18,29 @@ public class PostsController : ControllerBase
 
     private readonly IPostService _postService;
 
-    private readonly ILogger<PostsController> _logger; 
+    private readonly ILogger<PostsController> _logger;
 
 
     public PostsController(IPostRepository postRepository, IPostService postService, ILogger<PostsController> logger)
     {
 
-        _logger = logger; 
+        _logger = logger;
         _postService = postService;
         this.postRepository = postRepository;
 
     }
 
     [HttpPost, Route("create")]
-    public async void CreatePost([FromForm] NewPost post)
+    public async Task<ActionResult<ResponseMessage<string>>> CreatePost([FromForm] NewPost post)
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int id = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
         string name = identity.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
 
-        await _postService.CreatePost(post, id, name);
+        ResponseMessage<string> response = await _postService.CreatePost(post, id, name);
+
+        return Ok(response);
     }
 
     [HttpGet]
@@ -67,7 +69,7 @@ public class PostsController : ControllerBase
     [Route(("{postId}/delete"))]
     public void DeletePost(int postId)
     {
-        _logger.LogInformation("post deleted " + postId); 
+        _logger.LogInformation("post deleted " + postId);
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         IEnumerable<Claim> claims = identity!.Claims;
         int userId = int.Parse(identity.FindFirst(c => c.Type == ClaimTypes.Sid)!.Value);
