@@ -58,6 +58,10 @@
             </div>
           </mat-card-actions>
         </div>
+        <app-comment-feed
+          *ngIf="showComments"
+          [postId]="post.postId"
+        ></app-comment-feed>
       </div>
     </mat-card>
   </div>
