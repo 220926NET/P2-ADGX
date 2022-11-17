@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import ResponseMessage from "../../../Models/Profile/ResponseMessage";
 import { OtherProfileService } from "../../../services/other-profile.service";
 import ProfilePost from "../../../Models/Profile/ProfilePost";
+import { PostService } from "src/app/services/post.service";
 
 @Component({
   selector: "app-users-posts",
@@ -10,7 +11,10 @@ import ProfilePost from "../../../Models/Profile/ProfilePost";
   styleUrls: ["./users-posts.component.css"],
 })
 export class UsersPostsComponent implements OnInit {
+  showComments: boolean = false;
+
   @Input() userPhoto: any;
+  @Output() deletePost = new EventEmitter<number>();
 
   getUserPostsUrl: string =
     "https://flar-e.azurewebsites.net/api/Profile/profilePosts";
@@ -21,7 +25,8 @@ export class UsersPostsComponent implements OnInit {
 
   constructor(
     private _httpClient: HttpClient,
-    private _profileService: OtherProfileService
+    private _profileService: OtherProfileService,
+    private _postService: PostService
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +39,12 @@ export class UsersPostsComponent implements OnInit {
   }
   setView() {
     this.isViewGallery = !this.isViewGallery;
+  }
+
+  DeletePost(postId: number) {
+    this.deletePost.emit(postId);
+    this._postService.deletePost(postId).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
