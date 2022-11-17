@@ -47,7 +47,7 @@
   }
 
   .btn-upload-photo {
-    background-color: pink;
+    background-color: rgba(134, 62, 62, 0.5);
   }
 
   .profile-details-container {
@@ -94,7 +94,7 @@
   .btn-create-post {
   
     margin: 10px;
-    background-color: rgba(22, 22, 126, 0.5);
+    background-color: rgba(134, 62, 62, 0.5);
   }
   .like-comment-delete-container{
         align-items: center;
@@ -110,7 +110,7 @@
         margin-right: 200px;
     }
     .comment-btn{
-        padding: 5px;
+        padding: 10px;
         height: 0px;
     }
     .delete-btn{

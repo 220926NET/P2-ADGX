@@ -12,6 +12,10 @@ import { AuthService } from "../../services/auth.service";
 export class PostFeedComponent implements OnInit {
   posts: Post[] = [];
 
+  
+  createPost: boolean = false;
+
+
   constructor(
     private postService: PostService,
     private tokenStorage: TokenStorageService,
@@ -44,8 +48,22 @@ export class PostFeedComponent implements OnInit {
       });
   }
 
+
+  showCreatePost() {
+    this.createPost = !this.createPost;
+  }
+
+  /*
+  hideDelete(userId: number): boolean {
+    let tokenString = this.tokenStorage.getToken();
+    let tokenInfo = this.getDecodedAccessToken(tokenString ? tokenString : "");
+    let loggedInId =
+      tokenInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
+    return loggedInId == userId;
+
   deletePost(postId: number) {
     console.log("Deleting the post from the feed.");
     this.posts = this.posts.filter((i) => i.postID != postId);
+
   }
 }
