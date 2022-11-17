@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { OtherProfileService } from "../../services/other-profile.service";
 import { ActivatedRoute } from "@angular/router";
 import ProfilePost from "../../Models/Profile/ProfilePost";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-profile-others",
@@ -15,20 +16,23 @@ export class ProfileOthersComponent implements OnInit {
   myAboutMe: string = "";
   myImage: string = "";
 
+  username: string = "";
+
   isViewGallery: boolean = false;
 
   posts: ProfilePost[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private _otherProfileServce: OtherProfileService
+    private _otherProfileService: OtherProfileService,
+    private authService: AuthService
   ) {
     this.userId = this.route.snapshot.params["id"];
   }
 
   ngOnInit(): void {
     console.log("user id is " + this.userId);
-    this._otherProfileServce
+    this._otherProfileService
       .getUserProfileDetails(this.userId)
       .subscribe((res) => {
         this.myHobbies = res.data.hobbies;
@@ -36,8 +40,10 @@ export class ProfileOthersComponent implements OnInit {
         this.myAboutMe = res.data.aboutMe;
         this.myImage = res.data.image;
       });
-
-    this._otherProfileServce.getUserPosts(this.userId).subscribe((res) => {
+    this.authService.getUserInfo(this.userId).subscribe((res) => {
+      this.username = res["username"];
+    });
+    this._otherProfileService.getUserPosts(this.userId).subscribe((res) => {
       console.log(res);
       this.posts = res.data;
     });
