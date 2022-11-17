@@ -24,7 +24,7 @@
     flex-direction: column;
     flex-wrap: wrap;
   }
-  .preview-image{
+  .preview-image {
     width: 168px;
     height: 168px;
     object-fit: cover;
@@ -33,8 +33,7 @@
   .no-profile-img {
     height: 20px;
   }
-  
- 
+
   .btn-delete-user-photo {
     position: absolute;
     top: 50%;
@@ -70,53 +69,49 @@
     display: block;
     border: 1px solid black;
     height: 20px;
-   
   }
 
-  .no-photo-label{
+  .no-photo-label {
     height: 20px;
     background-color: red;
   }
 
-  .no-photo-text{
-    padding: 5px; 
+  .no-photo-text {
+    padding: 5px;
     border-radius: 5px;
-    background-color: rgb(236, 139, 155,.2);
+    background-color: rgb(236, 139, 155, 0.2);
   }
 
   .photo-input {
     display: none;
   }
-.btn-create-post-container{
-
-  text-align: center;
-}
+  .btn-create-post-container {
+    text-align: center;
+  }
   .btn-create-post {
-  
     margin: 10px;
     background-color: rgba(134, 62, 62, 0.5);
   }
-  .like-comment-delete-container{
-        align-items: center;
-    }
+  .like-comment-delete-container {
+    align-items: center;
+  }
 
-    .d-flex{
-        padding:0px;
-        
-    }
-    .like{
-        float: left;
-        padding: 5px;
-        margin-right: 200px;
-    }
-    .comment-btn{
-        padding: 10px;
-        height: 0px;
-    }
-    .delete-btn{
-        padding: 5px;
-        height: 0px;
-    }
+  .d-flex {
+    padding: 0px;
+  }
+  .like {
+    float: left;
+    padding: 5px;
+    margin-right: 200px;
+  }
+  .comment-btn {
+    padding: 10px;
+    height: 0px;
+  }
+  .delete-btn {
+    padding: 5px;
+    height: 0px;
+  }
 
   .btn-hide-post {
     margin: 10px;
@@ -126,12 +121,12 @@
 
 @media (max-width: 440px) {
   .outer-profile-container {
-    background-color: rgba(96, 109, 226, .7);
+    background-color: rgba(96, 109, 226, 0.7);
     margin: 10px;
     border-radius: 5px;
   }
 
-  .profile-img{
+  .profile-img {
     width: 168px;
     object-fit: cover;
     border-radius: 50%;
@@ -140,7 +135,6 @@
   .profile-img-container {
     padding-top: 10px;
     text-align: center;
-    
   }
 
   .create-post-container {
@@ -151,34 +145,31 @@
     padding: 20px;
   }
 
-  
-  .btn-hide-post{
+  .btn-hide-post {
     background-color: rgb(226, 80, 43);
   }
-  .profile-recent-posts{
+  .profile-recent-posts {
     text-align: center;
   }
 
-  .photo-input{
+  .photo-input {
     display: none;
   }
- 
-  .image-preview-container{
+
+  .image-preview-container {
     text-align: center;
   }
   .preview-image {
     width: 200px;
   }
-  .photo-label{
+  .photo-label {
     display: block;
-    background-color:  rgb(202, 87, 87, .2);
-    padding:20px;
+    background-color: rgb(202, 87, 87, 0.2);
+    padding: 20px;
   }
-  .btn-upload-photo{
+  .btn-upload-photo {
     display: block;
-   
+
     background-color: rgb(202, 87, 87);
   }
-
-  
 }

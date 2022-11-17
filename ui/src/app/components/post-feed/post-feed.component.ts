@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { PostService } from "../../services/post.service";
 import { Post } from "../../Models/Post";
-import { TokenStorageService } from "../../services/token-storage.service";
 import { OtherProfileService } from "../../services/other-profile.service";
 import { AuthService } from "../../services/auth.service";
 @Component({
@@ -16,7 +15,6 @@ export class PostFeedComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private tokenStorage: TokenStorageService,
     private otherProfileService: OtherProfileService,
     private authService: AuthService
   ) {}
@@ -30,8 +28,10 @@ export class PostFeedComponent implements OnInit {
       this.posts = posts;
       posts.reverse();
       this.posts.forEach((post) => {
-        this.authService.getUserInfo(post.postID).subscribe((res) => {
-          console.log(res);
+        this.authService.getUserInfo(post.userID).subscribe((res) => {
+          post.postUsername = res["username"];
+          post.postUserImageUrl = res["avatarUrl"];
+          console.log(post);
         });
       });
     });
