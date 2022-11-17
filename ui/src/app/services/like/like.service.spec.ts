@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { LikeService } from './like.service';
 import { Observable, of } from 'rxjs';
-import {Like} from 'src/Models/Like';
+import {Like} from '../../Models/Like';
 
 let MockHttpClient = {
   post<Type>():Observable<Type> {

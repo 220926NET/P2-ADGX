@@ -3,7 +3,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { CommentFeedComponent } from './comment-feed.component';
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { Observable, of } from 'rxjs';
-import { Comment } from 'src/Models/Comment'
+import { Comment } from 'src/app/Models/Comment'
 
 let MockCommentService = {
   createComment(comment: Partial<Comment>): Observable<Comment> {

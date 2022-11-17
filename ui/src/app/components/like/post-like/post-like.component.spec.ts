@@ -3,7 +3,7 @@ import { PostLikeComponent } from './post-like.component';
 import { LikeService } from 'src/app/services/like/like.service';
 import { CurrentUserService } from 'src/app/services/current-user/current-user.service';
 import { Observable, of } from 'rxjs';
-import { Like } from 'src/Models/Like';
+import { Like } from 'src/app/Models/Like';
 import { PostLikeCounterComponent } from '../post-like-counter/post-like-counter.component';
 import { PostLikeButtonComponent } from '../post-like-button/post-like-button.component';
 

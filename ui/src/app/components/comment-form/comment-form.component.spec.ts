@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
-import {Comment} from 'src/Models/Comment';
+import {Comment} from 'src/app/Models/Comment';
 
 import { CommentFormComponent } from './comment-form.component';
 import {CommentService} from 'src/app/services/comment.service';

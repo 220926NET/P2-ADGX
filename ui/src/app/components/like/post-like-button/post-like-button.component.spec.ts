@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
-import { Like } from 'src/Models/Like';
+import { Like } from 'src/app/Models/Like';
 import { PostLikeButtonComponent } from './post-like-button.component';
 import {LikeService} from '../../../services/like/like.service';
 

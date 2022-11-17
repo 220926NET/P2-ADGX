@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/Models/user';
+import { User } from 'src/app/Models/user';
 
 import { RegisterComponent } from './register.component';
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Like } from "../../Models/Like";
+import { Like } from "src/app/Models/Like";
 import { Observable } from "rxjs";
 
 const LIKE_API = "https://flar-e.azurewebsites.net/api/like/";
