@@ -13,6 +13,9 @@ import { PostService } from "src/app/services/post.service";
 export class UsersPostsComponent implements OnInit {
   showComments: boolean = false;
 
+
+  showDelete : boolean = false; 
+
   @Input() userPhoto: any;
   @Output() deletePost = new EventEmitter<number>();
 
