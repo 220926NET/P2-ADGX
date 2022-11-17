@@ -30,14 +30,8 @@
     <div class="row">
         <div class="col-sm-2 col-md-3 d-flex flex-column">
             <app-post-like [postId]="post.postID" class="mb-2"></app-post-like>
-
-            <app-post-comment-button [(showComments)]="showComments" class="mb-2"></app-post-comment-button>
+            <app-post-comment-button [(showComments)]="showComments" [commentCount]="comments.length" class="mb-2"></app-post-comment-button>
             <app-post-delete-button  [hidden]="!isMyPost" (click)="DeletePost(post.postID, post.userID)" class="mb-2"></app-post-delete-button>
-            <!--
-            <button [hidden]="!isMyPost" class="float-right" (click)="DeletePost(post.postID, post.userID)">
-              <em class="bi bi-x-lg"></em>
-          </button>
-          -->
         </div>
         <div class="col-sm-10 col-md-9">
           <mat-card-header>
@@ -63,5 +57,5 @@
             </div>
         </div>
     </div>
-    <app-comment-feed *ngIf="showComments" [postId]="post.postID"></app-comment-feed>
+    <app-comment-feed *ngIf="showComments" [comments]="comments"></app-comment-feed>
 </mat-card>

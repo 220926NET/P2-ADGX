@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-post-comment-button',
@@ -8,6 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PostCommentButtonComponent implements OnInit {
 
   @Input() showComments:boolean = false;
+  @Input() commentCount:number = 0;
   @Output() showCommentsChange:EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
 
