@@ -51,13 +51,10 @@ export class PostComponent implements OnInit {
       post.append("Title", this.postForm.controls["title"].value);
       post.append("isTextPost", "false");
       post.append("image", this.image);
-      post.append("image", this.image);
       this._postService.createPost(post).subscribe((res) => {
         this.postForm.reset();
 
       });
-
-      this.postForm.enable();
     }
   }
 
